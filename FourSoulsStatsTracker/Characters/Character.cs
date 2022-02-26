@@ -6,14 +6,22 @@ using System.Threading.Tasks;
 
 namespace FourSoulsStatsTracker
 {
-    class Character
+    public class Character
     {
         protected int wins;
         protected int losses;
         protected double winRate;
         protected double averageSouls;
-        protected List<Game> allGames;
+        protected List<Game> allGames { get; }
         protected string characterName;
+        public static string[] characterNames = new string[] {"Isaac", "Cain", "Maggy", "Judas", "Samson", "Eve", "Lilith", "Blue Baby",
+            "Lazarath", "The Forgotten", "Eden", "The Lost", "The Keeper", "Axazel", "Apollyon", "Guppy", "Bum-Bo", "Whore of Babylon",
+            "Dark Judas", "Tapeworm", "Bethany", "Jacob & Esau", "The Broken", "The Hoarder", "The Duantless", "The Deceiver", "The Savage",
+            "The Curdled", "The Harlot", "The Soiled", "The Enigma", "The Fettered", "The Capricious", "The Baleful", "The Miser", "The Benighted",
+            "The Empty", "The Zealot", "The Deserter", "Ash", "Guy Spelunky", "The Silent", "Captain Viridian", "The Knight", "Pink Knight",
+            "Boyfriend", "Psycho Goreman", "Blind Johnny", "Salad Fingers", "Blue Archer", "Quote", "Crewmate", "Bum-Bo The Weird", "Steven",
+            "Johnny", "Baba", "Edmund", "Flash Isaac"};
+
 
         public void postgameCalculations()
         {
@@ -65,6 +73,10 @@ namespace FourSoulsStatsTracker
         public void addWinLoss(Game game)
         {
 
+        }
+        public string[] LoadCharacterNames()
+        {
+            return characterNames;
         }
     }
 }

@@ -5,10 +5,7 @@ VisualStudioVersion = 16.0.32002.261
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FourSoulsStatsTracker", "FourSoulsStatsTracker\FourSoulsStatsTracker.csproj", "{D787C384-0439-4F15-8F4D-7FFA6BE25DE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "GUI\GUI.csproj", "{98C53A02-4C86-4B1A-B134-D443549099F9}"
-	ProjectSection(ProjectDependencies) = postProject
-		{D787C384-0439-4F15-8F4D-7FFA6BE25DE1} = {D787C384-0439-4F15-8F4D-7FFA6BE25DE1}
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "GUI\GUI.csproj", "{728CD499-7888-4352-B00E-A5225602C9A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,10 +17,10 @@ Global
 		{D787C384-0439-4F15-8F4D-7FFA6BE25DE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D787C384-0439-4F15-8F4D-7FFA6BE25DE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D787C384-0439-4F15-8F4D-7FFA6BE25DE1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98C53A02-4C86-4B1A-B134-D443549099F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98C53A02-4C86-4B1A-B134-D443549099F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98C53A02-4C86-4B1A-B134-D443549099F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98C53A02-4C86-4B1A-B134-D443549099F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{728CD499-7888-4352-B00E-A5225602C9A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{728CD499-7888-4352-B00E-A5225602C9A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{728CD499-7888-4352-B00E-A5225602C9A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{728CD499-7888-4352-B00E-A5225602C9A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

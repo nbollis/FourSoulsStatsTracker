@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FourSoulsStatsTracker
 {
-    class Game
+    public class Game
     {
         private int year;
         private int month;

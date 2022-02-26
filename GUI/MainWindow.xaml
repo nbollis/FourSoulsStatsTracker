@@ -1,0 +1,36 @@
+﻿<Window x:Class="GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TabControl HorizontalAlignment="Center" Height="434" VerticalAlignment="Center" Width="800">
+            <TabItem Header="Game Enterer">
+                <Grid Background="#FFE5E5E5">
+                    <ComboBox x:Name="characterPlayed1" HorizontalAlignment="Left" Margin="233,60,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="characterPlayed1_SelectionChanged" Text="Character Played" IsReadOnly="True" IsEditable="True"/>
+                    <ComboBox x:Name="characterPlayed2" HorizontalAlignment="Left" Margin="233,116,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="characterPlayed1_SelectionChanged" Text="Character Played" IsReadOnly="True" IsEditable="True"/>
+                    <ComboBox x:Name="characterPlayed3" HorizontalAlignment="Left" Margin="233,181,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="characterPlayed1_SelectionChanged" Text="Character Played" IsReadOnly="True" IsEditable="True"/>
+                    <ComboBox x:Name="characterPlayed4" HorizontalAlignment="Left" Margin="233,257,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="characterPlayed1_SelectionChanged" Text="Character Played" IsReadOnly="True" IsEditable="True"/>
+                    <ComboBox x:Name="playerName1" HorizontalAlignment="Left" Margin="65,60,0,0" VerticalAlignment="Top" Width="120" Text="Player Name" IsReadOnly="True" IsEditable="True"/>
+                    <ComboBox x:Name="playerName2" HorizontalAlignment="Left" Margin="65,116,0,0" VerticalAlignment="Top" Width="120" Text="Player Name" IsEditable="True"/>
+                    <ComboBox x:Name="playerName3" HorizontalAlignment="Left" Margin="65,176,0,0" VerticalAlignment="Top" Width="120" Text="Player Name" IsEditable="True"/>
+                    <ComboBox x:Name="playerName4" HorizontalAlignment="Left" Margin="65,257,0,0" VerticalAlignment="Top" Width="120" Text="Player Name" IsEditable="True"/>
+                    <ComboBox x:Name="player1Souls" HorizontalAlignment="Left" Margin="397,60,0,0" VerticalAlignment="Top" Width="120" Text="Souls" IsEditable="True"/>
+                    <ComboBox x:Name="player2Souls" HorizontalAlignment="Left" Margin="397,116,0,0" VerticalAlignment="Top" Width="120" Text="Souls" IsEditable="True"/>
+                    <ComboBox x:Name="player3Souls" HorizontalAlignment="Left" Margin="397,182,0,0" VerticalAlignment="Top" Width="120" Text="Souls" IsEditable="True"/>
+                    <ComboBox x:Name="player4Souls" HorizontalAlignment="Left" Margin="397,257,0,0" VerticalAlignment="Top" Width="120" Text="Souls" IsEditable="True"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Stats By Player">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
