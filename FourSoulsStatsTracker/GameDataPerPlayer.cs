@@ -19,9 +19,10 @@ namespace FourSoulsStatsTracker
             souls = soul;
         }
 
-        public GameDataPerPlayer()
+        public override string ToString()
         {
-
+            string output = characterPlayed + "," + playerName + "," + souls.ToString();
+            return output;
         }
     }
 }

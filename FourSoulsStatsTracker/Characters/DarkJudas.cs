@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FourSoulsStatsTracker
 {
-    class DarkJudas : Character
+    public class DarkJudas : Character
     {
-        //characterName = "Dark Judas";
+        //Character.characterName = "Dark Judas";
 
     }
 }

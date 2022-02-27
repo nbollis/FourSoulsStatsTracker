@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FourSoulsStatsTracker
 {
-    public class Character
+    public class Character : Engine
     {
         protected int wins;
         protected int losses;
@@ -22,13 +22,26 @@ namespace FourSoulsStatsTracker
             "Boyfriend", "Psycho Goreman", "Blind Johnny", "Salad Fingers", "Blue Archer", "Quote", "Crewmate", "Bum-Bo The Weird", "Steven",
             "Johnny", "Baba", "Edmund", "Flash Isaac"};
 
-
-        public void postgameCalculations()
+        // TODO loads character data from file
+        public static List<Character> LoadData()
         {
-            this.calculateWinRate();
-            this.calculateAverageSouls();
+            var characters = new List<Character>();
+            return characters;
         }
-        private void calculateWinRate()
+
+        // TODO prints character data to file
+        public static void PrintCharacters(List<Character> characters)
+        {
+
+        }
+
+
+        public void PostgameCalculations()
+        {
+            this.CalculateWinRate();
+            this.CalculateAverageSouls();
+        }
+        private void CalculateWinRate()
         {
             int winCount = 0;
             int gameCount = 0;
@@ -52,7 +65,7 @@ namespace FourSoulsStatsTracker
             winRate = Math.Round((double)(wins / gameCount), 2);
         }
 
-        private void calculateAverageSouls()
+        private void CalculateAverageSouls()
         {
             int soulCount = 0;
             int gameCount = 0;
@@ -70,7 +83,7 @@ namespace FourSoulsStatsTracker
             averageSouls = soulCount / gameCount;
         }
 
-        public void addWinLoss(Game game)
+        public void AddWinLoss(Game game)
         {
 
         }

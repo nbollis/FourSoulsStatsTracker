@@ -24,6 +24,7 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
+            Engine.LoadAllData(); //likely in here temperarily
             PopulateChoices();
         }
 
@@ -45,7 +46,7 @@ namespace GUI
                 player4Souls.Items.Add(i);
             }
 
-            foreach (var player in Player.getPlayersList())
+            foreach (var player in Player.GetPlayerList())
             {
                 playerName1.Items.Add(player);
                 playerName2.Items.Add(player);
@@ -55,9 +56,10 @@ namespace GUI
 
         }
 
-        private void characterPlayed1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SaveGameButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            Engine.ParseGame();
+            Engine.ReloadStats();
         }
     }
 }
