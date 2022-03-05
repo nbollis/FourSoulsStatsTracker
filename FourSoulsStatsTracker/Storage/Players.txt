@@ -1,4 +1,4 @@
 name:wins:losses
-Nic:3:0
-Jamir:1:5
-Nico:3:7
+Clayton:0:2
+Nico:0:1
+Nic:2:0

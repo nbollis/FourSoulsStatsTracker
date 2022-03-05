@@ -9,19 +9,14 @@ namespace FourSoulsStatsTracker
 {
     public class Player : Engine
     {
+        public static List<Player> AllPlayers;
         private string name { get; }
         public int wins { get; private set; }
-        private int losses { get; }
+        public int losses { get; private set; }
         public int gamesPlayed { get; private set; }
         public int cumulativeSouls { get; }
         private float winRate;
-        
-
-        //constructor for simple players with only the name field initialized
-        Player(string playerName)
-        {
-            name = playerName;
-        }
+        public List<Character> charactersPlayed;
 
         // constructor for player with stats
         Player(string playerName, int win = 0, int lose = 0)
@@ -34,6 +29,7 @@ namespace FourSoulsStatsTracker
         // returns a list of players from file
         public static List<Player> LoadData()
         {
+            // Creates a new player and adds it to players list for each name in the txt file
             string filepath = @"C:\Users\nboll\Source\Repos\FourSoulsStatsTracker\FourSoulsStatsTracker\Storage\Players.txt";
             string[] fields;
             string line = "";
@@ -49,8 +45,7 @@ namespace FourSoulsStatsTracker
                         {
                             line = line.ToString();
                             fields = line.Split(':');
-                            Player player = new Player(fields[0], Int32.Parse(fields[1]), Int32.Parse(fields[2])); // Need to update this with every field added
-                            player.UpdateStats();
+                            Player player = new Player(fields[0]);
                             players.Add(player);
                         }
                     }
@@ -65,29 +60,34 @@ namespace FourSoulsStatsTracker
                         input.Close();
                 }
             }
+
+            foreach (var player in players)
+            {
+                player.charactersPlayed = new();
+                player.CrunchNumbers();
+            }
+            int breakpoint = 0;
             return players;
         }
 
-        // recalculates the statistics of a player
-        public void UpdateStats()
+        // Calculates the wins and losses of each player and initializes the characters inside of each player object
+        public void CrunchNumbers()
         {
-            gamesPlayed = wins + losses;
+            foreach (var name in Character.characterNames)
+            {
+                charactersPlayed.Add(new Character(name));
+            }
+            List<FourSoulsGame> gamesWithPlayer = games.Where(p => p.gameDataByPlayer.Any(n => n.playerName.Equals(this.name))).ToList();
+            gamesPlayed = gamesWithPlayer.Count;
+            wins = games.Where(p => p.winner.Equals(this.name)).Count();
+            losses = gamesPlayed - wins;
             winRate = wins / gamesPlayed;
-            double tacos = winRate;
+            foreach (var character in charactersPlayed)
+            {
+                character.CrunchNumbers(gamesWithPlayer);
+            }
         }
 
-        // returns a list of playernames from file
-        public List<string> LoadNameData()
-        {
-            //TODO load name data from file
-            List<Player> players = new() { new Player("Nic", 3, 0), new Player("Nico", 2, 3), new Player("Jamir", 1, 5) };
-            List<string> playerNames = new();
-            foreach (var player in players)
-            {
-                playerNames.Add(player.name);
-            }
-            return playerNames;
-        }
         // Prints the list of players and their statistics to file
         public static void PrintPlayers(List<Player> players)
         {
@@ -109,7 +109,7 @@ namespace FourSoulsStatsTracker
         }
 
         // Adds players names to the playerNames list if not on there already
-        public static void ParsePlayersFromGames(List<Game> games)
+        public static void ParsePlayersFromGames(List<FourSoulsGame> games)
         {
             foreach (var game in games)
             {
@@ -121,7 +121,7 @@ namespace FourSoulsStatsTracker
             }
         }
         // Updates the stats of a player taking into account the newest games
-        public static void ParseStatsFromGames(List<Game> games)
+        public static void ParseStatsFromGames(List<FourSoulsGame> games)
         {
             //TODO parse stats from a list of games
         }

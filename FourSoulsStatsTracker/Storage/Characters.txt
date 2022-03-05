@@ -1,0 +1,59 @@
+CharacterName:Wins:Losses
+Isaac:1:0
+Cain:0:0
+Maggy:0:1
+Judas:0:0
+Samson:0:0
+Eve:0:0
+Lilith:0:0
+Blue Baby:0:0
+Lazarath:0:0
+The Forgotten:0:1
+Eden:0:0
+The Lost:0:0
+The Keeper:0:1
+Azazel:1:0
+Apollyon:0:0
+Guppy:0:0
+Bum-Bo:0:0
+Whore of Babylon:0:0
+Dark Judas:0:0
+Tapeworm:0:0
+Bethany:0:0
+Jacob & Esau:0:0
+The Broken:0:0
+The Hoarder:0:0
+The Duantless:0:0
+The Deceiver:0:0
+The Savage:0:0
+The Curdled:0:0
+The Harlot:0:0
+The Soiled:0:0
+The Enigma:0:0
+The Fettered:0:0
+The Capricious:0:0
+The Baleful:0:0
+The Miser:0:0
+The Benighted:0:0
+The Empty:0:0
+The Zealot:0:0
+The Deserter:0:0
+Ash:0:0
+Guy Spelunky:0:0
+The Silent:0:0
+Captain Viridian:0:0
+The Knight:0:0
+Pink Knight:0:0
+Boyfriend:0:0
+Psycho Goreman:0:0
+Blind Johnny:0:0
+Salad Fingers:0:0
+Blue Archer:0:0
+Quote:0:0
+Crewmate:0:0
+Bum-Bo The Weird:0:0
+Steven:0:0
+Johnny:0:0
+Baba:0:0
+Edmund:0:0
+Flash Isaac:0:0

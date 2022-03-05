@@ -10,24 +10,24 @@ namespace FourSoulsStatsTracker
     {
         protected static List<Player> players;
         protected static List<string> playerNames;
-        protected static List<Game> games;
+        protected static List<FourSoulsGame> games;
         protected static List<Character> characters;
 
         // loads all data from file
         public static void LoadAllData()
         {
+            games = FourSoulsGame.LoadData();
+            characters = Character.LoadData();
             players = Player.LoadData().OrderBy(p => p.wins).ToList();
             playerNames = Player.GetPlayerList();
-            games = Game.LoadData();
-            characters = Character.LoadData();
         }
 
         // saves all data to file
         public static void SaveAllData()
         {
             Player.PrintPlayers(players);
-            Game.PrintGames(games);
-            Character.PrintCharacters(characters);
+            FourSoulsGame.PrintGames();
+            Character.PrintCharacters();
 
         }
 

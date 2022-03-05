@@ -21,7 +21,7 @@ namespace FourSoulsStatsTracker
 
         public override string ToString()
         {
-            string output = characterPlayed + "," + playerName + "," + souls.ToString();
+            string output = characterPlayed + ":" + playerName + ":" + souls.ToString();
             return output;
         }
     }

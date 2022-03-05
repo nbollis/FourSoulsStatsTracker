@@ -7,7 +7,6 @@ namespace FourSoulsStatsTracker
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             Engine.LoadAllData();
             Engine.SaveAllData();
         }
