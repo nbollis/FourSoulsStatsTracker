@@ -30,28 +30,40 @@ namespace GUI
 
         private void PopulateChoices()
         {
+            // Populates the character names fields
             foreach (var character in Character.characterNames)
             {
-                characterPlayed1.Items.Add(character);
-                characterPlayed2.Items.Add(character);
-                characterPlayed3.Items.Add(character);
-                characterPlayed4.Items.Add(character);
+                if (!characterPlayed1.Items.Contains(character))
+                {
+                    characterPlayed1.Items.Add(character);
+                    characterPlayed2.Items.Add(character);
+                    characterPlayed3.Items.Add(character);
+                    characterPlayed4.Items.Add(character);
+                }
             }
 
+            // Populates the souls fields
             for (int i = 1; i < 5; i++)
             {
-                player1Souls.Items.Add(i);
-                player2Souls.Items.Add(i);
-                player3Souls.Items.Add(i);
-                player4Souls.Items.Add(i);
+                if (!player1Souls.Items.Contains(i))
+                {
+                    player1Souls.Items.Add(i);
+                    player2Souls.Items.Add(i);
+                    player3Souls.Items.Add(i);
+                    player4Souls.Items.Add(i);
+                }
             }
 
+            // Populates the player name fields
             foreach (var player in Player.AllPlayers)
             {
-                playerName1.Items.Add(player.ToString().Split(':')[0]);
-                playerName2.Items.Add(player.ToString().Split(':')[0]);
-                playerName3.Items.Add(player.ToString().Split(':')[0]);
-                playerName4.Items.Add(player.ToString().Split(':')[0]);
+                if (!playerName1.Items.Contains(player.Name))
+                {
+                    playerName1.Items.Add(player.Name);
+                    playerName2.Items.Add(player.Name);
+                    playerName3.Items.Add(player.Name);
+                    playerName4.Items.Add(player.Name);
+                }
             }
 
         }
@@ -87,11 +99,16 @@ namespace GUI
 
         private void AddPlayerButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Add in the popup of the add player window
             AddPlayer addPlayerWindow = new();
-            
             addPlayerWindow.ShowDialog();
             PopulateChoices();
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Engine.ReloadStats();
+            Engine.SaveAllData();
+            Close();
         }
     }
 }

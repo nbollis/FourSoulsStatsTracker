@@ -10,21 +10,22 @@ namespace FourSoulsStatsTracker
     public class Player : Engine
     {
         public static List<Player> AllPlayers;
-        private string name { get; }
-        public int wins { get; private set; }
-        public int losses { get; private set; }
-        public int gamesPlayed { get; private set; }
-        public int cumulativeSouls { get; }
-        private float winRate;
+        public string Name { get; }
+        public int Wins { get; private set; }
+        public int Losses { get; private set; }
+        public int GamesPlayed { get; private set; }
+        public int CumulativeSouls;
+        public double AverageSouls;
+        private double winRate;
         public List<Character> charactersPlayed;
 
         // constructor for player with stats
-        Player(string playerName, int win = 0, int lose = 0)
+        public Player(string playerName, int win = 0, int lose = 0)
         {
-            name = playerName;
-            wins = win;
-            losses = lose;
-            gamesPlayed = win + lose;
+            Name = playerName;
+            Wins = win;
+            Losses = lose;
+            GamesPlayed = win + lose;
         }
         // returns a list of players from file
         public static List<Player> LoadData()
@@ -72,18 +73,37 @@ namespace FourSoulsStatsTracker
         // Calculates the wins and losses of each player and initializes the characters inside of each player object
         public void CrunchNumbers()
         {
+            // Creates every character object for each player
             foreach (var name in Character.characterNames)
             {
                 charactersPlayed.Add(new Character(name));
             }
-            List<FourSoulsGame> gamesWithPlayer = games.Where(p => p.gameDataByPlayer.Any(n => n.playerName.Equals(this.name))).ToList();
-            gamesPlayed = gamesWithPlayer.Count;
-            wins = games.Where(p => p.winner.Equals(this.name)).Count();
-            losses = gamesPlayed - wins;
-            winRate = wins / gamesPlayed;
+            Wins = games.Where(p => p.winner.Equals(this.Name)).Count();
+            List<FourSoulsGame> gamesWithPlayer = games.Where(p => p.gameDataByPlayer.Any(n => n.playerName.Equals(this.Name))).ToList();
+            
+            // Totals a players souls across all games
+            foreach (var game in gamesWithPlayer)
+            {
+                foreach (var gamedata in game.gameDataByPlayer)
+                {
+                    if (gamedata.playerName.Equals(this.Name))
+                    {
+                        CumulativeSouls += gamedata.souls;
+                    }
+                }
+            }
+
+
+            GamesPlayed = gamesWithPlayer.Count;
+            AverageSouls = Math.Round((double)CumulativeSouls / (double)GamesPlayed, 2);
+            Losses = GamesPlayed - Wins;
+            winRate = Math.Round((double)Wins / (double)GamesPlayed, 2);
+
+            // Populates character stats for only with games that player is in
+            // May not work correctly, could possibly populate the stats from a character's perspective and not a players
             foreach (var character in charactersPlayed)
             {
-                character.CrunchNumbers(gamesWithPlayer);
+                character.CrunchNumbers(gamesWithPlayer, true, Name);
             }
         }
 
@@ -101,14 +121,14 @@ namespace FourSoulsStatsTracker
             }
         }
 
-        public void OnNewPlayerAdded(object sender, EventArgs e)
+        public static void AddPlayer(Player player)
         {
-            Console.WriteLine("It Worked!");
+            AllPlayers.Add(player);
         }
         // overide of the ToString method
         public override string ToString()
         {
-            string output = name + ':' + wins + ':' + losses; // Need to update this with every field added
+            string output = Name + ':' + Wins + ':' + Losses; // Need to update this with every field added
             return output;
         }
     }

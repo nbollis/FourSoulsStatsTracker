@@ -17,7 +17,8 @@ namespace FourSoulsStatsTracker
         {
             games = FourSoulsGame.LoadData();
             characters = Character.LoadData();
-            players = Player.LoadData().OrderBy(p => p.wins).ToList();
+            players = Player.LoadData().OrderBy(p => p.Wins).ToList();
+            int breakpoint = 0;
         }
 
         // saves all data to file

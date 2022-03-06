@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FourSoulsStatsTracker;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,27 @@ namespace GUI
         private void AddPlayerButton_Click(object sender, RoutedEventArgs e)
         {
             string name = newPlayerName.Text;
+            if (Player.AllPlayers.Any(p => p.Name.Equals(name)))
+            {
+                MessageBox.Show("Player already exists!");
+            }
+            else if (name.Equals("") || name.Equals(" "))
+            {
+                MessageBox.Show("Player's name cannot be empty!");
+            }
+            else
+            {
+                try
+                {
+                    var player = new Player(name);
+                    Player.AddPlayer(player);
+                    newPlayerName.Clear();
+                }
+                catch (Exception ea)
+                {
+                    Console.WriteLine(ea.Message);
+                }
+            }
 
             
         }

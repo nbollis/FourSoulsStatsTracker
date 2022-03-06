@@ -1,4 +1,9 @@
 name:wins:losses
 Clayton:1:2
-Nico:0:8
-Nic:8:0
+Nico:0:4
+Nic:3:2
+Cam:1:1
+Maia:2:1
+Holden:0:3
+Claire:0:1
+

@@ -11,7 +11,7 @@ namespace FourSoulsStatsTracker
     {
         public static List<FourSoulsGame> AllGames { get; set; }
         public string winner;
-        private int numberOfPlayers;
+        public int numberOfPlayers;
         private string dateOfGame;
         public List<GameDataPerPlayer> gameDataByPlayer { get; private set; }
 
@@ -56,7 +56,7 @@ namespace FourSoulsStatsTracker
                             else if (Int32.Parse(fields[0]) == 4)
                             {
                                 game.gameDataByPlayer.Add(new GameDataPerPlayer(fields[9], fields[8], Int32.Parse(fields[10])));
-                                game.gameDataByPlayer.Add(new GameDataPerPlayer(fields[12], fields[9], Int32.Parse(fields[13])));
+                                game.gameDataByPlayer.Add(new GameDataPerPlayer(fields[12], fields[11], Int32.Parse(fields[13])));
                                 game.numberOfPlayers = 4;
                             }
                             game.gameDataByPlayer.OrderByDescending(p => p.souls).ToList();
