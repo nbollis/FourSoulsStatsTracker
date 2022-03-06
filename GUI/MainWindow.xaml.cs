@@ -46,20 +46,52 @@ namespace GUI
                 player4Souls.Items.Add(i);
             }
 
-            foreach (var player in Player.GetPlayerList())
+            foreach (var player in Player.AllPlayers)
             {
-                playerName1.Items.Add(player);
-                playerName2.Items.Add(player);
-                playerName3.Items.Add(player);
-                playerName4.Items.Add(player);
+                playerName1.Items.Add(player.ToString().Split(':')[0]);
+                playerName2.Items.Add(player.ToString().Split(':')[0]);
+                playerName3.Items.Add(player.ToString().Split(':')[0]);
+                playerName4.Items.Add(player.ToString().Split(':')[0]);
             }
 
         }
 
         private void SaveGameButton_Click(object sender, RoutedEventArgs e)
         {
-            Engine.ParseGame();
+
+            string gameData = playerName1.SelectedItem.ToString() + ":";
+            gameData += characterPlayed1.SelectedItem.ToString() + ":";
+            gameData += player1Souls.SelectedItem.ToString() + ":";
+            gameData += playerName2.SelectedItem.ToString() + ":";
+            gameData += characterPlayed2.SelectedItem.ToString() + ":";
+            gameData += player2Souls.SelectedItem.ToString() + ":";
+
+            if (characterPlayed3.SelectedItem != null)
+            {
+                gameData += playerName3.SelectedItem.ToString() + ":";
+                gameData += characterPlayed3.SelectedItem.ToString() + ":";
+                gameData += player3Souls.SelectedItem.ToString() + ":";
+            }
+            if (characterPlayed4.SelectedItem != null)
+            {
+                gameData += playerName4.SelectedItem.ToString() + ":";
+                gameData += characterPlayed4.SelectedItem.ToString() + ":";
+                gameData += player4Souls.SelectedItem.ToString() + ":";
+            }
+
+
+            Engine.ParseGame(gameData);
+            MessageBox.Show("Game Saved");
             Engine.ReloadStats();
+        }
+
+        private void AddPlayerButton_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: Add in the popup of the add player window
+            AddPlayer addPlayerWindow = new();
+            
+            addPlayerWindow.ShowDialog();
+            PopulateChoices();
         }
     }
 }

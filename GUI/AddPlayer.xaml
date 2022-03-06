@@ -1,0 +1,53 @@
+﻿<Window x:Class="GUI.AddPlayer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI"
+        mc:Ignorable="d"
+        Title="Add New Player" 
+        Height="200" 
+        Width="400">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <Button x:Name="AddPlayerButton"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Grid.Row="2"
+                Content="Add Player"
+                FontSize="20"
+                Height="40"
+                Width="100"
+                Click="AddPlayerButton_Click"/>
+        <Button x:Name="ExitButton"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Grid.Row="2"
+                Content="Exit"
+                FontSize="20"
+                Height="40"
+                Width="100"
+                Click="ExitButton_Click"/>
+        <TextBox x:Name="newPlayerName"
+                 Grid.Row="0"
+                 Grid.RowSpan="2"
+                 Grid.Column="0"
+                 Grid.ColumnSpan="3"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Center"
+                 Height="50"
+                 Width="200" TextAlignment="Center" FontSize="24"/>
+
+
+    </Grid>
+</Window>

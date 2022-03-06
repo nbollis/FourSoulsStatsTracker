@@ -50,7 +50,6 @@ namespace FourSoulsStatsTracker
         public static List<Character> LoadData()
         {
             AllGames = games;
-            int i = 0;
             AllCharacters = new List<Character>();
             // Initializes characters and searches 
             foreach (var name in characterNames)
@@ -170,46 +169,6 @@ namespace FourSoulsStatsTracker
             }
         }
 
-
-        public void PostgameCalculations()
-        {
-            this.CalculateBasicStats();
-        }
-        private void CalculateBasicStats()
-        {
-            int winCount = 0;
-            int gameCount = 0;
-            int lossCount = 0;
-            int soulCount = 0;
-            foreach (var game in AllGames)
-            {
-                gameCount = gameCount + 1;
-                for (int i = 0; i < game.gameDataByPlayer.Count(); i++)
-                {
-                    if (game.gameDataByPlayer[i].characterPlayed == this.characterName)
-                    {
-                        soulCount = soulCount + game.gameDataByPlayer[i].souls;
-                        if (game.gameDataByPlayer[i].souls == 4)
-                            winCount++;
-                        else
-                            lossCount++;
-                    }
-                }
-            }
-            wins = winCount;
-            losses = lossCount++;
-            winRate = Math.Round((double)(wins / gameCount), 2);
-            averageSouls = soulCount / gameCount;
-        }
-
-        public void AddWinLoss(Game game)
-        {
-
-        }
-        public string[] LoadCharacterNames()
-        {
-            return characterNames;
-        }
         // Prints all data about characters
         public override string ToString()
         {

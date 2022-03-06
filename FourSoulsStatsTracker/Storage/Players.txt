@@ -1,4 +1,4 @@
 name:wins:losses
-Clayton:0:2
-Nico:0:1
-Nic:2:0
+Clayton:1:2
+Nico:0:8
+Nic:8:0

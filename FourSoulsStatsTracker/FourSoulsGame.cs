@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FourSoulsStatsTracker
 {
-    public class FourSoulsGame 
+    public class FourSoulsGame
     {
         public static List<FourSoulsGame> AllGames { get; set; }
         public string winner;
@@ -31,7 +31,7 @@ namespace FourSoulsStatsTracker
             int players;
             string[] fields;
             string line = "";
-            List<FourSoulsGame> games = new();
+            AllGames = new();
             using (StreamReader input = new StreamReader(filepath))
             {
                 try
@@ -60,7 +60,7 @@ namespace FourSoulsStatsTracker
                                 game.numberOfPlayers = 4;
                             }
                             game.gameDataByPlayer.OrderByDescending(p => p.souls).ToList();
-                            games.Add(game);
+                            AllGames.Add(game);
                         }
                     }
 
@@ -76,8 +76,7 @@ namespace FourSoulsStatsTracker
                 }
 
             }
-            AllGames = games;
-            return games;
+            return AllGames;
         }
 
         public static void PrintGames()
@@ -103,5 +102,9 @@ namespace FourSoulsStatsTracker
             return output;
         }
 
+        public static void AddGame(FourSoulsGame game)
+        {
+            AllGames.Add(game);
+        }
     }
 }

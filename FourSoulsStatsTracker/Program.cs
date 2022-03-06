@@ -8,6 +8,7 @@ namespace FourSoulsStatsTracker
         static void Main(string[] args)
         {
             Engine.LoadAllData();
+            int breakpoint = 0;
             Engine.SaveAllData();
         }
     }

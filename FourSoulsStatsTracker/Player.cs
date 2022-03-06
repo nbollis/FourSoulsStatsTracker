@@ -33,7 +33,7 @@ namespace FourSoulsStatsTracker
             string filepath = @"C:\Users\nboll\Source\Repos\FourSoulsStatsTracker\FourSoulsStatsTracker\Storage\Players.txt";
             string[] fields;
             string line = "";
-            List<Player> players = new();
+            AllPlayers = new();
             using (StreamReader input = new StreamReader(filepath))
             {
                 try
@@ -46,7 +46,7 @@ namespace FourSoulsStatsTracker
                             line = line.ToString();
                             fields = line.Split(':');
                             Player player = new Player(fields[0]);
-                            players.Add(player);
+                            AllPlayers.Add(player);
                         }
                     }
                 }
@@ -61,13 +61,12 @@ namespace FourSoulsStatsTracker
                 }
             }
 
-            foreach (var player in players)
+            foreach (var player in AllPlayers)
             {
                 player.charactersPlayed = new();
                 player.CrunchNumbers();
             }
-            int breakpoint = 0;
-            return players;
+            return AllPlayers;
         }
 
         // Calculates the wins and losses of each player and initializes the characters inside of each player object
@@ -89,61 +88,28 @@ namespace FourSoulsStatsTracker
         }
 
         // Prints the list of players and their statistics to file
-        public static void PrintPlayers(List<Player> players)
+        public static void PrintPlayers()
         {
             string filepath = @"C:\Users\nboll\Source\Repos\FourSoulsStatsTracker\FourSoulsStatsTracker\Storage\Players.txt";
             using (StreamWriter output = new StreamWriter(filepath))
             {
                 output.WriteLine("name:wins:losses");
-                foreach (var player in players)
+                foreach (var player in AllPlayers)
                 {
                     output.WriteLine(player.ToString());
                 }
             }
+        }
+
+        public void OnNewPlayerAdded(object sender, EventArgs e)
+        {
+            Console.WriteLine("It Worked!");
         }
         // overide of the ToString method
         public override string ToString()
         {
             string output = name + ':' + wins + ':' + losses; // Need to update this with every field added
             return output;
-        }
-
-        // Adds players names to the playerNames list if not on there already
-        public static void ParsePlayersFromGames(List<FourSoulsGame> games)
-        {
-            foreach (var game in games)
-            {
-                foreach (var gameData in game.gameDataByPlayer)
-                {
-                    if (!playerNames.Contains(gameData.playerName))
-                        AddPlayer(gameData.playerName);
-                }
-            }
-        }
-        // Updates the stats of a player taking into account the newest games
-        public static void ParseStatsFromGames(List<FourSoulsGame> games)
-        {
-            //TODO parse stats from a list of games
-        }
-        // Adds a players name to the static list playerNames
-        public static void AddPlayer(string name)
-        {
-            playerNames.Add(name);
-        }
-        // Returns playerNames list
-        public static List<string> GetPlayerList()
-        {
-            List<string> names = new();
-            foreach (var player in players)
-            {
-                names.Add(player.name);
-            }
-            return names;
-        }
-        // Returns a string representation of a players name
-        public string GetPlayerName()
-        {
-            return this.name;
         }
     }
 }

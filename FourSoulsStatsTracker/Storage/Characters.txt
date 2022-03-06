@@ -1,12 +1,12 @@
 CharacterName:Wins:Losses
-Isaac:1:0
+Isaac:1:6
 Cain:0:0
-Maggy:0:1
+Maggy:0:2
 Judas:0:0
 Samson:0:0
 Eve:0:0
-Lilith:0:0
-Blue Baby:0:0
+Lilith:1:0
+Blue Baby:6:0
 Lazarath:0:0
 The Forgotten:0:1
 Eden:0:0
