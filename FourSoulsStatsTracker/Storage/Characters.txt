@@ -7,17 +7,17 @@ Samson:0:0
 Eve:0:1
 Lilith:1:0
 Blue Baby:1:1
-Lazarath:0:0
-The Forgotten:0:1
+Lazarus:0:1
+The Forgotten:1:1
 Eden:0:0
 The Lost:0:1
 The Keeper:0:2
 Azazel:1:1
 Apollyon:0:0
 Guppy:0:2
-Bum-Bo:0:0
+Bum-Bo:0:1
 Whore of Babylon:1:0
-Dark Judas:1:0
+Dark Judas:2:0
 Tapeworm:0:0
 Albert:0:1
 Bethany:0:0
