@@ -5,30 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        WindowStyle="None">
+        Title="MainWindow" Height="Auto" Width="Auto"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="800"/>
-        </Grid.ColumnDefinitions>
-        <TabControl x:Name="TabControl" HorizontalAlignment="Left" Height="450" VerticalAlignment="Center" Width="800" RenderTransformOrigin="0.45,0.463" Grid.ColumnSpan="2">
-            <TabItem Header="Game Enterer" Height="25" Width="200">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32*"
+                           MouseDown="RowDefinition_MouseDown"/>
+            <RowDefinition Height="155*"/>
+        </Grid.RowDefinitions>
+        <TabControl x:Name="TabControl" Grid.RowSpan="2" >
+            <TabItem Header="Game Enterer" Height="25" Width="200" 
+                     MouseDown="RowDefinition_MouseDown">
+
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="200"/>
-                        <ColumnDefinition Width ="200"/>
-                        <ColumnDefinition Width ="200"/>
-                        <ColumnDefinition Width ="100"/>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width ="3*"/>
+                        <ColumnDefinition Width ="3*"/>
+                        <ColumnDefinition Width ="0.5*"/>
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="75"/>
-                        <RowDefinition Height="75"/>
-                        <RowDefinition Height="75"/>
-                        <RowDefinition Height="75"/>
-                        <RowDefinition Height="75"/>
+                        <RowDefinition Height="*"
+                                       MouseDown="RowDefinition_MouseDown"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
                     <ComboBox x:Name="playerName1"
@@ -137,7 +144,7 @@
                             Width="60"
                             Grid.RowSpan="2"
                             Click="ClearPlayers_Click"/>
-                    
+
                     <Button x:Name="ClearCharacters"
                             Grid.Column="2"
                             Grid.Row="4"
@@ -147,7 +154,7 @@
                             Width="60"
                             Grid.RowSpan="2"
                             Click="ClearCharacters_Click"/>
-                    
+
                     <Button x:Name="ClearSouls"
                             Grid.Column="3"
                             Grid.Row="4"
@@ -157,7 +164,7 @@
                             Width="60"
                             Grid.RowSpan="2"
                             Click="ClearSouls_Click"/>
-                    
+
                     <Button x:Name="SaveGameButton" 
                             Grid.Column="2"
                             Grid.Row="5"
@@ -171,7 +178,6 @@
                     <Button x:Name="AddPlayerButton"
                             Grid.Column="1"
                             Grid.Row="5"
-                            Grid.RowSpan="2"
                             Content="Add Player" 
                             HorizontalAlignment="Center"  
                             VerticalAlignment="Bottom" 
@@ -191,16 +197,21 @@
                             Click="ExitButton_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Player Stats" Height="25" Width="200">
-                <StackPanel/>
-            </TabItem>
-            <TabItem Header="Character Stats" Height="25" Width="200">
+
+            <TabItem Header="Character Stats" Height="25" Width="200"
+                     MouseDown="RowDefinition_MouseDown">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+
                     </Grid.ColumnDefinitions>
                 </Grid>
             </TabItem>
+
+            <TabItem Header="Player Stats" Height="25" Width="200"
+                     MouseDown="RowDefinition_MouseDown">
+                <StackPanel/>
+            </TabItem>
+
         </TabControl>
     </Grid>
 </Window>

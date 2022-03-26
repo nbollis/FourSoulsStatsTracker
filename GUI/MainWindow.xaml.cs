@@ -28,40 +28,42 @@ namespace GUI
             PopulateChoices();
         }
 
-        private void PopulateChoices()
+        private void PopulateChoices(bool onlyPlayers = false)
         {
-            // Populates the character names fields
-            characterPlayed1.Items.Add("Character Played");
-            characterPlayed2.Items.Add("Character Played");
-            characterPlayed3.Items.Add("Character Played");
-            characterPlayed4.Items.Add("Character Played");
-            foreach (var character in Character.characterNames)
+            if (!onlyPlayers)
             {
-                if (!characterPlayed1.Items.Contains(character))
+                // Populates the character names fields
+                characterPlayed1.Items.Add("Character Played");
+                characterPlayed2.Items.Add("Character Played");
+                characterPlayed3.Items.Add("Character Played");
+                characterPlayed4.Items.Add("Character Played");
+                foreach (var character in Character.characterNames)
                 {
-                    characterPlayed1.Items.Add(character);
-                    characterPlayed2.Items.Add(character);
-                    characterPlayed3.Items.Add(character);
-                    characterPlayed4.Items.Add(character);
+                    if (!characterPlayed1.Items.Contains(character))
+                    {
+                        characterPlayed1.Items.Add(character);
+                        characterPlayed2.Items.Add(character);
+                        characterPlayed3.Items.Add(character);
+                        characterPlayed4.Items.Add(character);
+                    }
+                }
+
+                // Populates the souls fields
+                player1Souls.Items.Add("Souls");
+                player2Souls.Items.Add("Souls");
+                player3Souls.Items.Add("Souls");
+                player4Souls.Items.Add("Souls");
+                for (int i = 1; i < 5; i++)
+                {
+                    if (!player1Souls.Items.Contains(i))
+                    {
+                        player1Souls.Items.Add(i);
+                        player2Souls.Items.Add(i);
+                        player3Souls.Items.Add(i);
+                        player4Souls.Items.Add(i);
+                    }
                 }
             }
-
-            // Populates the souls fields
-            player1Souls.Items.Add("Souls");
-            player2Souls.Items.Add("Souls");
-            player3Souls.Items.Add("Souls");
-            player4Souls.Items.Add("Souls");
-            for (int i = 1; i < 5; i++)
-            {
-                if (!player1Souls.Items.Contains(i))
-                {
-                    player1Souls.Items.Add(i);
-                    player2Souls.Items.Add(i);
-                    player3Souls.Items.Add(i);
-                    player4Souls.Items.Add(i);
-                }
-            }
-
             // Populates the player name fields
             playerName1.Items.Add("Player Name");
             playerName2.Items.Add("Player Name");
@@ -113,7 +115,7 @@ namespace GUI
         {
             AddPlayer addPlayerWindow = new();
             addPlayerWindow.ShowDialog();
-            PopulateChoices();
+            PopulateChoices(true);
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -145,6 +147,15 @@ namespace GUI
             player2Souls.SelectedItem = player2Souls.Items[0];
             player3Souls.SelectedItem = player3Souls.Items[0];
             player4Souls.SelectedItem = player4Souls.Items[0];
+        }
+
+        private void RowDefinition_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine("Event Fired");
+            if(e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
         }
     }
 }
