@@ -31,6 +31,10 @@ namespace GUI
         private void PopulateChoices()
         {
             // Populates the character names fields
+            characterPlayed1.Items.Add("Character Played");
+            characterPlayed2.Items.Add("Character Played");
+            characterPlayed3.Items.Add("Character Played");
+            characterPlayed4.Items.Add("Character Played");
             foreach (var character in Character.characterNames)
             {
                 if (!characterPlayed1.Items.Contains(character))
@@ -43,6 +47,10 @@ namespace GUI
             }
 
             // Populates the souls fields
+            player1Souls.Items.Add("Souls");
+            player2Souls.Items.Add("Souls");
+            player3Souls.Items.Add("Souls");
+            player4Souls.Items.Add("Souls");
             for (int i = 1; i < 5; i++)
             {
                 if (!player1Souls.Items.Contains(i))
@@ -55,6 +63,10 @@ namespace GUI
             }
 
             // Populates the player name fields
+            playerName1.Items.Add("Player Name");
+            playerName2.Items.Add("Player Name");
+            playerName3.Items.Add("Player Name");
+            playerName4.Items.Add("Player Name");
             foreach (var player in Player.AllPlayers)
             {
                 if (!playerName1.Items.Contains(player.Name))
@@ -109,6 +121,30 @@ namespace GUI
             Engine.ReloadStats();
             Engine.SaveAllData();
             Close();
+        }
+
+        private void ClearPlayers_Click(object sender, RoutedEventArgs e)
+        {
+            playerName1.SelectedItem = playerName1.Items[0];
+            playerName2.SelectedItem = playerName2.Items[0];
+            playerName3.SelectedItem = playerName3.Items[0];
+            playerName4.SelectedItem = playerName4.Items[0];
+        }
+
+        private void ClearCharacters_Click(object sender, RoutedEventArgs e)
+        {
+            characterPlayed1.SelectedItem = characterPlayed1.Items[0];
+            characterPlayed2.SelectedItem = characterPlayed2.Items[0];
+            characterPlayed3.SelectedItem = characterPlayed3.Items[0];
+            characterPlayed4.SelectedItem = characterPlayed4.Items[0];
+        }
+
+        private void ClearSouls_Click(object sender, RoutedEventArgs e)
+        {
+            player1Souls.SelectedItem = player1Souls.Items[0];
+            player2Souls.SelectedItem = player2Souls.Items[0];
+            player3Souls.SelectedItem = player3Souls.Items[0];
+            player4Souls.SelectedItem = player4Souls.Items[0];
         }
     }
 }

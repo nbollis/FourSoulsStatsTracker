@@ -8,8 +8,8 @@ namespace FourSoulsStatsTracker
 {
     public abstract class  Game
     {
-        public abstract List<T> LoadData<T>();
+        public abstract List<Game> LoadData();
 
-        public abstract void PrintGames<T>(List<T> games);
+        public abstract void PrintGames(List<Game> games);
     }
 }

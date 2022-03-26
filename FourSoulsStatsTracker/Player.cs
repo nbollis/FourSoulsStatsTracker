@@ -95,12 +95,14 @@ namespace FourSoulsStatsTracker
 
 
             GamesPlayed = gamesWithPlayer.Count;
-            AverageSouls = Math.Round((double)CumulativeSouls / (double)GamesPlayed, 2);
             Losses = GamesPlayed - Wins;
-            winRate = Math.Round((double)Wins / (double)GamesPlayed, 2);
+            if (GamesPlayed != 0)
+            {
+                AverageSouls = Math.Round((double)CumulativeSouls / (double)GamesPlayed, 2);
+                winRate = Math.Round((double)Wins / (double)GamesPlayed, 2);
+            }
 
             // Populates character stats for only with games that player is in
-            // May not work correctly, could possibly populate the stats from a character's perspective and not a players
             foreach (var character in charactersPlayed)
             {
                 character.CrunchNumbers(gamesWithPlayer, true, Name);
