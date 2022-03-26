@@ -9,11 +9,6 @@
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="32*"
-                           MouseDown="RowDefinition_MouseDown"/>
-            <RowDefinition Height="155*"/>
-        </Grid.RowDefinitions>
         <TabControl x:Name="TabControl" Grid.RowSpan="2" >
             <TabItem Header="Game Enterer" Height="25" Width="200" 
                      MouseDown="RowDefinition_MouseDown">
@@ -209,7 +204,11 @@
 
             <TabItem Header="Player Stats" Height="25" Width="200"
                      MouseDown="RowDefinition_MouseDown">
-                <StackPanel/>
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+
+                    </Grid.ColumnDefinitions>
+                </Grid>
             </TabItem>
 
         </TabControl>
