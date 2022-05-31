@@ -27,7 +27,7 @@ namespace FourSoulsStatsTracker
         // Loads in game data from file
         public static List<FourSoulsGame> LoadData()
         {
-            string filepath = @"C:\Users\nboll\Source\Repos\FourSoulsStatsTracker\FourSoulsStatsTracker\Storage\Games.txt";
+            string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Storage\Games.txt");
             int players;
             string[] fields;
             string line = "";
@@ -81,7 +81,7 @@ namespace FourSoulsStatsTracker
 
         public static void PrintGames()
         {
-            string filepath = @"C:\Users\nboll\Source\Repos\FourSoulsStatsTracker\FourSoulsStatsTracker\Storage\Games.txt";
+            string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Storage\Games.txt");
             using (StreamWriter output = new StreamWriter(filepath))
             {
                 output.WriteLine("Players:Date:Character1:Player1:Souls1:Character2:Player2:Souls2:Character3:Player3:Souls3:Character4:Player4:Souls4");

@@ -31,7 +31,7 @@ namespace FourSoulsStatsTracker
         public static List<Player> LoadData()
         {
             // Creates a new player and adds it to players list for each name in the txt file
-            string filepath = @"C:\Users\nboll\Source\Repos\FourSoulsStatsTracker\FourSoulsStatsTracker\Storage\Players.txt";
+            string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Storage\Players.txt");
             string[] fields;
             string line = "";
             AllPlayers = new();
@@ -112,7 +112,7 @@ namespace FourSoulsStatsTracker
         // Prints the list of players and their statistics to file
         public static void PrintPlayers()
         {
-            string filepath = @"C:\Users\nboll\Source\Repos\FourSoulsStatsTracker\FourSoulsStatsTracker\Storage\Players.txt";
+            string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Storage\Players.txt");
             using (StreamWriter output = new StreamWriter(filepath))
             {
                 output.WriteLine("name:wins:losses");

@@ -7,6 +7,7 @@ namespace FourSoulsStatsTracker
     {
         static void Main(string[] args)
         {
+            var engine = new Engine();
             Engine.LoadAllData();
             int breakpoint = 0;
             Engine.SaveAllData();

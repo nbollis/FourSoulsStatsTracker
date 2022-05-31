@@ -154,7 +154,7 @@ namespace FourSoulsStatsTracker
         }
         public static void PrintCharacters()
         {
-            string filepath = @"C:\Users\nboll\Source\Repos\FourSoulsStatsTracker\FourSoulsStatsTracker\Storage\Characters.txt";
+            string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Storage\Characters.txt");
             using (StreamWriter output = new StreamWriter(filepath))
             {
                 output.WriteLine("CharacterName:Wins:Losses");
