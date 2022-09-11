@@ -78,17 +78,17 @@ namespace FourSoulsStatsTracker
             {
                 charactersPlayed.Add(new Character(name));
             }
-            Wins = games.Where(p => p.winner.Equals(this.Name)).Count();
-            List<FourSoulsGame> gamesWithPlayer = games.Where(p => p.gameDataByPlayer.Any(n => n.playerName.Equals(this.Name))).ToList();
+            Wins = games.Where(p => p.Winner.Equals(this.Name)).Count();
+            List<FourSoulsGame> gamesWithPlayer = games.Where(p => p.GameDataPerPlayer.Any(n => n.PlayerName.Equals(this.Name))).ToList();
             
-            // Totals a players souls across all games
+            // Totals a players Souls across all games
             foreach (var game in gamesWithPlayer)
             {
-                foreach (var gamedata in game.gameDataByPlayer)
+                foreach (var gamedata in game.GameDataPerPlayer)
                 {
-                    if (gamedata.playerName.Equals(this.Name))
+                    if (gamedata.PlayerName.Equals(this.Name))
                     {
-                        CumulativeSouls += gamedata.souls;
+                        CumulativeSouls += gamedata.Souls;
                     }
                 }
             }

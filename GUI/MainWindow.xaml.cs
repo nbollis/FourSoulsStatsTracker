@@ -48,7 +48,7 @@ namespace GUI
                     }
                 }
 
-                // Populates the souls fields
+                // Populates the Souls fields
                 player1Souls.Items.Add("Souls");
                 player2Souls.Items.Add("Souls");
                 player3Souls.Items.Add("Souls");

@@ -6,14 +6,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FourSoulsStatsTracker
+namespace FourSoulsCore
 {
     public class FourSoulsGame
     {
         public static List<FourSoulsGame> AllGames { get; set; }
         public string Winner;
         public int NumberOfPlayers;
-        private string DateOfEntry;
+        public string DateOfEntry;
         public List<GameDataPerPlayer> GameDataPerPlayer { get; private set; }
 
         public FourSoulsGame(string date, List<GameDataPerPlayer> gameData)

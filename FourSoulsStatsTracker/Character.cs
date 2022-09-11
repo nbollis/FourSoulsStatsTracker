@@ -76,15 +76,15 @@ namespace FourSoulsStatsTracker
 
             if (!playerSpecificCalc)
             {
-                gamesWithCharacter = games.Where(p => p.gameDataByPlayer.Any(n => n.characterPlayed.Equals(characterName))).ToList();
-                wonGamesWithCharacter = games.Where(p => p.gameDataByPlayer.Any(n => n.characterPlayed.Equals(characterName) && n.souls == 4)).ToList();
-                lostGamesWithCharacter = games.Where(p => p.gameDataByPlayer.Any(n => n.characterPlayed.Equals(characterName) && n.souls != 4)).ToList();
+                gamesWithCharacter = games.Where(p => p.GameDataPerPlayer.Any(n => n.CharacterPlayed.Equals(characterName))).ToList();
+                wonGamesWithCharacter = games.Where(p => p.GameDataPerPlayer.Any(n => n.CharacterPlayed.Equals(characterName) && n.Souls == 4)).ToList();
+                lostGamesWithCharacter = games.Where(p => p.GameDataPerPlayer.Any(n => n.CharacterPlayed.Equals(characterName) && n.Souls != 4)).ToList();
             }
             if (playerSpecificCalc)
             {
-                gamesWithCharacter = games.Where(p => p.gameDataByPlayer.Any(n => n.characterPlayed.Equals(characterName) && n.playerName.Equals(playerName))).ToList();
-                wonGamesWithCharacter = games.Where(p => p.gameDataByPlayer.Any(n => n.characterPlayed.Equals(characterName) && n.souls == 4 && n.playerName.Equals(playerName))).ToList();
-                lostGamesWithCharacter = games.Where(p => p.gameDataByPlayer.Any(n => n.characterPlayed.Equals(characterName) && n.souls != 4 && n.playerName.Equals(playerName))).ToList();
+                gamesWithCharacter = games.Where(p => p.GameDataPerPlayer.Any(n => n.CharacterPlayed.Equals(characterName) && n.PlayerName.Equals(playerName))).ToList();
+                wonGamesWithCharacter = games.Where(p => p.GameDataPerPlayer.Any(n => n.CharacterPlayed.Equals(characterName) && n.Souls == 4 && n.PlayerName.Equals(playerName))).ToList();
+                lostGamesWithCharacter = games.Where(p => p.GameDataPerPlayer.Any(n => n.CharacterPlayed.Equals(characterName) && n.Souls != 4 && n.PlayerName.Equals(playerName))).ToList();
             }
 
             // Populates the dictionaries for each character vs each character
@@ -92,11 +92,11 @@ namespace FourSoulsStatsTracker
             {
                 if (AllCharacters[i].characterName.Equals(characterName)) continue;
                 // (X, 0, 0) If Character[i] lost and we won
-                var gamesWithSecondCharacterLosingAndFirstWon = wonGamesWithCharacter.Where(p => p.gameDataByPlayer.Any(n => n.characterPlayed.Equals(AllCharacters[i].characterName) && n.souls != 4));
+                var gamesWithSecondCharacterLosingAndFirstWon = wonGamesWithCharacter.Where(p => p.GameDataPerPlayer.Any(n => n.CharacterPlayed.Equals(AllCharacters[i].characterName) && n.Souls != 4));
                 // (0, X, 0) If Character[i] lost and main character lost
-                var gamesWithBothCharactersLosing = lostGamesWithCharacter.Where(p => p.gameDataByPlayer.Any(n => n.characterPlayed.Equals(AllCharacters[i].characterName) && n.souls != 4));
+                var gamesWithBothCharactersLosing = lostGamesWithCharacter.Where(p => p.GameDataPerPlayer.Any(n => n.CharacterPlayed.Equals(AllCharacters[i].characterName) && n.Souls != 4));
                 // (0, 0, X) If Character[i] won, we lost
-                var gamesWithSecondCharacterWinning = gamesWithCharacter.Where(p => p.gameDataByPlayer.Any(n => n.characterPlayed.Equals(AllCharacters[i].characterName) && n.souls == 4));
+                var gamesWithSecondCharacterWinning = gamesWithCharacter.Where(p => p.GameDataPerPlayer.Any(n => n.CharacterPlayed.Equals(AllCharacters[i].characterName) && n.Souls == 4));
 
                 if (winRateByCharacter.TryGetValue(AllCharacters[i].characterName, out (int, int, int) value))
                 {
@@ -108,36 +108,36 @@ namespace FourSoulsStatsTracker
 
                 if (winRateByCharacterTwoPlayers.TryGetValue(AllCharacters[i].characterName, out (int, int, int) val2))
                 {
-                    val2.Item1 = gamesWithSecondCharacterLosingAndFirstWon.Where(p => p.numberOfPlayers == 2).ToList().Count();
-                    val2.Item2 = gamesWithBothCharactersLosing.Where(p => p.numberOfPlayers == 2).ToList().Count();
-                    val2.Item3 = gamesWithSecondCharacterWinning.Where(p => p.numberOfPlayers == 2).ToList().Count();
+                    val2.Item1 = gamesWithSecondCharacterLosingAndFirstWon.Where(p => p.NumberOfPlayers == 2).ToList().Count();
+                    val2.Item2 = gamesWithBothCharactersLosing.Where(p => p.NumberOfPlayers == 2).ToList().Count();
+                    val2.Item3 = gamesWithSecondCharacterWinning.Where(p => p.NumberOfPlayers == 2).ToList().Count();
                     this.winRateByCharacterTwoPlayers[AllCharacters[i].characterName] = val2;
                 }
 
                 if (winRateByCharacterThreePlayers.TryGetValue(AllCharacters[i].characterName, out (int, int, int) val3))
                 {
-                    val3.Item1 = gamesWithSecondCharacterLosingAndFirstWon.Where(p => p.numberOfPlayers == 3).ToList().Count();
-                    val2.Item3 = gamesWithBothCharactersLosing.Where(p => p.numberOfPlayers == 3).ToList().Count();
-                    val3.Item3 = gamesWithSecondCharacterWinning.Where(p => p.numberOfPlayers == 3).ToList().Count();
+                    val3.Item1 = gamesWithSecondCharacterLosingAndFirstWon.Where(p => p.NumberOfPlayers == 3).ToList().Count();
+                    val2.Item3 = gamesWithBothCharactersLosing.Where(p => p.NumberOfPlayers == 3).ToList().Count();
+                    val3.Item3 = gamesWithSecondCharacterWinning.Where(p => p.NumberOfPlayers == 3).ToList().Count();
                     this.winRateByCharacterThreePlayers[AllCharacters[i].characterName] = val3;
                 }
 
                 if (winRateByCharacterFourPlayers.TryGetValue(AllCharacters[i].characterName, out (int, int, int) val4))
                 {
-                    val4.Item1 = gamesWithSecondCharacterLosingAndFirstWon.Where(p => p.numberOfPlayers == 4).Count();
-                    val4.Item2 = gamesWithBothCharactersLosing.Where(p => p.numberOfPlayers == 4).Count();
-                    val4.Item3 = gamesWithSecondCharacterWinning.Where(p => p.numberOfPlayers == 4).Count();
+                    val4.Item1 = gamesWithSecondCharacterLosingAndFirstWon.Where(p => p.NumberOfPlayers == 4).Count();
+                    val4.Item2 = gamesWithBothCharactersLosing.Where(p => p.NumberOfPlayers == 4).Count();
+                    val4.Item3 = gamesWithSecondCharacterWinning.Where(p => p.NumberOfPlayers == 4).Count();
                     this.winRateByCharacterFourPlayers[AllCharacters[i].characterName] = val4;
                 }
             }
 
             foreach (var game in gamesWithCharacter)
             {
-                foreach (var data in game.gameDataByPlayer)
+                foreach (var data in game.GameDataPerPlayer)
                 {
-                    if (data.characterPlayed.Equals(characterName))
+                    if (data.CharacterPlayed.Equals(characterName))
                     {
-                        cumulativeSouls += data.souls;
+                        cumulativeSouls += data.Souls;
                     }
                 }
             }
@@ -154,7 +154,7 @@ namespace FourSoulsStatsTracker
         }
         public static void PrintCharacters()
         {
-            string filepath = @"C:\Users\nboll\Source\Repos\FourSoulsStatsTracker\FourSoulsStatsTracker\Storage\Characters.txt";
+            string filepath = @"C:\Users\nboll\Source\Repos\FourSoulsStatsTracker\FourSoulsStatsTracker\Storage\Characters.txt";  
             using (StreamWriter output = new StreamWriter(filepath))
             {
                 output.WriteLine("CharacterName:Wins:Losses");
