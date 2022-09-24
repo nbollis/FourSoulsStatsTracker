@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Bson;
 
 namespace FourSoulsCore
 {
@@ -17,17 +18,18 @@ namespace FourSoulsCore
         public int CumulativeSouls { get; set; }
         public double WinRate { get; set; }
         public double AverageSouls { get; set; }
+        public StatDataTypes StatDataType { get; set; }
         public List<DataTable> AllTables { get; set; }
 
         #region Tables
-        public DataTable? CharacterDataTable { get; set; }
-        public DataTable? Character4PlayersDataTable { get; set; }
-        public DataTable? Character3PlayersDataTable { get; set; }
-        public DataTable? Character2PlayersDataTable { get; set; }
-        public DataTable? PlayerDataTable { get; set; }
-        public DataTable? Player4PlayersDataTable { get; set; }
-        public DataTable? Player3PlayersDataTable { get; set; }
-        public DataTable? Player2PlayersDataTable { get; set; }
+        public DataTable CharacterDataTable { get; set; }
+        public DataTable Character4PlayersDataTable { get; set; }
+        public DataTable Character3PlayersDataTable { get; set; }
+        public DataTable Character2PlayersDataTable { get; set; }
+        public DataTable PlayerDataTable { get; set; }
+        public DataTable Player4PlayersDataTable { get; set; }
+        public DataTable Player3PlayersDataTable { get; set; }
+        public DataTable Player2PlayersDataTable { get; set; }
 
         #endregion
         /// <summary>
@@ -41,7 +43,7 @@ namespace FourSoulsCore
         /// </summary>
         /// <param name="souls"></param>
         /// <param name="win"></param>
-        public void AddGame(int souls, bool win)
+        private void AddGame(int souls, bool win)
         {
             if (win)
             {
@@ -53,9 +55,9 @@ namespace FourSoulsCore
             }
 
             GamesPlayed++;
-            CumulativeSouls++;
-            WinRate = Wins / GamesPlayed;
-            AverageSouls = CumulativeSouls / GamesPlayed;
+            CumulativeSouls += souls;
+            WinRate = (double)Wins / GamesPlayed;
+            AverageSouls = (double)CumulativeSouls / GamesPlayed;
         }
 
         /// <summary>
@@ -72,6 +74,14 @@ namespace FourSoulsCore
             InitializeIndividualTable(sd.Player4PlayersDataTable = new DataTable() { TableName = nameof(Player4PlayersDataTable) });
             InitializeIndividualTable(sd.Player3PlayersDataTable = new DataTable() { TableName = nameof(Player3PlayersDataTable) });
             InitializeIndividualTable(sd.Player2PlayersDataTable = new DataTable() { TableName = nameof(Player2PlayersDataTable) });
+
+            if (sd.StatDataType == StatDataTypes.Player)
+            {
+                InitializeIndividualTable(((Player)sd).VsCharacterDataTable = new DataTable() { TableName = "VsCharacterDataTable" });
+                InitializeIndividualTable(((Player)sd).VsCharacter4PlayersDataTable = new DataTable() { TableName = "VsCharacter4PlayersDataTable" });
+                InitializeIndividualTable(((Player)sd).VsCharacter3PlayersDataTable = new DataTable() { TableName = "VsCharacter3PlayersDataTable" });
+                InitializeIndividualTable(((Player)sd).VsCharacter2PlayersDataTable = new DataTable() { TableName = "VsCharacter2PlayersDataTable" });
+            }
         }
 
         /// <summary>
@@ -117,21 +127,21 @@ namespace FourSoulsCore
             // initialize all common columns
             DataColumn column = new DataColumn()
             {
-                DataType = typeof(int),
+                DataType = typeof(double),
                 ColumnName = "Games Played",
                 Caption = "Games Played"
             };
             table.Columns.Add(column);
             column = new DataColumn()
             {
-                DataType = typeof(int),
+                DataType = typeof(double),
                 ColumnName = "Wins",
                 Caption = "Wins"
             };
             table.Columns.Add(column);
             column = new DataColumn()
             {
-                DataType = typeof(int),
+                DataType = typeof(double),
                 ColumnName = "Losses",
                 Caption = "Losses"
             };
@@ -157,6 +167,17 @@ namespace FourSoulsCore
                 Caption = "Total Souls"
             };
             table.Columns.Add(column);
+
+            // set all values to 0
+            // j is set to 1 to avoid the name row
+            for (var i = 0; i < table.Rows.Count; i++)
+            {
+                var tableRow = table.Rows[i];
+                for (var j = 1; j < tableRow.ItemArray.Length; j++)
+                {
+                    tableRow[j] = 0;
+                }
+            }
         }
 
         /// <summary>
@@ -165,39 +186,99 @@ namespace FourSoulsCore
         /// </summary>
         /// <param name="sd"></param>
         /// <param name="game"></param>
-        protected static void ParseGameData(IStatData sd, Game game) 
+        protected static void ParseGameData(IStatData sd, Game game)
         {
+            DataRow rowForSpecificSd = game.GameData.Select($"Player = '{sd.Name}'").First();
             int numPlayers = game.GameData.Rows.Count;
-            int souls = (int)game.GameData.Rows.Find(sd.Name).ItemArray[2];
-            bool winner = sd.Name == game.Winner || sd.Name == game.GameData.Rows[0]["Name"].ToString();
+            int souls = rowForSpecificSd.Field<int>("Souls");
+            bool winner = sd.Name == game.Winner;
+            string sdName = sd.Name;
             sd.AddGame(souls, winner);
 
             // all character and player data tables
             // iterate through each player data in game
             for (int i = 0; i < numPlayers; i++)
             {
-                string player = game.GameData.Rows.Find(sd.Name).ItemArray[0].ToString();
-                CharacterNames character = (CharacterNames)game.GameData.Rows.Find(sd.Name).ItemArray[1];
-                int characterIndex = sd.CharacterDataTable.Rows.IndexOf(sd.CharacterDataTable.Rows.Find(character));
-                int playerIndex = sd.PlayerDataTable.Rows.IndexOf(sd.PlayerDataTable.Rows.Find(player));
+                DataRow row = game.GameData.Rows[i];
+                string player = row.Field<string>("Player") ?? throw new ArgumentNullException();
+                CharacterNames character = row.Field<CharacterNames>("Character");
+                int characterIndex = Array.IndexOf(Enum.GetValues<CharacterNames>(), character);
+                int playerIndex = FourSoulsGlobalData.AllPlayerNames.IndexOf(player);
 
-                AdjustRowOfTable(sd.CharacterDataTable, souls, characterIndex, winner);
                 AdjustRowOfTable(sd.PlayerDataTable, souls, playerIndex, winner);
+                if (sd.StatDataType == StatDataTypes.Player)
+                {
+                    if (sdName == player || sd.Name == character.ToString())
+                    {
+                        AdjustRowOfTable(sd.CharacterDataTable, souls, characterIndex, winner);
+                    }
+                    else
+                    {
+                        AdjustRowOfTable(((Player)sd).VsCharacterDataTable, souls, characterIndex, winner);
+                    }
+                }
+                else
+                {
+                    AdjustRowOfTable(sd.CharacterDataTable, souls, characterIndex, winner);
+                }
+                
 
                 // number of character specific tables
                 switch (game.GameData.Rows.Count)
                 {
                     case 2:
-                        AdjustRowOfTable(sd.Character2PlayersDataTable, souls, characterIndex, winner);
                         AdjustRowOfTable(sd.Player2PlayersDataTable, souls, playerIndex, winner);
+                        if (sd.StatDataType == StatDataTypes.Player)
+                        {
+                            if (sdName == player || sd.Name == character.ToString())
+                            {
+                                AdjustRowOfTable(sd.Character2PlayersDataTable, souls, characterIndex, winner);
+                            }
+                            else
+                            {
+                                AdjustRowOfTable(((Player)sd).VsCharacter2PlayersDataTable, souls, characterIndex, winner);
+                            }
+                        }
+                        else
+                        {
+                            AdjustRowOfTable(sd.Character2PlayersDataTable, souls, characterIndex, winner);
+                        }
                         break;
                     case 3:
-                        AdjustRowOfTable(sd.Character3PlayersDataTable, souls, characterIndex, winner);
                         AdjustRowOfTable(sd.Player3PlayersDataTable, souls, playerIndex, winner);
+                        if (sd.StatDataType == StatDataTypes.Player)
+                        {
+                            if (sdName == player || sd.Name == character.ToString())
+                            {
+                                AdjustRowOfTable(sd.Character3PlayersDataTable, souls, characterIndex, winner);
+                            }
+                            else
+                            {
+                                AdjustRowOfTable(((Player)sd).VsCharacter3PlayersDataTable, souls, characterIndex, winner);
+                            }
+                        }
+                        else
+                        {
+                            AdjustRowOfTable(sd.Character3PlayersDataTable, souls, characterIndex, winner);
+                        }
                         break;
                     case 4:
-                        AdjustRowOfTable(sd.Character4PlayersDataTable, souls, characterIndex, winner);
                         AdjustRowOfTable(sd.Player4PlayersDataTable, souls, playerIndex, winner);
+                        if (sd.StatDataType == StatDataTypes.Player)
+                        {
+                            if (sdName == player || sd.Name == character.ToString())
+                            {
+                                AdjustRowOfTable(sd.Character4PlayersDataTable, souls, characterIndex, winner);
+                            }
+                            else
+                            {
+                                AdjustRowOfTable(((Player)sd).VsCharacter4PlayersDataTable, souls, characterIndex, winner);
+                            }
+                        }
+                        else
+                        {
+                            AdjustRowOfTable(sd.Character4PlayersDataTable, souls, characterIndex, winner);
+                        }
                         break;
                     default:
                         break;
@@ -218,24 +299,26 @@ namespace FourSoulsCore
                 EditTableCell(table, rowIndex, "Losses", -1);
             }
 
-            double averageSouls = (double)table.Rows[rowIndex]["Total Souls"] /
-                                  (double)table.Rows[rowIndex]["Games Played"];
+            double averageSouls = table.Rows[rowIndex].Field<double>("Total Souls") /
+                                  table.Rows[rowIndex].Field<double>("Games Played");
             table.Rows[rowIndex].SetField("Average Souls", averageSouls);
 
-            double winRate = (double)table.Rows[rowIndex]["Wins"] /
-                                  (double)table.Rows[rowIndex]["Games Played"];
+            double winRate = table.Rows[rowIndex].Field<double>("Wins") /
+                             table.Rows[rowIndex].Field<double>("Games Played");
             table.Rows[rowIndex].SetField("Win Rate", winRate);
         }
 
         private static void EditTableCell(DataTable table, int rowIndex, string columnHeader, int souls)
         {
+            // if adding to a column that cares about souls
             if (souls >= 0)
             {
-                table.Rows[rowIndex].SetField(columnHeader, (int)table.Rows[rowIndex][columnHeader] + souls);
+                table.Rows[rowIndex].SetField(columnHeader, table.Rows[rowIndex].Field<double>(columnHeader) + souls);
             }
+            // if incrementing by one
             else
             {
-                table.Rows[rowIndex].SetField(columnHeader, (int)table.Rows[rowIndex][columnHeader] + 1);
+                table.Rows[rowIndex].SetField(columnHeader, table.Rows[rowIndex].Field<double>(columnHeader) + 1);
             }
         }
     }

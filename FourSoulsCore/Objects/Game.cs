@@ -26,6 +26,8 @@ namespace FourSoulsCore
             row["Character"] = character;
             row["Souls"] = souls;
             GameData.Rows.Add(row);
+            OrganizeTableBySouls();
+            Winner = GameData.Rows[0].Field<string>("Player") ?? throw new NullReferenceException("No Player Found");
         }
 
         public void OrganizeTableBySouls()

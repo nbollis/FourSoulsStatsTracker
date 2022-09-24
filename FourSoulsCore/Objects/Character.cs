@@ -19,17 +19,18 @@ namespace FourSoulsCore
         public int CumulativeSouls { get; set; }
         public double WinRate { get; set; }
         public double AverageSouls { get; set; }
+        public StatDataTypes StatDataType { get; set; }
         public List<DataTable> AllTables { get; set; }
 
         #region Tables
-        public DataTable? CharacterDataTable { get; set; }
-        public DataTable? Character4PlayersDataTable { get; set; }
-        public DataTable? Character3PlayersDataTable { get; set; }
-        public DataTable? Character2PlayersDataTable { get; set; }
-        public DataTable? PlayerDataTable { get; set; }
-        public DataTable? Player4PlayersDataTable { get; set; }
-        public DataTable? Player3PlayersDataTable { get; set; }
-        public DataTable? Player2PlayersDataTable { get; set; }
+        public DataTable CharacterDataTable { get; set; }
+        public DataTable Character4PlayersDataTable { get; set; }
+        public DataTable Character3PlayersDataTable { get; set; }
+        public DataTable Character2PlayersDataTable { get; set; }
+        public DataTable PlayerDataTable { get; set; }
+        public DataTable Player4PlayersDataTable { get; set; }
+        public DataTable Player3PlayersDataTable { get; set; }
+        public DataTable Player2PlayersDataTable { get; set; }
 
         #endregion
 
@@ -42,6 +43,7 @@ namespace FourSoulsCore
             CumulativeSouls = 0;
             WinRate = 0;
             AverageSouls = 0;
+            StatDataType = StatDataTypes.Character;
             AllTables = new List<DataTable>();
             IStatData.InitializeDataTables(this);
             AllTables.Add(CharacterDataTable ?? throw new NullReferenceException());

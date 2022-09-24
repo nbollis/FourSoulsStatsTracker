@@ -19,7 +19,6 @@ namespace Test
             game.AddRowToTable("Nico", CharacterNames.CaptainViridian, 3);
             Assert.That(game.GameData.Rows.Count == 3);
             
-            game.OrganizeTableBySouls();
             int previousSouls = 4;
             for (var i = 0; i < game.GameData.Rows.Count; i++)
             {
