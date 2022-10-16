@@ -264,11 +264,20 @@ namespace Test
             Assert.That(nicoRow.Field<double>("Average Souls") == (double)11 / 4);
             Assert.That(nicoRow.Field<double>("Total Souls") == 11);
 
+            // add new game and ensure it is all added correctly
             Game newGame = new();
             newGame.AddRowToTable("Nic", CharacterNames.Apollyon, 4);
             newGame.AddRowToTable("Maia", CharacterNames.Azazel, 4);
             newGame.AddRowToTable("Claire", CharacterNames.Ash, 4);
             nic.ParseDataFromGame(newGame);
+
+            Assert.That(nic.Wins == 2);
+            Assert.That(nic.Losses == 3);
+            Assert.That(nic.GamesPlayed == 5);
+            Assert.That(nic.CumulativeSouls == 15);
+            Assert.That(Math.Abs(nic.WinRate - 0.4) < 0.01);
+            Assert.That(Math.Abs(nic.AverageSouls - 15.0 / 5.0) < 0.01);
+
             nicRow = nic.PlayerDataTable.Select("Name = 'Nic'").First();
             Assert.That(nicRow.Field<double>("Games Played") == 5);
             Assert.That(nicRow.Field<double>("Wins") == 2);
