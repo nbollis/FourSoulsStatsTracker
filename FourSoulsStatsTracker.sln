@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FourSoulsStatsTracker", "Fo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GUI", "GUI\GUI.csproj", "{728CD499-7888-4352-B00E-A5225602C9A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourSoulsCore", "FourSoulsCore\FourSoulsCore.csproj", "{F3083E8E-EB91-4797-853F-A37C08E87F47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FourSoulsCore", "FourSoulsCore\FourSoulsCore.csproj", "{F3083E8E-EB91-4797-853F-A37C08E87F47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{C45B1CAB-60E4-4130-AE28-517BD5C2497C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{C45B1CAB-60E4-4130-AE28-517BD5C2497C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourSoulsStatGUI", "FourSoulsStatGUI\FourSoulsStatGUI.csproj", "{0753D280-07BB-49B7-BAA6-099B8621791E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,12 @@ Global
 		{C45B1CAB-60E4-4130-AE28-517BD5C2497C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C45B1CAB-60E4-4130-AE28-517BD5C2497C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C45B1CAB-60E4-4130-AE28-517BD5C2497C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0753D280-07BB-49B7-BAA6-099B8621791E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0753D280-07BB-49B7-BAA6-099B8621791E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0753D280-07BB-49B7-BAA6-099B8621791E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0753D280-07BB-49B7-BAA6-099B8621791E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0753D280-07BB-49B7-BAA6-099B8621791E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0753D280-07BB-49B7-BAA6-099B8621791E}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

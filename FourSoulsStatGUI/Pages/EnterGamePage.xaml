@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FourSoulsStatGUI.Pages.EnterGamePage"
+             xmlns:viewModels="clr-namespace:FourSoulsCore.ViewModels;assembly=FourSoulsCore"
+             xmlns:fs="clr-namespace:FourSoulsCore;assembly=FourSoulsCore"
+             Title="EnterGamePage">
+    <ContentPage.BindingContext>
+        <viewModels:EnterGamePageViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid>
+
+        <Grid x:Name="GameLayout"
+              BindingContext="{Binding GameViewModel}"
+              ColumnDefinitions="*, *, *"
+              RowDefinitions="*, *, *, *, *">
+
+            <Label Grid.Row="0" Grid.Column="0" Text="Player"></Label>
+            <Label Grid.Row="0" Grid.Column="1" Text="Character"></Label>
+            <Label Grid.Row="0" Grid.Column="2" Text="Souls"></Label>
+
+
+            <!-- Player 1 -->
+            <ListView Grid.Row="1" Grid.Column="0"
+                      SelectedItem="{Binding Player1}"
+                      ItemsSource="{x:Static fs:FourSoulsGlobalData.AllPlayerNames}">
+            </ListView>
+            <ListView Grid.Row="1" Grid.Column="1"
+                      SelectedItem="{Binding Character1}"
+                      ItemsSource="{x:Static fs:FourSoulsGlobalData.AllCharacterNames}">
+            </ListView>
+            <StackLayout Grid.Row="1" Grid.Column="2"
+                         RadioButtonGroup.GroupName="Player1"
+                         RadioButtonGroup.SelectedValue="{Binding Souls1}"
+                         Orientation="Vertical">
+
+                <StackLayout Orientation="Horizontal">
+                    <RadioButton Content="0"></RadioButton>
+                    <RadioButton Content="1"></RadioButton>
+                    <RadioButton Content="2"></RadioButton>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <RadioButton Content="3"></RadioButton>
+                    <RadioButton Content="4"></RadioButton>
+                </StackLayout>
+                
+            </StackLayout>
+
+
+        </Grid>
+
+
+
+
+
+    
+        
+    </Grid>
+</ContentPage>
