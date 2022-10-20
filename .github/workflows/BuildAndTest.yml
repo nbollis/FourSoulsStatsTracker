@@ -23,8 +23,6 @@ jobs:
       run: cd FourSoulsStatsTracker && dotnet restore
     - name: Build
       run: cd FourSoulsStatsTracker && dotnet build --no-restore
-    - name: dir
-      run: dir
     - name: Build (Test)
       run: dotnet build ./Test/Test.csproj 
     - name: Add coverlet collector (Test)
@@ -32,7 +30,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=cobertura ./Test/Test.csproj
     - name: Codecov
-      uses: codecov/codecov-action@v2
+      uses: codecov/codecov-action@v3
       with:
         verbose: true
         files: FourSoulsStatsTracker/Test*/TestResults/*/coverage.cobertura.xml
