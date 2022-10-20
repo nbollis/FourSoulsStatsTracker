@@ -26,7 +26,7 @@ jobs:
     - name: dir
       run: dir
     - name: Build (Test)
-      run: cd FourSoulsStatsTracker && dotnet build ./Test.csproj 
+      run: cd FourSoulsStatsTracker && dotnet build FourSoulsStatsTracker/Test/Test.csproj 
     - name: Add coverlet collector (Test)
       run: cd FourSoulsStatsTracker && dotnet add Test/Test.csproj package coverlet.collector
     - name: Test
