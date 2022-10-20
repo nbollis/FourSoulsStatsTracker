@@ -28,22 +28,23 @@ jobs:
     runs-on: windows-latest
     timeout-minutes: 15
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Install dependencies
-        run: npm install
-      - name: Lint
-        run: npm run lint
-      - name: Run tests and collect coverage
-        run: npm run test
-      - name: Upload coverage to Codecov (version)
-        uses: ./
-        with:
-          files: ./coverage/calculator/coverage-final.json,./coverage/coverage-test/coverage-final.json
-          file: ./coverage/coverage-final.json
-          flags: version,${{ matrix.os }}
-          name: codecov-version
-          version: v0.1.0_8880
-          verbose: true
-        
- 
+    - uses: actions/checkout@v2
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: cd FourSoulsStatsTracker && dotnet restore
+    - name: Build
+      run: cd FourSoulsStatsTracker && dotnet build --no-restore
+    - name: Build (Test)
+      run: cd FourSoulsStatsTracker && dotnet build --no-restore ./Test/Test.csproj
+    - name: Add coverlet collector (Test)
+      run: cd FourSoulsStatsTracker && dotnet add Test/Test.csproj package coverlet.collector
+    - name: Test
+      run: cd FourSoulsStatsTracker && dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=cobertura ./Test/Test.csproj
+    - name: Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        verbose: true
+        files: mzLib/Test*/TestResults/*/coverage.cobertura.xml
