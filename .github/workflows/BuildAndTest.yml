@@ -24,7 +24,7 @@ jobs:
     - name: Build
       run: cd FourSoulsStatsTracker && dotnet build --no-restore
     - name: Build (Test)
-      run: cd FourSoulsStatsTracker && dotnet build ./Test/Test.csproj --no-restore
+      run: cd FourSoulsStatsTracker && dotnet build /Test/Test.csproj --no-restore
     - name: Add coverlet collector (Test)
       run: cd FourSoulsStatsTracker && dotnet add Test/Test.csproj package coverlet.collector
     - name: Test
