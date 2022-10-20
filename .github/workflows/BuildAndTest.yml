@@ -25,7 +25,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Build (Tests)
-      run: dotnetbuild --no-restore ./Test/Test.csproj
+      run: dotnet build --no-restore ./Test/Test.csproj
     - name: Add coverlet collector (Test)
       run: dotnet add Test/Test.csproj package coverlet.collector
     - name: Test
