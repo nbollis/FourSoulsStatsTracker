@@ -26,11 +26,11 @@ jobs:
     - name: dir
       run: dir
     - name: Build (Test)
-      run: cd FourSoulsStatsTracker && dotnet build FourSoulsStatsTracker/Test/Test.csproj 
+      run: dotnet build ./Test/Test.csproj 
     - name: Add coverlet collector (Test)
-      run: cd FourSoulsStatsTracker && dotnet add Test/Test.csproj package coverlet.collector
+      run: dotnet add Test/Test.csproj package coverlet.collector
     - name: Test
-      run: cd FourSoulsStatsTracker && dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=cobertura ./Test/Test.csproj
+      run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=cobertura ./Test/Test.csproj
     - name: Codecov
       uses: codecov/codecov-action@v2
       with:
