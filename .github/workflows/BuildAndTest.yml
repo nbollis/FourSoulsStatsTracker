@@ -11,7 +11,6 @@ on:
 
 jobs:
   build:
-
     runs-on: windows-latest
     timeout-minutes: 15
     steps:
@@ -24,20 +23,27 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Build (Tests)
-      run: dotnet build --no-restore ./Test/Test.csproj
-    - name: Add coverlet collector (Test)
-      run: dotnet add Test/Test.csproj package coverlet.collector
-    - name: Test
-      run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=cobertura ./Tests/Tests.csproj
-    - name: Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        verbose: true
-        files: InstrumentControl/Tests*/TestResults/*/coverage.cobertura.xml
-    - name: Uploade coverage reports to Codecov
-      uses: ./
-      with:
-        files: ./coverage/calculator/coverage-final.json,./coverage/coverage-test/coverage-final.json
-        file: ./coverage/coverage-final.json
-        verbose: true
+      
+  test:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Lint
+        run: npm run lint
+      - name: Run tests and collect coverage
+        run: npm run test
+      - name: Upload coverage to Codecov (version)
+        uses: ./
+        with:
+          files: ./coverage/calculator/coverage-final.json,./coverage/coverage-test/coverage-final.json
+          file: ./coverage/coverage-final.json
+          flags: version,${{ matrix.os }}
+          name: codecov-version
+          version: v0.1.0_8880
+          verbose: true
+        
+ 
