@@ -14,9 +14,9 @@ jobs:
     runs-on: windows-latest
     timeout-minutes: 15
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
@@ -26,9 +26,9 @@ jobs:
     - name: Build (Test)
       run: dotnet build ./Test/Test.csproj 
     - name: Add coverlet collector (Test)
-      run: dotnet add Test/Test.csproj package coverlet.collector
+      run: cd FourSoulsStatsTracker && dotnet add Test/Test.csproj package coverlet.collector
     - name: Test
-      run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=cobertura ./Test/Test.csproj
+      run: cd FourSoulsStatsTracker && dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=cobertura ./Test/Test.csproj
     - name: Codecov
       uses: codecov/codecov-action@v3
       with:
