@@ -33,4 +33,4 @@ jobs:
       uses: codecov/codecov-action@v2
       with:
         verbose: true
-        files: mzLib/Test*/TestResults/*/coverage.cobertura.xml
+        files: FourSoulsStatsTracker/Test*/TestResults/*/coverage.cobertura.xml
