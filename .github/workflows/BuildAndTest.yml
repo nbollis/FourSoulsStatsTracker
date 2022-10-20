@@ -35,3 +35,7 @@ jobs:
       with:
         verbose: true
         files: InstrumentControl/Tests*/TestResults/*/coverage.cobertura.xml
+    - name: Uploade coverage reports to Codecov
+      run: curl -Os https://uploader.codecov.io/latest/windows/codecov
+        chmod +x codecov
+        ./codecov -t ${721cdbba-69cc-44d5-a2a7-96b581584f9b}
