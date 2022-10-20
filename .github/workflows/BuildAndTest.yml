@@ -24,7 +24,7 @@ jobs:
     - name: Build
       run: cd FourSoulsStatsTracker && dotnet build --no-restore
     - name: Build (Test)
-      run: dotnet build ./Test/Test.csproj --no-restore
+      run: dotnet build ./Test/Test.csproj 
     - name: Add coverlet collector (Test)
       run: dotnet add Test/Test.csproj package coverlet.collector
     - name: Test
@@ -33,4 +33,5 @@ jobs:
       uses: codecov/codecov-action@v3
       with:
         verbose: true
+        fail_ci_if_error: true
         files: FourSoulsStatsTracker/Test*/TestResults/*/coverage.cobertura.xml
