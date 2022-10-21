@@ -30,7 +30,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=cobertura ./Test/Test.csproj
     - name: Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v2
       with:
         verbose: true
         fail_ci_if_error: true
