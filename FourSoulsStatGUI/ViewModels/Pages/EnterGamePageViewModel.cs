@@ -30,7 +30,7 @@ namespace FourSoulsStatGUI
         #region Public Properties
         public ObservableCollection<string> CharacterNames { get; }
 
-        public ObservableCollection<string> PlayerNames { get; private set; }
+        public List<string> PlayerNames => FourSoulsGlobalData.AllPlayerNames;
 
         public GameViewModel GameViewModel { get; set; }
 
@@ -59,7 +59,6 @@ namespace FourSoulsStatGUI
         {
             gameTimer = new Timer();
             gameTimer.Interval = 1000; //milliseconds
-            PlayerNames = new ObservableCollection<string>(FourSoulsGlobalData.AllPlayerNames);
             CharacterNames = new ObservableCollection<string>(FourSoulsGlobalData.AllCharacters.Select(p => p.Name));
             GameParsingErrors = new ObservableCollection<string>();
             GameViewModel = new();
@@ -176,7 +175,6 @@ namespace FourSoulsStatGUI
 
         public void UpdatePlayerNames()
         {
-            PlayerNames = new ObservableCollection<string>(FourSoulsGlobalData.AllPlayerNames);
             OnPropertyChanged(nameof(PlayerNames));
         }
     }

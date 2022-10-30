@@ -33,9 +33,12 @@ namespace FourSoulsCore
         /// <param name="filepath"></param>
         public static void SerializeAndAppend<T>(T objectToSerialize, string filepath)
         {
-            using (StreamWriter streamWriter = new(File.OpenWrite(filepath)))
+            using(var file = File.Open(filepath, FileMode.Append))
             {
-                streamWriter.WriteLine(JsonConvert.SerializeObject(objectToSerialize));
+                using (StreamWriter streamWriter = new(file))
+                {
+                    streamWriter.WriteLine(JsonConvert.SerializeObject(objectToSerialize));
+                }
             }
         }
 

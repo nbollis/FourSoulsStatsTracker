@@ -48,7 +48,7 @@ public partial class EnterGamePage : ContentPage
         await this.ShowPopupAsync(addPlayerPopup);
 
         string playerName = ((PopupViewModel)addPlayerPopup.BindingContext).InputText;
-        if (FourSoulsGlobalData.AllPlayerNames.Contains(playerName))
+        if (playerName != null && FourSoulsGlobalData.AllPlayerNames.Contains(playerName))
         {
             popupVM.Messages.Add("Player with name already exists");
             SimplePopup simplePopup = new SimplePopup(popupVM);
@@ -56,7 +56,7 @@ public partial class EnterGamePage : ContentPage
         }
         else
         {
-            FourSoulsGlobalData.AddPlayerName(playerName);
+            FourSoulsGlobalData.AddPlayer(playerName);
             vm.UpdatePlayerNames();
         }
     }

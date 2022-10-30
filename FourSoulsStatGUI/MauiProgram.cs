@@ -8,7 +8,7 @@ namespace FourSoulsStatGUI
     {
         public static MauiApp CreateMauiApp()
         {
-            FourSoulsGlobalData.LoadAllData();
+            //LoadData();
             var builder = MauiApp.CreateBuilder();
             // Initialise the toolkit
             builder.UseMauiApp<App>().UseMauiCommunityToolkitMarkup().UseMauiCommunityToolkit();
@@ -19,6 +19,11 @@ namespace FourSoulsStatGUI
                 fonts.AddFont("fa_solid.ttf", "FontAwesome");
             });
             return builder.Build();
+        }
+
+        private static async void LoadData()
+        {
+            await Task.Run(FourSoulsGlobalData.LoadAllData);
         }
     }
 }

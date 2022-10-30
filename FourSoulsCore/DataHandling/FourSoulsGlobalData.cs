@@ -53,11 +53,14 @@ namespace FourSoulsCore
            JsonSerializerDeserializer.SerializeCollection(AllPlayerNames, playerNamesPath);
        }
 
-       public static void AddPlayerName(string playerName)
+       public static void AddPlayer(string playerName)
        {
             AllPlayerNames.Add(playerName);
+            var newPlayer = new Player(playerName);
+            AllPlayers.Add(newPlayer);
             JsonSerializerDeserializer.SerializeAndAppend(playerName, playerNamesPath);
-       }
+            JsonSerializerDeserializer.SerializeAndAppend(newPlayer, playersPath);
+        }
 
        public static void AddGame(Game game)
        {

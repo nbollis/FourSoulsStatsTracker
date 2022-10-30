@@ -36,7 +36,7 @@
                                     <Picker SelectedItem="{Binding PlayerName}" Grid.Column="0"
                                         HorizontalOptions="Center"
                                         ItemsSource="{Binding Source={RelativeSource AncestorType
-                                        ={x:Type local:EnterGamePageViewModel}}, Path=PlayerNames }">
+                                        ={x:Type local:EnterGamePageViewModel}}, Path=PlayerNames, Mode=TwoWay}">
                                     </Picker>
                                     <Picker SelectedItem="{Binding CharacterPlayed}" Grid.Column="1"
                                         HorizontalOptions="Center"
