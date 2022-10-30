@@ -30,19 +30,19 @@ namespace FourSoulsCore
        public static List<Player> AllPlayers { get; set; }
 
        public static List<string> AllCharacterNames => AllCharacters.Select(p => p.Name).ToList();
-       public static List<string> AllPlayerNames => AllCharacters.Select(p => p.Name).ToList();
+       public static List<string> AllPlayerNames { get; private set; }
 
-       static FourSoulsGlobalData()
-       {
-           LoadAllData();
-       }
+        static FourSoulsGlobalData()
+        {
+            LoadAllData();
+        }
 
-       private static void LoadAllData()
+        public static void LoadAllData()
        {
+           AllPlayerNames = JsonSerializerDeserializer.DeserializeCollection<string>(playerNamesPath).ToList();
            AllGames = JsonSerializerDeserializer.DeserializeCollection<Game>(gamesPath).ToList();
            AllCharacters = JsonSerializerDeserializer.DeserializeCollection<Character>(charactersPath).ToList();
            AllPlayers = JsonSerializerDeserializer.DeserializeCollection<Player>(playersPath).ToList();
-          
        }
 
        public static void SaveAllData()

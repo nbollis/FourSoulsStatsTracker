@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
 namespace FourSoulsCore.MVVMBase
 {
@@ -15,6 +16,19 @@ namespace FourSoulsCore.MVVMBase
         /// Considering how fast this check will always be it isn't an issue to globally lock all callers.
         /// </summary>
         protected object mPropertyValueCheckLock = new object();
+
+        protected bool SetProperty<T>(ref T backingStore, T value,
+            [CallerMemberName] string propertyName = "",
+            Action onChanged = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(backingStore, value))
+                return false;
+
+            backingStore = value;
+            onChanged?.Invoke();
+            OnPropertyChanged(propertyName);
+            return true;
+        }
 
         #endregion
 
@@ -122,6 +136,16 @@ namespace FourSoulsCore.MVVMBase
 
         #endregion
     }
+
+    //public static class BaseViewModelExtensions
+    //{
+    //    public static void OnPropertyChanged(this BaseViewModel vm, string propertyName)
+    //    {
+    //        vm.OnPropertyChanged(propertyName);
+    //    }
+
+    //}
+
 
     #region Private Members
 

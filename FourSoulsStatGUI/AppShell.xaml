@@ -5,26 +5,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:FourSoulsStatGUI"
     xmlns:pages="clr-namespace:FourSoulsStatGUI.Pages"
-    Shell.FlyoutBehavior="Flyout">
+    Shell.FlyoutBehavior="Flyout"
+    Shell.NavBarIsVisible="False">
 
-    <FlyoutItem Title="Main" FlyoutIcon="{StaticResource PlayerIcon}">
-        <ShellContent
-            Title="Main"
-            ContentTemplate="{DataTemplate local:MainPage}"
-            Route="OnePage" />
-    </FlyoutItem>
-    <FlyoutItem Title="Players" FlyoutIcon="{StaticResource PlayerIcon}">
-        <ShellContent
-            Title="Players"
-            ContentTemplate="{DataTemplate pages:PlayersPage}"
-            Route="OnePage" />
-    </FlyoutItem>
     <FlyoutItem Title="Enter Game" FlyoutIcon="{StaticResource GameIcon}">
         <ShellContent
             Title="Enter Game"
             ContentTemplate="{DataTemplate pages:EnterGamePage}"
+            Route="OnePage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Players" FlyoutIcon="{StaticResource PlayerIcon}">
+        <ShellContent
+            Title="Players"
+            ContentTemplate="{DataTemplate pages:PlayersPage}"
             Route="TwoPage" />
     </FlyoutItem>
+    
     <FlyoutItem Title="Characters" FlyoutIcon="{StaticResource CharacterIcon}">
         <ShellContent
             Title="Characters"

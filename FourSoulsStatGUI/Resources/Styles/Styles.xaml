@@ -22,6 +22,23 @@
                Size="22"
                Glyph="{x:Static local:IconFont.ChessPawn}">
     </FontImage>
+    <FontImage x:Key="UserPlus"
+               FontFamily="FontAwesome"
+               Size="22"
+               Glyph="{x:Static local:IconFont.UserPlus}">
+    </FontImage>
+    <FontImage x:Key="UserMinus"
+               FontFamily="FontAwesome"
+               Size="22"
+               Glyph="{x:Static local:IconFont.UserMinus}">
+    </FontImage>
+
+    <!-- My Styles -->
+    <Style TargetType="Entry" x:Key="TextEntry">
+        <Setter Property="IsTextPredictionEnabled" Value="False" />
+        <Setter Property="IsSpellCheckEnabled" Value="False" />
+        <Setter Property="ClearButtonVisibility" Value="WhileEditing" />
+    </Style>
 
     <!-- what was already here -->
     <Style TargetType="ActivityIndicator">

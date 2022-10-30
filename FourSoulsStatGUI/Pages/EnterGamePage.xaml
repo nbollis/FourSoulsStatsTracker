@@ -2,56 +2,122 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FourSoulsStatGUI.Pages.EnterGamePage"
-             xmlns:viewModels="clr-namespace:FourSoulsCore.ViewModels;assembly=FourSoulsCore"
-             xmlns:fs="clr-namespace:FourSoulsCore;assembly=FourSoulsCore"
-             Title="EnterGamePage">
+             xmlns:local="clr-namespace:FourSoulsStatGUI"
+             Title="">
     <ContentPage.BindingContext>
-        <viewModels:EnterGamePageViewModel />
+        <local:EnterGamePageViewModel />
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <local:RadioButtonToSoulsConverter x:Key="ButtonToSoulsConverter"></local:RadioButtonToSoulsConverter>
+    </ContentPage.Resources>
 
-    <Grid>
+    <Grid RowDefinitions="*, Auto">
 
-        <Grid x:Name="GameLayout"
+        <Grid x:Name="GameLayout" Grid.Row="0"
               BindingContext="{Binding GameViewModel}"
               ColumnDefinitions="*, *, *"
-              RowDefinitions="*, *, *, *, *">
+              RowDefinitions="Auto, *, Auto">
 
-            <Label Grid.Row="0" Grid.Column="0" Text="Player"></Label>
-            <Label Grid.Row="0" Grid.Column="1" Text="Character"></Label>
-            <Label Grid.Row="0" Grid.Column="2" Text="Souls"></Label>
+            <!-- Top Labels --> 
+            <Label Grid.Row="0" Grid.Column="0" Text="Player"
+                   HorizontalOptions="Center" VerticalOptions="Center"></Label>
+            <Label Grid.Row="0" Grid.Column="1" Text="Character" 
+                   HorizontalOptions="Center" VerticalOptions="Center"></Label>
+            <Label Grid.Row="0" Grid.Column="2" Text="Souls" 
+                   HorizontalOptions="Center" VerticalOptions="Center"></Label>
+            
+            <!-- Players -->
+            <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="3">
+                <ListView ItemsSource="{Binding GameDataPerPlayers}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid ColumnDefinitions="*, *, *">
+                                    <Picker SelectedItem="{Binding PlayerName}" Grid.Column="0"
+                                        HorizontalOptions="Center"
+                                        ItemsSource="{Binding Source={RelativeSource AncestorType
+                                        ={x:Type local:EnterGamePageViewModel}}, Path=PlayerNames }">
+                                    </Picker>
+                                    <Picker SelectedItem="{Binding CharacterPlayed}" Grid.Column="1"
+                                        HorizontalOptions="Center"
+                                        ItemsSource="{Binding Source={RelativeSource AncestorType
+                                        ={x:Type local:EnterGamePageViewModel}}, Path=CharacterNames }">
+                                    </Picker>
+                                    <StackLayout RadioButtonGroup.GroupName="{Binding GameDataPerPlayerHash}"
+                                             RadioButtonGroup.SelectedValue="{Binding Souls}"
+                                             Orientation="Vertical" Grid.Column="2">
 
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                            <RadioButton Content="0" IsChecked="{Binding Souls, 
+                                                Converter={StaticResource ButtonToSoulsConverter},
+                                                ConverterParameter=0}">
+                                            </RadioButton>
+                                            <RadioButton Content="1" IsChecked="{Binding Souls, 
+                                                Converter={StaticResource ButtonToSoulsConverter}, ConverterParameter=1}">
+                                            </RadioButton>
+                                            <RadioButton Content="2" IsChecked="{Binding Souls, 
+                                                Converter={StaticResource ButtonToSoulsConverter}, ConverterParameter=2}">
+                                            </RadioButton>
+                                        </StackLayout>
 
-            <!-- Player 1 -->
-            <ListView Grid.Row="1" Grid.Column="0"
-                      SelectedItem="{Binding Player1}"
-                      ItemsSource="{x:Static fs:FourSoulsGlobalData.AllPlayerNames}">
-            </ListView>
-            <ListView Grid.Row="1" Grid.Column="1"
-                      SelectedItem="{Binding Character1}"
-                      ItemsSource="{x:Static fs:FourSoulsGlobalData.AllCharacterNames}">
-            </ListView>
-            <StackLayout Grid.Row="1" Grid.Column="2"
-                         RadioButtonGroup.GroupName="Player1"
-                         RadioButtonGroup.SelectedValue="{Binding Souls1}"
-                         Orientation="Vertical">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                            <RadioButton Content="3"></RadioButton>
+                                            <RadioButton Content="4"></RadioButton>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
 
-                <StackLayout Orientation="Horizontal">
-                    <RadioButton Content="0"></RadioButton>
-                    <RadioButton Content="1"></RadioButton>
-                    <RadioButton Content="2"></RadioButton>
-                </StackLayout>
+                <!-- Buttons under players -->
+                <Grid ColumnDefinitions="*, *, *">
 
-                <StackLayout Orientation="Horizontal">
-                    <RadioButton Content="3"></RadioButton>
-                    <RadioButton Content="4"></RadioButton>
-                </StackLayout>
-                
-            </StackLayout>
+                    <!-- Add and Remove Player Buttons -->
+                    <Grid Grid.Column="0" ColumnDefinitions="*, *, *, *, *">
+                        <Button Grid.Column="1" WidthRequest="50"
+                                Text="{x:Static local:IconFont.UserPlus}" 
+                                FontFamily="FontAwesome"
+                                Command="{Binding AddPlayerToGameCommand}" />
+                        <Button Grid.Column="3" WidthRequest="50"
+                                Text="{x:Static local:IconFont.UserMinus}" 
+                                FontFamily="FontAwesome"
+                                Command="{Binding RemovePlayerFromGameCommand}" />
+                    </Grid>
 
+                    <!-- Timer and Related Buttons -->
+                    <Grid Grid.Column="2" ColumnDefinitions="*, *, *">
+                        <Button Grid.Column="0" WidthRequest="50"
+                                Text="{x:Static local:IconFont.Play}" 
+                                FontFamily="FontAwesome"
+                                Command="{Binding Source={RelativeSource AncestorType
+                                ={x:Type local:EnterGamePageViewModel}}, Path=StartGameTimerCommand}" />
 
+                        <Label Grid.Column="1" Text="{Binding Source={RelativeSource AncestorType
+                            ={x:Type local:EnterGamePageViewModel}}, Path=ElapsedTime}"
+                               FontSize="24" HorizontalOptions="Center" VerticalOptions="Center">
+                        </Label>
+
+                        <Button Grid.Column="2" WidthRequest="50"
+                                Text="{x:Static local:IconFont.Pause}" 
+                                FontFamily="FontAwesome"
+                                Command="{Binding Source={RelativeSource AncestorType
+                                ={x:Type local:EnterGamePageViewModel}}, Path=PauseGameTimerCommand}" />
+                    </Grid>
+                    
+                </Grid>
+            </VerticalStackLayout>
         </Grid>
 
-
+        <HorizontalStackLayout  Grid.Row="1" HorizontalOptions="Center">
+            <Button Text="Add Player" x:Name="AddPlayer"
+                    Clicked="AddPlayer_OnClicked"/>
+            <Button Text="Save Game" 
+                    Clicked="SaveGameButton_OnClicked"/>
+            <Button Text="Reset Game"
+                    Command="{Binding ResetGameCommand}"/>
+        </HorizontalStackLayout>
 
 
 

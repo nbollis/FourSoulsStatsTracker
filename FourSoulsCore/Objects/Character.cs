@@ -9,8 +9,10 @@ namespace FourSoulsCore
 {
     public class Character : IStatData
     {
-        public string Name { get => CharacterName.ToString();
-            set { Name = value; }
+        public string Name
+        {
+            get { return CharacterName.ToString(); }
+            set { }
         }
         public CharacterNames CharacterName { get; set; }
         public int Wins { get; set; }

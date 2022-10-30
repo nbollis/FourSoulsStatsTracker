@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FourSoulsStatsTracker", "FourSoulsStatsTracker\FourSoulsStatsTracker.csproj", "{D787C384-0439-4F15-8F4D-7FFA6BE25DE1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GUI", "GUI\GUI.csproj", "{728CD499-7888-4352-B00E-A5225602C9A5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FourSoulsCore", "FourSoulsCore\FourSoulsCore.csproj", "{F3083E8E-EB91-4797-853F-A37C08E87F47}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{C45B1CAB-60E4-4130-AE28-517BD5C2497C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourSoulsStatGUI", "FourSoulsStatGUI\FourSoulsStatGUI.csproj", "{0753D280-07BB-49B7-BAA6-099B8621791E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FourSoulsStatGUI", "FourSoulsStatGUI\FourSoulsStatGUI.csproj", "{0753D280-07BB-49B7-BAA6-099B8621791E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D787C384-0439-4F15-8F4D-7FFA6BE25DE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D787C384-0439-4F15-8F4D-7FFA6BE25DE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D787C384-0439-4F15-8F4D-7FFA6BE25DE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D787C384-0439-4F15-8F4D-7FFA6BE25DE1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{728CD499-7888-4352-B00E-A5225602C9A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{728CD499-7888-4352-B00E-A5225602C9A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{728CD499-7888-4352-B00E-A5225602C9A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
