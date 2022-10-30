@@ -36,6 +36,7 @@ namespace Test
         {
             List<Character> characters = new();
             List<Player> players = new();
+
             foreach (var character in Enum.GetValues(typeof(CharacterNames)))
             {
                 characters.Add(new Character((CharacterNames)character));

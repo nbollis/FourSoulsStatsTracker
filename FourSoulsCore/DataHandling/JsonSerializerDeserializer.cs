@@ -33,9 +33,12 @@ namespace FourSoulsCore
         /// <param name="filepath"></param>
         public static void SerializeAndAppend<T>(T objectToSerialize, string filepath)
         {
-            using (StreamWriter streamWriter = new(File.Create(filepath)))
+            using(var file = File.Open(filepath, FileMode.Append))
             {
-                streamWriter.WriteLine(JsonConvert.SerializeObject(objectToSerialize));
+                using (StreamWriter streamWriter = new(file))
+                {
+                    streamWriter.WriteLine(JsonConvert.SerializeObject(objectToSerialize));
+                }
             }
         }
 
@@ -45,11 +48,15 @@ namespace FourSoulsCore
         /// <typeparam name="T"></typeparam>
         /// <param name="collectionToSerialize"></param>
         /// <param name="filepath"></param>
-        public static void SerializeCollection<T>(IEnumerable<T> collectionToSerialize, string filepath) 
+        public static void SerializeCollection<T>(IEnumerable<T> collectionToSerialize, string filepath)
         {
-            foreach (var item in collectionToSerialize)
+            FileStream stream = File.Create(filepath);
+            using (StreamWriter streamWriter = new(stream))
             {
-                SerializeAndAppend(item, filepath);
+                foreach (var item in collectionToSerialize)
+                {
+                    streamWriter.WriteLine(JsonConvert.SerializeObject(item));
+                }
             }
         }
 

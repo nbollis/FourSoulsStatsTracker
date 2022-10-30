@@ -13,6 +13,7 @@ namespace FourSoulsCore
         public int NumberOfPlayers { get; set; }
         public DateTime DateOfEntry { get; set; }
         public DataTable GameData { get; set; }
+        public TimeSpan LengthOfGame { get; set; }
 
         public Game()
         {
@@ -28,9 +29,10 @@ namespace FourSoulsCore
             GameData.Rows.Add(row);
             OrganizeTableBySouls();
             Winner = GameData.Rows[0].Field<string>("Player") ?? throw new NullReferenceException("No Player Found");
+            NumberOfPlayers = GameData.Rows.Count;
         }
 
-        public void OrganizeTableBySouls()
+        private void OrganizeTableBySouls()
         {
             GameData.DefaultView.Sort = "Souls DESC";
             GameData = GameData.DefaultView.ToTable();
