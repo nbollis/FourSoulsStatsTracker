@@ -7,24 +7,6 @@ using System.Threading.Tasks;
 
 namespace FourSoulsData
 {
-    public static class SqlConnection
-    {
-        public static FourSoulsEfContext EfContext { get; set; }
-
-        static SqlConnection()
-        {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "NICS-DESKTOP"; // update me
-            builder.UserID = "admin"; // update me
-            builder.Password = "admin"; // update me
-            builder.InitialCatalog = "FourSoulsStats";
-            EfContext = new FourSoulsEfContext(builder.ConnectionString);
-        }
-    }
-
-
-
-
     public static class SqlMethods
     {
         public static void AddGame(Game game, IEnumerable<GameData> gameDatum)
@@ -33,6 +15,13 @@ namespace FourSoulsData
             SqlConnection.EfContext.Games.Add(game);
             SqlConnection.EfContext.SaveChanges();
             SqlConnection.EfContext.GameData.AddRange(gameDatum);
+            SqlConnection.EfContext.SaveChanges();
+        }
+
+        public static void AddPlayer(string name)
+        {
+            Player player = new() { PlayerName = name };
+            SqlConnection.EfContext.Players.Add(player);
             SqlConnection.EfContext.SaveChanges();
         }
 
@@ -56,7 +45,7 @@ namespace FourSoulsData
             return (from d in SqlConnection.EfContext.GameData select d).ToList();
         }
 
-        public static void AddExampleGame()
+        public static void AddFirst12Games()
         {
             List<Game> games = new()
             {
@@ -130,7 +119,7 @@ namespace FourSoulsData
                 {
                     CharacterId = (int)CharacterName.TheKeeper,
                     GameId = 3,
-                    PlayerId = 2,
+                    PlayerId = 3,
                     Souls = 1,
                     Win = 0
                 },
@@ -164,7 +153,7 @@ namespace FourSoulsData
                     { 
                         CharacterId = (int)CharacterName.Lazarus, 
                         GameId = 5, 
-                        PlayerId = 2, 
+                        PlayerId = 1, 
                         Souls = 1, 
                         Win = 0
                     },
@@ -181,7 +170,7 @@ namespace FourSoulsData
                     { 
                         CharacterId = (int)CharacterName.Eve, 
                         GameId = 6, 
-                        PlayerId = 2, 
+                        PlayerId = 1, 
                         Souls = 4, 
                         Win = 1
                     },
@@ -324,8 +313,6 @@ namespace FourSoulsData
             {
                 AddGame(game.Key, game.Value);
             }
-
-
         }
     }
 }

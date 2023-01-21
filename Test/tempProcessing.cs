@@ -34,10 +34,10 @@ namespace Test
         }
 
         [Test]
-        public static void aaaaah()
+        public static void AddFirst12Games()
         {
 
-            SqlMethods.AddExampleGame();
+            SqlMethods.AddFirst12Games();
         }
 
         [Test]

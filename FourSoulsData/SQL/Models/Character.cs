@@ -15,13 +15,11 @@ namespace FourSoulsData
         public int CharacterId { get; set; }
         [Required]
         public string CharacterName { get; set; }
-        [Required]
         public int Wins { get; set; }
-        [Required]
-        public int GamesPlayed { get; set; }
-
         public int Losses => GamesPlayed - Wins;
-        public double WinRate => Wins / (double)GamesPlayed;
-
+        public int GamesPlayed { get; set; }
+        public double WinRate => Math.Round(Wins / (double)GamesPlayed, 2);
+        public int CumulativeSouls { get; set; }
+        public double AverageSouls => Math.Round(CumulativeSouls / (double)GamesPlayed, 2);
     }
 }
