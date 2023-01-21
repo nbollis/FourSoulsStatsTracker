@@ -1,0 +1,71 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FourSoulsData
+{
+    public enum CharacterName
+    {
+        Isaac = 1,
+        Cain = 2,
+        Maggy = 3,
+        Judas = 4,
+        Samson = 5,
+        Eve = 6,
+        Lilith = 7,
+        BlueBaby = 8,
+        Lazarus = 9,
+        TheForgotten = 10,
+        Eden = 11,
+        TheLost = 12,
+        TheKeeper = 13,
+        Azazel = 14,
+        Apollyon = 15,
+        Guppy = 16,
+        BumBo = 17,
+        WhoreofBabylon = 18,
+        DarkJudas = 19,
+        Tapeworm = 20,
+        Albert = 21,
+        Bethany = 22,
+        JacobAndEsau = 23,
+        TheBroken = 24,
+        TheHoarder = 25,
+        TheDuantless = 26,
+        TheDeceiver = 27,
+        TheSavage = 28,
+        TheCurdled = 29,
+        TheHarlot = 30,
+        TheSoiled = 31,
+        TheEnigma = 32,
+        TheFettered = 33,
+        TheCapricious = 34,
+        TheBaleful = 35,
+        TheMiser = 36,
+        TheBenighted = 37,
+        TheEmpty = 38,
+        TheZealot = 39,
+        TheDeserter = 40,
+        Ash = 41,
+        GuySpelunky = 42,
+        TheSilent = 43,
+        CaptainViridian = 44,
+        TheKnight = 45,
+        PinkKnight = 46,
+        Boyfriend = 47,
+        PsychoGoreman = 48,
+        BlindJohnny = 49,
+        SaladFingers = 50,
+        BlueArcher = 51,
+        Quote = 52,
+        Crewmate = 53,
+        BumBoTheWeird = 54,
+        Steven = 55,
+        Johnny = 56,
+        Baba = 57,
+        Edmund = 58,
+        FlashIsaac = 59
+    }
+}

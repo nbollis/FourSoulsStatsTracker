@@ -5,12 +5,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FourSoulsCore;
+using FourSoulsData;
 using NUnit.Framework;
+using Character = FourSoulsCore.Character;
+using Player = FourSoulsCore.Player;
 
 namespace Test
 {
     public static class tempProcessing
     {
+
+        [Test]
+        public static void GetCharacterEnumForSQL()
+        {
+            var temp = Enum.GetValues<CharacterNames>();
+            var sb = new StringBuilder();
+            foreach (var name in temp)
+            {
+                sb.Append($"('{name.ToString()}'),");
+            }
+            //foreach (var name in temp)
+            //{
+            //    sb.AppendLine($"{name.ToString()} = {(int)name + 1},");
+            //}
+
+            var str = sb.ToString();
+            var final = str.Substring(0, str.Length - 1) + ';';
+        }
+
+        [Test]
+        public static void aaaaah()
+        {
+
+            SqlMethods.AddExampleGame();
+        }
+
         [Test]
         public static void OutputCharactersForEnum()
         {

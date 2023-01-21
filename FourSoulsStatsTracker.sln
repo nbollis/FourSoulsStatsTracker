@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FourSoulsStatGUI", "FourSoulsStatGUI\FourSoulsStatGUI.csproj", "{0753D280-07BB-49B7-BAA6-099B8621791E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourSoulsData", "FourSoulsData\FourSoulsData.csproj", "{CECC93AF-15A4-4BD2-AB4D-5749DE300F8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{0753D280-07BB-49B7-BAA6-099B8621791E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0753D280-07BB-49B7-BAA6-099B8621791E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0753D280-07BB-49B7-BAA6-099B8621791E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{CECC93AF-15A4-4BD2-AB4D-5749DE300F8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CECC93AF-15A4-4BD2-AB4D-5749DE300F8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CECC93AF-15A4-4BD2-AB4D-5749DE300F8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CECC93AF-15A4-4BD2-AB4D-5749DE300F8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

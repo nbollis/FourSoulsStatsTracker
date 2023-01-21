@@ -8,7 +8,7 @@ namespace FourSoulsCore
 {
     public enum CharacterNames
     {
-        Isaac,
+        Isaac ,
         Cain,
         Maggy,
         Judas,
