@@ -11,7 +11,7 @@ namespace FourSoulsCore
     {
         public string Name
         {
-            get { return CharacterName.ToString(); }
+            get => CharacterName.ToString();
             set { }
         }
         public CharacterNames CharacterName { get; set; }
@@ -68,6 +68,11 @@ namespace FourSoulsCore
             {
                 throw new ArgumentException("Game does not contain player");
             }
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -6,37 +6,26 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="DataHandling\Data\AllCharacters.txt" />
-    <None Remove="DataHandling\Data\AllGames.txt" />
-    <None Remove="DataHandling\Data\AllPlayerNames.txt" />
-    <None Remove="DataHandling\Data\AllPlayers.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="DataHandling\Data\AllCharacters.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DataHandling\Data\AllGames.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DataHandling\Data\AllPlayerNames.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DataHandling\Data\AllPlayers.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
+	<ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="DataHandling\Data\CharacterNames.txt">
+	<ItemGroup>
+    <None Update="DataHandling\Data\AllCharacters.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DataHandling\Data\AllGames.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DataHandling\Data\AllPlayerNames.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="DataHandling\Data\AllPlayers.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+ 
 
 </Project>

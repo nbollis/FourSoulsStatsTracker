@@ -36,6 +36,32 @@ namespace FourSoulsCore
 
         #endregion
 
+        // need a better solution than this for a parameterless constyruct
+        public Player()
+        {
+            Name = "";
+            Wins = 0;
+            Losses = 0;
+            GamesPlayed = 0;
+            CumulativeSouls = 0;
+            WinRate = 0;
+            AverageSouls = 0;
+            StatDataType = StatDataTypes.Player;
+            AllTables = new List<DataTable>();
+            IStatData.InitializeDataTables(this);
+            AllTables.Add(CharacterDataTable ?? throw new NullReferenceException());
+            AllTables.Add(Character4PlayersDataTable ?? throw new NullReferenceException());
+            AllTables.Add(Character3PlayersDataTable ?? throw new NullReferenceException());
+            AllTables.Add(Character2PlayersDataTable ?? throw new NullReferenceException());
+            AllTables.Add(VsCharacterDataTable ?? throw new NullReferenceException());
+            AllTables.Add(VsCharacter4PlayersDataTable ?? throw new NullReferenceException());
+            AllTables.Add(VsCharacter3PlayersDataTable ?? throw new NullReferenceException());
+            AllTables.Add(VsCharacter2PlayersDataTable ?? throw new NullReferenceException());
+            AllTables.Add(PlayerDataTable ?? throw new NullReferenceException());
+            AllTables.Add(Player4PlayersDataTable ?? throw new NullReferenceException());
+            AllTables.Add(Player3PlayersDataTable ?? throw new NullReferenceException());
+            AllTables.Add(Player2PlayersDataTable ?? throw new NullReferenceException());
+        }
 
         public Player(string name)
         {
@@ -73,6 +99,11 @@ namespace FourSoulsCore
             {
                 throw new ArgumentException("Game does not contain player");
             }
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

@@ -18,6 +18,8 @@ namespace Test
         [OneTimeSetUp]
         public static void OneTimeSetup()
         {
+            FourSoulsGlobalData.LoadAllData();
+            
             Game game1 = new Game();
             game1.AddRowToTable("Nic", CharacterNames.Maggy, 2);
             game1.AddRowToTable("Clayton", CharacterNames.Albert, 4);

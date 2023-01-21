@@ -32,6 +32,7 @@ namespace FourSoulsCore
         public DataTable Player2PlayersDataTable { get; set; }
 
         #endregion
+
         /// <summary>
         /// Method to call ParseGameData
         /// </summary>
