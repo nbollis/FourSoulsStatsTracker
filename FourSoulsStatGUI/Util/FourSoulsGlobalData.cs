@@ -12,14 +12,30 @@ namespace FourSoulsStatGUI
 {
     public static class FourSoulsGlobalData
     {
-        public static ObservableCollection<Player> AllPlayers = SqlConnection.EfContext.Players.Local;
-        public static ObservableCollection<Game> AllGames = SqlConnection.EfContext.Games.Local;
-        public static ObservableCollection<Character> AllCharacters = SqlConnection.EfContext.Characters.Local;
-        public static ObservableCollection<GameData> AllGameData = SqlConnection.EfContext.GameData.Local;
-        public static ObservableCollection<string> AllPlayerNames =
+        static FourSoulsGlobalData()
+        {
+            AllPlayers = SqlConnection.EfContext.Players.Local;
+            AllGames = SqlConnection.EfContext.Games.Local;
+            AllCharacters = SqlConnection.EfContext.Characters.Local;
+            AllGameData = SqlConnection.EfContext.GameData.Local;
+        }
+
+
+        public static ObservableCollection<Player> AllPlayers { get; } 
+        public static ObservableCollection<Game> AllGames { get; }
+        public static ObservableCollection<Character> AllCharacters { get; } 
+        public static ObservableCollection<GameData> AllGameData { get; }
+
+        public static ObservableCollection<string> AllPlayerNames =>
             AllPlayers.Select(p => p.PlayerName).ToObservableCollection();
+
+        public static ObservableCollection<string> AllCharacterNames =>
+            AllCharacters.Select(p => p.CharacterName).ToObservableCollection();
+
+
 
         public static void AddPlayer(string name) => SqlMethods.AddPlayer(name);
         public static void AddGame(Game game, IEnumerable<GameData> gameData) => SqlMethods.AddGame(game, gameData);
+        public static void UpdatePlayerNames() => SqlConnection.UpdateNameKeyDictionary();
     }
 }

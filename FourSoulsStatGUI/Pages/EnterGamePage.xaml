@@ -28,7 +28,7 @@
             
             <!-- Players -->
             <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="3">
-                <ListView ItemsSource="{Binding GameDataPerPlayers}">
+                <ListView ItemsSource="{Binding GameData}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -38,12 +38,12 @@
                                         ItemsSource="{Binding Source={RelativeSource AncestorType
                                         ={x:Type local:EnterGamePageViewModel}}, Path=PlayerNames, Mode=TwoWay}">
                                     </Picker>
-                                    <Picker SelectedItem="{Binding CharacterPlayed}" Grid.Column="1"
+                                    <Picker SelectedItem="{Binding CharacterName}" Grid.Column="1"
                                         HorizontalOptions="Center"
                                         ItemsSource="{Binding Source={RelativeSource AncestorType
                                         ={x:Type local:EnterGamePageViewModel}}, Path=CharacterNames }">
                                     </Picker>
-                                    <StackLayout RadioButtonGroup.GroupName="{Binding GameDataPerPlayerHash}"
+                                    <StackLayout RadioButtonGroup.GroupName="{Binding GameDataHash}"
                                              RadioButtonGroup.SelectedValue="{Binding Souls}"
                                              Orientation="Vertical" Grid.Column="2">
 

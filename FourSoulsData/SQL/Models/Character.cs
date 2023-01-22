@@ -11,15 +11,21 @@ namespace FourSoulsData
     [Table("Characters")]
     public class Character
     {
-        [Key]
-        public int CharacterId { get; set; }
-        [Required]
-        public string CharacterName { get; set; }
-        public int Wins { get; set; }
-        public int Losses => GamesPlayed - Wins;
+        [Key] public int CharacterId { get; set; }
+        [Required] public string CharacterName { get; set; } = null!;
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public int GamesPlayed { get; set; }
-        public double WinRate => Math.Round(Wins / (double)GamesPlayed, 2);
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public int Wins { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public int CumulativeSouls { get; set; }
-        public double AverageSouls => Math.Round(CumulativeSouls / (double)GamesPlayed, 2);
+
+
+        [NotMapped] public int Losses => GamesPlayed - Wins;
+        [NotMapped] public double WinRate => Math.Round(Wins / (double)GamesPlayed, 2);
+        [NotMapped] public double AverageSouls => Math.Round(CumulativeSouls / (double)GamesPlayed, 2);
     }
 }

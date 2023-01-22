@@ -11,10 +11,8 @@ namespace FourSoulsData
     [Table("Games")]
     public class Game
     {
-        [Key]
-        public int GameId { get; set; }
-        [Required]
-        public int NumberOfPlayers { get; set; }
+        [Key] public int GameId { get; set; }
+        [Required] public int NumberOfPlayers { get; set; }
         public DateTime? Date { get; set; }
         public TimeSpan? LengthOfGame { get; set; }
     }

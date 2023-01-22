@@ -47,9 +47,12 @@ public partial class EnterGamePage : ContentPage
         await this.ShowPopupAsync(addPlayerPopup);
 
         string playerName = ((PopupViewModel)addPlayerPopup.BindingContext).InputText;
+        if (playerName == "")
+            popupVM.Messages.Add("Cannot Add Empty Name");
         if (playerName != null && FourSoulsGlobalData.AllPlayerNames.Contains(playerName))
-        {
             popupVM.Messages.Add("Player with name already exists");
+        if (popupVM.Messages.Any())
+        {
             SimplePopup simplePopup = new SimplePopup(popupVM);
             await this.ShowPopupAsync(simplePopup);
         }

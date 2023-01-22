@@ -8,6 +8,7 @@ namespace FourSoulsData
 {
     public enum CharacterName
     {
+        _ = 0,
         Isaac = 1,
         Cain = 2,
         Maggy = 3,
