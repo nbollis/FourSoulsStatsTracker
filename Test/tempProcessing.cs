@@ -4,11 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FourSoulsCore;
 using FourSoulsData;
 using NUnit.Framework;
-using Character = FourSoulsCore.Character;
-using Player = FourSoulsCore.Player;
 
 namespace Test
 {
@@ -18,7 +15,7 @@ namespace Test
         [Test]
         public static void GetCharacterEnumForSQL()
         {
-            var temp = Enum.GetValues<CharacterNames>();
+            var temp = Enum.GetValues<CharacterName>();
             var sb = new StringBuilder();
             foreach (var name in temp)
             {
@@ -58,27 +55,6 @@ namespace Test
             //        writer.WriteLine(character.Replace(" ", "") + ",");
             //    }
             //}
-        }
-
-        [Test]
-        public static void CreateCharacterAndPlayersFiles()
-        {
-            List<Character> characters = new();
-            List<Player> players = new();
-
-            foreach (var character in Enum.GetValues(typeof(CharacterNames)))
-            {
-                characters.Add(new Character((CharacterNames)character));
-            }
-
-            foreach (var player in FourSoulsGlobalData.AllPlayerNames)
-            {
-                players.Add(new Player(player));
-            }
-
-            FourSoulsGlobalData.AllPlayers = players;
-            FourSoulsGlobalData.AllCharacters = characters;
-            FourSoulsGlobalData.SaveAllData();
         }
     }
 }

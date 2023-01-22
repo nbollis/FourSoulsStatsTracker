@@ -15,7 +15,7 @@ namespace FourSoulsData
         public int GameId { get; set; }
         [Required]
         public int NumberOfPlayers { get; set; }
-        public int? Date { get; set; }
+        public DateTime? Date { get; set; }
         public TimeSpan? LengthOfGame { get; set; }
     }
 }

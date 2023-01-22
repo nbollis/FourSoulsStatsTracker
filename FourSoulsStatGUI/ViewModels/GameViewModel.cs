@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using FourSoulsCore;
-using FourSoulsCore.MVVMBase;
+using FourSoulsData;
 
 namespace FourSoulsStatGUI
 {
@@ -23,11 +23,6 @@ namespace FourSoulsStatGUI
 
         #region Public Properties
 
-        public string Winner
-        {
-            get => game.Winner;
-            set { game.Winner = value; OnPropertyChanged(nameof(Winner)); }
-        }
 
         public int NumberOfPlayers
         {
@@ -35,27 +30,16 @@ namespace FourSoulsStatGUI
             set { game.NumberOfPlayers = value; OnPropertyChanged(nameof(NumberOfPlayers)); }
         }
 
-        public DateTime DateOfEntry
+        public DateTime? DateOfEntry
         {
-            get => game.DateOfEntry;
-            set { game.DateOfEntry = value; OnPropertyChanged(nameof(DateOfEntry)); }
+            get => game.Date;
+            set { game.Date = value; OnPropertyChanged(nameof(DateOfEntry)); }
         }
 
-        public DataTable GameData
-        {
-            get => game.GameData; 
-            set { game.GameData = value;OnPropertyChanged(nameof(GameData)); }
-        }
-
-        public TimeSpan GameTime
+        public TimeSpan? GameTime
         {
             get => game.LengthOfGame;
             set { game.LengthOfGame = value; OnPropertyChanged(nameof(GameTime)); }
-        }
-
-        public ObservableCollection<GameDataPerPlayer> GameDataPerPlayers
-        {
-            get;
         }
 
         public Game Game
@@ -63,6 +47,8 @@ namespace FourSoulsStatGUI
             get { return game; }
             set { game = value; OnPropertyChanged(nameof(Game)); }
         }
+
+        public ObservableCollection<GameData> GameData { get; set; }
 
         #endregion
 
@@ -78,9 +64,9 @@ namespace FourSoulsStatGUI
         public GameViewModel()
         {
             game = new Game();
-            GameDataPerPlayers = new();
+            GameData = new();
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 2; i++)
             {
                 AddPlayer();
             }
@@ -98,8 +84,7 @@ namespace FourSoulsStatGUI
         /// </summary>
         private void AddPlayer()
         {
-            GameDataPerPlayer gameDataPerPlayer = new GameDataPerPlayer();
-            GameDataPerPlayers.Add(gameDataPerPlayer);
+            GameData.Add(new GameData());
         }
 
         /// <summary>
@@ -107,38 +92,7 @@ namespace FourSoulsStatGUI
         /// </summary>
         private void RemovePlayer()
         {
-            GameDataPerPlayers.Remove(GameDataPerPlayers.Last());
-        }
-
-
-        private string GetPlayer(int index)
-        {
-            return GameData.Rows[index].Field<string>("Player") 
-                   ?? throw new NullReferenceException("GetPlayer Failed");
-        }
-
-        private void SetPlayer(int index, string val)
-        {
-            GameData.Rows[index]["Player"] = val;
-        }
-
-        private string GetCharacter(int index)
-        {
-            return GameData.Rows[index].Field<string>("Character")
-                   ?? throw new NullReferenceException("GetCharacter Failed");
-        }
-        private void SetCharacter(int index, string val)
-        {
-            GameData.Rows[index]["Character"] = val;
-        }
-
-        private int GetSouls(int index)
-        {
-            return GameData.Rows[index].Field<int>("Souls");
-        }
-        private void SetSouls(int index, int val)
-        {
-            GameData.Rows[index]["Souls"] = val;
+            GameData.RemoveAt(GameData.Count);
         }
 
         #endregion

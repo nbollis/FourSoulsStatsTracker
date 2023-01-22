@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace FourSoulsData
 {
-    internal static class SqlConnection
+    public static class SqlConnection
     {
-        internal static FourSoulsEfContext EfContext { get; set; }
+        public static FourSoulsEfContext EfContext { get; set; }
 
         static SqlConnection()
         {

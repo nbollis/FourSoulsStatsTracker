@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Input;
 using System.Xml.Serialization;
-using FourSoulsCore;
-using FourSoulsCore.MVVMBase;
+using FourSoulsData;
+using Task = System.Threading.Tasks.Task;
 using Timer = System.Timers.Timer;
 
 namespace FourSoulsStatGUI
@@ -30,7 +30,7 @@ namespace FourSoulsStatGUI
         #region Public Properties
         public ObservableCollection<string> CharacterNames { get; }
 
-        public List<string> PlayerNames => FourSoulsGlobalData.AllPlayerNames;
+        public ObservableCollection<string> PlayerNames => FourSoulsGlobalData.AllPlayerNames;
 
         public GameViewModel GameViewModel { get; set; }
 
@@ -59,7 +59,7 @@ namespace FourSoulsStatGUI
         {
             gameTimer = new Timer();
             gameTimer.Interval = 1000; //milliseconds
-            CharacterNames = new ObservableCollection<string>(FourSoulsGlobalData.AllCharacters.Select(p => p.Name));
+            CharacterNames = new ObservableCollection<string>(FourSoulsGlobalData.AllCharacters.Select(p => p.CharacterName));
             GameParsingErrors = new ObservableCollection<string>();
             GameViewModel = new();
 
@@ -78,27 +78,27 @@ namespace FourSoulsStatGUI
         public void ParseGameForCorrectness()
         {
             GameParsingErrors.Clear();
-            var data = GameViewModel.GameDataPerPlayers;
-            var characters = data.Select(p => p.CharacterPlayed).ToArray();
-            var players = data.Select(p => p.PlayerName).ToArray();
-            var souls = data.Select(p => p.Souls).ToArray();
+            var data = GameViewModel.GameData;
+            var characters = data.Select(p => p.CharacterId).ToArray();
+            var players = data.Select(p => p.PlayerId).ToArray();
+            var souls = data.Select(p => p.Souls).ToList();
 
             if (data.Count == 1)
                 GameParsingErrors.Add("Only One Player");
 
-            if (characters.Any(string.IsNullOrEmpty))
+            if (characters.Any(p => p == 0))
                 GameParsingErrors.Add("Missing Character");
             else if (characters.Length != characters.Distinct().Count())
                 GameParsingErrors.Add("Duplicate Characters");
 
-            if (players.Any(string.IsNullOrEmpty))
+            if (players.Any(p => p == 0))
                 GameParsingErrors.Add("Missing Player Name");
             else if (players.Length != players.Distinct().Count())
                 GameParsingErrors.Add("Duplicate Players");
 
-            if (souls.Any(string.IsNullOrEmpty))
-                GameParsingErrors.Add("Missing Souls for a Player");
-            else if (souls.All(p => p != "4"))
+            if (souls.Count(p => p >= 4) != 1)
+                GameParsingErrors.Add("Multiple Players Cannot Have Four Souls");
+            else if (souls.All(p => p != 4))
                 GameParsingErrors.Add("No Player With Four Souls");
         }
 
@@ -110,20 +110,9 @@ namespace FourSoulsStatGUI
 
         public void SaveGame()
         {
-            Game game = GameViewModel.Game;
-            var gameDataPerPlayers = GameViewModel.GameDataPerPlayers.ToList();
-
-            foreach (var data in gameDataPerPlayers)
-            {
-                var souls = int.Parse(data.Souls ?? throw new InvalidOperationException());
-                var characterPlayed = Enum.Parse<CharacterNames>(data.CharacterPlayed ?? throw new InvalidOperationException());
-                var playerName = data.PlayerName ?? throw new InvalidOperationException();
-                game.AddRowToTable(playerName, characterPlayed, souls);
-            }
-
-            game.DateOfEntry = DateTime.Now;
-            game.LengthOfGame = TimeSpan.Parse(elapsedTime);
-            FourSoulsGlobalData.AddGame(game);
+            //GameViewModel.DateOfEntry = DateTime.Now;
+            GameViewModel.GameTime = TimeSpan.Parse(ElapsedTime);
+            FourSoulsGlobalData.AddGame(GameViewModel.Game, GameViewModel.GameData);
         }
 
         #endregion

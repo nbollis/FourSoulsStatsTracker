@@ -1,5 +1,4 @@
 using CommunityToolkit.Maui.Views;
-using FourSoulsCore;
 
 namespace FourSoulsStatGUI.Pages;
 
