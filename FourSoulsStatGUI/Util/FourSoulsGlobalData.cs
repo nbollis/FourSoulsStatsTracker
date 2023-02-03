@@ -18,10 +18,10 @@ namespace FourSoulsStatGUI
 
             using (var context = new FourSoulsStatsContext())
             {
-                AllPlayers = context.Players.Local;
-                AllGames = context.Games.Local;
-                AllCharacters = context.Characters.Local;
-                AllGameData = context.GameDatas.Local;
+                AllPlayers = context.Players.ToObservableCollection();
+                AllGames = context.Games.ToObservableCollection();
+                AllCharacters = context.Characters.ToObservableCollection();
+                AllGameData = context.GameDatas.ToObservableCollection();
             }
         }
 
@@ -40,6 +40,6 @@ namespace FourSoulsStatGUI
 
 
         public static void AddPlayer(string name) => DataBaseMethods.AddPlayer(name);
-        public static void AddGame(Game game, IEnumerable<GameData> gameData) => DataBaseMethods.AddGame(game);
+        public static void AddGame(Game game) => DataBaseMethods.AddGame(game);
     }
 }

@@ -58,6 +58,7 @@ namespace FourSoulsStatGUI
 
         public EnterGamePageViewModel()
         {
+            GameParsingErrors = new ObservableCollection<string>();
             gameTimer = new Timer();
             gameTimer.Interval = 1000; //milliseconds
             GameViewModel = new();
@@ -111,7 +112,7 @@ namespace FourSoulsStatGUI
         {
             //GameViewModel.DateOfEntry = DateTime.Now;
             GameViewModel.GameTime = TimeSpan.Parse(ElapsedTime);
-            FourSoulsGlobalData.AddGame(GameViewModel.Game, GameViewModel.GameData);
+            FourSoulsGlobalData.AddGame(GameViewModel.Game);
         }
 
         #endregion
