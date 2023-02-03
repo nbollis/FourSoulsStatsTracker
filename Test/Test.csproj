@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FourSoulsCore\FourSoulsCore.csproj" />
-    <ProjectReference Include="..\FourSoulsData\FourSoulsData.csproj" />
   </ItemGroup>
 
   <ItemGroup>

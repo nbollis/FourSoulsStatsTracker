@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FourSoulsCore;
-using FourSoulsData;
 using NUnit.Framework;
 using CharacterName = FourSoulsCore.CharacterName;
 
