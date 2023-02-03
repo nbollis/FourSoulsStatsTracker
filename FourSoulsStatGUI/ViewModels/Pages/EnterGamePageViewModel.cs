@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Input;
 using System.Xml.Serialization;
-using FourSoulsData;
+using FourSoulsCore;
 using Task = System.Threading.Tasks.Task;
 using Timer = System.Timers.Timer;
 
@@ -164,7 +164,7 @@ namespace FourSoulsStatGUI
         public void UpdatePlayerNames()
         {
             OnPropertyChanged(nameof(PlayerNames));
-            FourSoulsGlobalData.UpdatePlayerNames();
+            
         }
     }
 }

@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Maui.Core.Extensions;
-using FourSoulsData;
+using FourSoulsCore;
 
 namespace FourSoulsStatGUI
 {
@@ -14,10 +15,14 @@ namespace FourSoulsStatGUI
     {
         static FourSoulsGlobalData()
         {
-            AllPlayers = SqlConnection.EfContext.Players.Local;
-            AllGames = SqlConnection.EfContext.Games.Local;
-            AllCharacters = SqlConnection.EfContext.Characters.Local;
-            AllGameData = SqlConnection.EfContext.GameData.Local;
+
+            using (var context = new FourSoulsStatsContext())
+            {
+                AllPlayers = context.Players.Local;
+                AllGames = context.Games.Local;
+                AllCharacters = context.Characters.Local;
+                AllGameData = context.GameDatas.Local;
+            }
         }
 
 
@@ -34,8 +39,7 @@ namespace FourSoulsStatGUI
 
 
 
-        public static void AddPlayer(string name) => SqlMethods.AddPlayer(name);
-        public static void AddGame(Game game, IEnumerable<GameData> gameData) => SqlMethods.AddGame(game, gameData);
-        public static void UpdatePlayerNames() => SqlConnection.UpdateNameKeyDictionary();
+        public static void AddPlayer(string name) => DataBaseMethods.AddPlayer(name);
+        public static void AddGame(Game game, IEnumerable<GameData> gameData) => DataBaseMethods.AddGame(game);
     }
 }

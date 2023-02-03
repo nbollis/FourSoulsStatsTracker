@@ -4,8 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FourSoulsCore;
 using FourSoulsData;
 using NUnit.Framework;
+using CharacterName = FourSoulsCore.CharacterName;
 
 namespace Test
 {
@@ -33,8 +35,8 @@ namespace Test
         [Test]
         public static void AddFirst12Games()
         {
-
-            SqlMethods.AddFirst12Games();
+           
+            DataBaseMethods.AddFirst12Games();
         }
 
         [Test]

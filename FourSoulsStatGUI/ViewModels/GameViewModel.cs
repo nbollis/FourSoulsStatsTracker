@@ -8,7 +8,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using FourSoulsData;
+using FourSoulsCore;
 
 namespace FourSoulsStatGUI
 {
