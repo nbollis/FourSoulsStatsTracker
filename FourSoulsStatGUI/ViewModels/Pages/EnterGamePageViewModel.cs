@@ -89,6 +89,7 @@ namespace FourSoulsStatGUI
             game.NumberOfPlayers = game.GameDatas.Count;
 
             // parse game data
+            GameParsingErrors.Clear();
             var characters = game.GameDatas.Select(p => p.CharacterId).ToArray();
             var players = game.GameDatas.Select(p => p.PlayerId).ToArray();
             var souls = game.GameDatas.Select(p => p.Souls).ToList();
@@ -106,10 +107,11 @@ namespace FourSoulsStatGUI
             else if (players.Length != players.Distinct().Count())
                 GameParsingErrors.Add("Duplicate Players");
 
-            if (souls.Count(p => p >= 4) != 1)
+            
+            if (souls.All(p => p != 4))
+                GameParsingErrors.Add("No Player With Four Souls"); 
+            else if (souls.Count(p => p >= 4) != 1)
                 GameParsingErrors.Add("Multiple Players Cannot Have Four Souls");
-            else if (souls.All(p => p != 4))
-                GameParsingErrors.Add("No Player With Four Souls");
             else
                 game.GameDatas.First(p => p.Souls == 4).Win = 1;
         }
@@ -122,9 +124,14 @@ namespace FourSoulsStatGUI
 
         public void SaveGame()
         {
+            // TODO: Uncomment this for release version
             //GameViewModel.DateOfEntry = DateTime.Now;
-            //GameViewModel.GameTime = TimeSpan.Parse(ElapsedTime);
+            if (ElapsedTime == null)
+                GameViewModel.GameTime = null;
+            else
+                GameViewModel.GameTime = TimeSpan.Parse(ElapsedTime);
             FourSoulsGlobalData.AddGame(GameViewModel.Game);
+            ResetGame();
         }
 
         #endregion
@@ -152,7 +159,7 @@ namespace FourSoulsStatGUI
         {
             gameTimer.Stop();
             await Task.Delay(1000);
-            ElapsedTime = "00:00:00";
+            ElapsedTime = null;
             startTime = null;
             GameViewModel = new GameViewModel();
         }
@@ -174,7 +181,7 @@ namespace FourSoulsStatGUI
         public void UpdatePlayerNames()
         {
             OnPropertyChanged(nameof(Players));
-            
+            ResetGame();
         }
     }
 }

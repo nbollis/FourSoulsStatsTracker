@@ -28,6 +28,8 @@ namespace FourSoulsDataConnection
 
         public int Win { get; set; }
 
+        #region Not Mapped
+
         [NotMapped]
         public virtual Character Character
         {
@@ -35,7 +37,7 @@ namespace FourSoulsDataConnection
             set
             {
                 _character = value;
-                CharacterId = _character.CharacterId;
+                CharacterId = _character?.CharacterId ?? 0;
             }
         }
 
@@ -46,7 +48,7 @@ namespace FourSoulsDataConnection
             set
             {
                 _game = value;
-                GameId = _game.GameId;
+                GameId = _game?.GameId ?? 0;
             }
         }
 
@@ -57,12 +59,9 @@ namespace FourSoulsDataConnection
             set
             {
                 _player = value;
-                PlayerId = _player.PlayerId;
+                PlayerId = _player?.PlayerId ?? 0;
             }
         }
-
-
-        #region Not Mapped
 
         [NotMapped]
         private double? dataHash;
@@ -88,5 +87,10 @@ namespace FourSoulsDataConnection
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            return $"{Player.PlayerName} : {Character.CharacterName} : {Souls}";
+        }
     }
 }

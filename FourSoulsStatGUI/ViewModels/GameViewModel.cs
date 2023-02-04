@@ -59,6 +59,7 @@ namespace FourSoulsStatGUI
         #region Commands
 
 
+
         #endregion
 
         #region Constructor
@@ -66,6 +67,7 @@ namespace FourSoulsStatGUI
         public GameViewModel()
         {
             game = FourSoulsGlobalData.CreateNewGame();
+            OnPropertyChanged(nameof(GameData));
         }
 
         #endregion
