@@ -24,16 +24,21 @@ namespace FourSoulsStatGUI
         private DateTime? startTime;
         private DateTime? pauseTime;
         private string elapsedTime;
+        private GameViewModel gameViewModel;
 
         #endregion
 
         #region Public Properties
 
-        public ObservableCollection<string> CharacterNames => FourSoulsGlobalData.AllCharacterNames;
+        public ObservableCollection<Character> Characters => FourSoulsGlobalData.AllCharacters;
 
-        public ObservableCollection<string> PlayerNames => FourSoulsGlobalData.AllPlayerNames;
+        public ObservableCollection<Player> Players => FourSoulsGlobalData.AllPlayers;
 
-        public GameViewModel GameViewModel { get; set; }
+        public GameViewModel GameViewModel
+        {
+            get => gameViewModel;
+            set => SetProperty(ref gameViewModel, value);
+        }
 
         public ObservableCollection<string> GameParsingErrors { get; set; }
 
@@ -46,7 +51,6 @@ namespace FourSoulsStatGUI
         #endregion
 
         #region Commands
-        public ICommand AddPlayerCommand { get; set; }
         public ICommand SaveGameCommand { get; set; }
         public ICommand StartGameTimerCommand { get; set; }
         public ICommand PauseGameTimerCommand { get; set; }
@@ -64,7 +68,6 @@ namespace FourSoulsStatGUI
             GameViewModel = new();
 
             gameTimer.Elapsed += (s,e) => UpdateText();
-            AddPlayerCommand = new RelayCommand(AddPlayer);
             SaveGameCommand = new RelayCommand(SaveGame);
             StartGameTimerCommand = new RelayCommand(StartGameTimer);
             PauseGameTimerCommand = new RelayCommand(PauseGameTimer);
@@ -75,15 +78,22 @@ namespace FourSoulsStatGUI
 
         #region Public Methods
 
-        public void ParseGameForCorrectness()
+        public void AdjustAndParseGameData()
         {
-            GameParsingErrors.Clear();
-            var data = GameViewModel.GameData;
-            var characters = data.Select(p => p.CharacterId).ToArray();
-            var players = data.Select(p => p.PlayerId).ToArray();
-            var souls = data.Select(p => p.Souls).ToList();
+            // remove unused game data
+            var game = GameViewModel.Game;
+            foreach (var data in game.GameDatas.Where(p => p.Character == null && p.Player == null && p.Souls == 0))
+            {
+                game.GameDatas.Remove(data);
+            }
+            game.NumberOfPlayers = game.GameDatas.Count;
 
-            if (data.Count == 1)
+            // parse game data
+            var characters = game.GameDatas.Select(p => p.CharacterId).ToArray();
+            var players = game.GameDatas.Select(p => p.PlayerId).ToArray();
+            var souls = game.GameDatas.Select(p => p.Souls).ToList();
+
+            if (game.GameDatas.Count == 1)
                 GameParsingErrors.Add("Only One Player");
 
             if (characters.Any(p => p == 0))
@@ -100,6 +110,8 @@ namespace FourSoulsStatGUI
                 GameParsingErrors.Add("Multiple Players Cannot Have Four Souls");
             else if (souls.All(p => p != 4))
                 GameParsingErrors.Add("No Player With Four Souls");
+            else
+                game.GameDatas.First(p => p.Souls == 4).Win = 1;
         }
 
         public void PauseGameTimer()
@@ -111,7 +123,7 @@ namespace FourSoulsStatGUI
         public void SaveGame()
         {
             //GameViewModel.DateOfEntry = DateTime.Now;
-            GameViewModel.GameTime = TimeSpan.Parse(ElapsedTime);
+            //GameViewModel.GameTime = TimeSpan.Parse(ElapsedTime);
             FourSoulsGlobalData.AddGame(GameViewModel.Game);
         }
 
@@ -119,10 +131,6 @@ namespace FourSoulsStatGUI
 
         #region Private Helpers
 
-        private void AddPlayer()
-        {
-
-        }
 
         private void StartGameTimer()
         {
@@ -146,6 +154,7 @@ namespace FourSoulsStatGUI
             await Task.Delay(1000);
             ElapsedTime = "00:00:00";
             startTime = null;
+            GameViewModel = new GameViewModel();
         }
 
         private void UpdateText()
@@ -164,7 +173,7 @@ namespace FourSoulsStatGUI
 
         public void UpdatePlayerNames()
         {
-            OnPropertyChanged(nameof(PlayerNames));
+            OnPropertyChanged(nameof(Players));
             
         }
     }

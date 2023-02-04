@@ -17,9 +17,10 @@ namespace Test
         {
             var temp = Enum.GetValues<CharacterName>();
             var sb = new StringBuilder();
-            foreach (var name in temp)
+            for (var index = 0; index < temp.Length; index++)
             {
-                sb.Append($"('{name.ToString()}'),");
+                var name = temp[index];
+                sb.Append($"({index}, '{name.ToString()}'),");
             }
             //foreach (var name in temp)
             //{
@@ -35,18 +36,18 @@ namespace Test
         {
             List<Game> games = new List<Game>()
             {
-                new Game(),
-                new Game(),
-                new Game(),
-                new Game(),
-                new Game(),
-                new Game(),
-                new Game(),
-                new Game(),
-                new Game(),
-                new Game(),
-                new Game(),
-                new Game(),
+                new Game() {GameId = 1},
+                new Game() {GameId = 2},
+                new Game() {GameId = 3},
+                new Game() {GameId = 4},
+                new Game() {GameId = 5},
+                new Game() {GameId = 6},
+                new Game() {GameId = 7},
+                new Game() {GameId = 8},
+                new Game() {GameId = 9},
+                new Game() {GameId = 10},
+                new Game() {GameId = 11},
+                new Game() {GameId = 12},
             };
 
             List<GameData> gameData = new List<GameData>()
@@ -297,7 +298,7 @@ namespace Test
                 foreach (var game in games)
                 {
                     game.GameDatas = gameData.Where(m => m.GameId == games.IndexOf(game) + 1).ToList();
-
+                    game.NumberOfPlayers = game.GameDatas.Count;
                 }
                 context.Games.AddRange(games);
                 context.SaveChanges();

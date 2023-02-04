@@ -8,6 +8,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CommunityToolkit.Maui.Core.Extensions;
 using FourSoulsCore;
 
 namespace FourSoulsStatGUI
@@ -17,7 +18,6 @@ namespace FourSoulsStatGUI
         #region Private Members
 
         private Game game;
-        //private ObservableCollection<GameDataPerPlayer> gameDataPerPlayers;
 
         #endregion
 
@@ -48,14 +48,16 @@ namespace FourSoulsStatGUI
             set { game = value; OnPropertyChanged(nameof(Game)); }
         }
 
-        public ObservableCollection<GameData> GameData { get; set; }
+        public ICollection<GameData> GameData
+        {
+            get => game.GameDatas;
+        }
+    
 
         #endregion
 
         #region Commands
 
-        public ICommand AddPlayerToGameCommand { get; set; }
-        public ICommand RemovePlayerFromGameCommand { get; set; }
 
         #endregion
 
@@ -63,37 +65,14 @@ namespace FourSoulsStatGUI
 
         public GameViewModel()
         {
-            game = new Game();
-            GameData = new();
-
-            for (int i = 0; i < 2; i++)
-            {
-                AddPlayer();
-            }
-
-            AddPlayerToGameCommand = new RelayCommand(AddPlayer);
-            RemovePlayerFromGameCommand = new RelayCommand(RemovePlayer);
+            game = FourSoulsGlobalData.CreateNewGame();
         }
 
         #endregion
 
         #region Private Helpers
 
-        /// <summary>
-        /// Adds a new GameDataPerPlayer to the list
-        /// </summary>
-        private void AddPlayer()
-        {
-            GameData.Add(new GameData());
-        }
-
-        /// <summary>
-        /// Removes the last GameDataPerPlayer from the list
-        /// </summary>
-        private void RemovePlayer()
-        {
-            GameData.RemoveAt(GameData.Count);
-        }
+     
 
         #endregion
 

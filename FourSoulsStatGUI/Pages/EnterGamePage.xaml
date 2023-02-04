@@ -33,17 +33,17 @@
                         <DataTemplate>
                             <ViewCell>
                                 <Grid ColumnDefinitions="*, *, *">
-                                    <Picker SelectedItem="{Binding PlayerName}" Grid.Column="0"
+                                    <Picker SelectedItem="{Binding Player}" Grid.Column="0"
                                         HorizontalOptions="Center"
                                         ItemsSource="{Binding Source={RelativeSource AncestorType
-                                        ={x:Type local:EnterGamePageViewModel}}, Path=PlayerNames, Mode=TwoWay}">
+                                        ={x:Type local:EnterGamePageViewModel}}, Path=Players, Mode=TwoWay}">
                                     </Picker>
-                                    <Picker SelectedItem="{Binding CharacterName}" Grid.Column="1"
+                                    <Picker SelectedItem="{Binding Character}" Grid.Column="1"
                                         HorizontalOptions="Center"
                                         ItemsSource="{Binding Source={RelativeSource AncestorType
-                                        ={x:Type local:EnterGamePageViewModel}}, Path=CharacterNames }">
+                                        ={x:Type local:EnterGamePageViewModel}}, Path=Characters }">
                                     </Picker>
-                                    <StackLayout RadioButtonGroup.GroupName="{Binding GameDataHash}"
+                                    <StackLayout RadioButtonGroup.GroupName="{Binding DataHash}"
                                              RadioButtonGroup.SelectedValue="{Binding Souls}"
                                              Orientation="Vertical" Grid.Column="2">
 
@@ -61,8 +61,12 @@
                                         </StackLayout>
 
                                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                            <RadioButton Content="3"></RadioButton>
-                                            <RadioButton Content="4"></RadioButton>
+                                            <RadioButton Content="3" IsChecked="{Binding Souls, 
+                                                Converter={StaticResource ButtonToSoulsConverter}, ConverterParameter=3}">
+                                            </RadioButton>
+                                            <RadioButton Content="4" IsChecked="{Binding Souls, 
+                                                Converter={StaticResource ButtonToSoulsConverter}, ConverterParameter=4}">
+                                            </RadioButton>
                                         </StackLayout>
                                     </StackLayout>
                                 </Grid>
@@ -73,18 +77,6 @@
 
                 <!-- Buttons under players -->
                 <Grid ColumnDefinitions="*, *, *">
-
-                    <!-- Add and Remove Player Buttons -->
-                    <Grid Grid.Column="0" ColumnDefinitions="*, *, *, *, *">
-                        <Button Grid.Column="1" WidthRequest="50"
-                                Text="{x:Static local:IconFont.UserPlus}" 
-                                FontFamily="FontAwesome"
-                                Command="{Binding AddPlayerToGameCommand}" />
-                        <Button Grid.Column="3" WidthRequest="50"
-                                Text="{x:Static local:IconFont.UserMinus}" 
-                                FontFamily="FontAwesome"
-                                Command="{Binding RemovePlayerFromGameCommand}" />
-                    </Grid>
 
                     <!-- Timer and Related Buttons -->
                     <Grid Grid.Column="2" ColumnDefinitions="*, *, *">

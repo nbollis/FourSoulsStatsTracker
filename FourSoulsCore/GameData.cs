@@ -28,10 +28,65 @@ namespace FourSoulsCore
 
         public int Win { get; set; }
 
-        public virtual Character Character { get; set; }
+        [NotMapped]
+        public virtual Character Character
+        {
+            get => _character;
+            set
+            {
+                _character = value;
+                CharacterId = _character.CharacterId;
+            }
+        }
 
-        public virtual Game Game { get; set; }
+        [NotMapped]
+        public virtual Game Game
+        {
+            get => _game;
+            set
+            {
+                _game = value;
+                GameId = _game.GameId;
+            }
+        }
 
-        public virtual Player Player { get; set; }
+        [NotMapped]
+        public virtual Player Player
+        {
+            get => _player;
+            set 
+            {
+                _player = value;
+                PlayerId = _player.PlayerId;
+            }
+        }
+
+
+        #region Not Mapped
+
+        [NotMapped]
+        private double? dataHash;
+
+        [NotMapped]
+        private Player _player;
+
+        [NotMapped]
+        private Character _character;
+
+        [NotMapped]
+        private Game _game;
+
+        [NotMapped]
+        public double DataHash
+        {
+            get
+            {
+                if (dataHash.HasValue) return dataHash.Value;
+                dataHash = new Random().Next();
+                return dataHash.Value;
+            }
+        }
+
+        #endregion
     }
 }

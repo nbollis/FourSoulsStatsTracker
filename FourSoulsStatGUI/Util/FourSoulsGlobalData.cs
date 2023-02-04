@@ -27,7 +27,7 @@ namespace FourSoulsStatGUI
 
         public static ObservableCollection<Player> AllPlayers { get; private set; } 
         public static ObservableCollection<Game> AllGames { get; private set; }
-        public static ObservableCollection<Character> AllCharacters { get;  } 
+        public static ObservableCollection<Character> AllCharacters { get; private set; } 
         public static ObservableCollection<GameData> AllGameData { get; private set; }
 
         public static ObservableCollection<string> AllPlayerNames =>
@@ -64,10 +64,34 @@ namespace FourSoulsStatGUI
                 context.Games.Add(game);
                 context.SaveChanges();
 
-                // update local objects
-                AllGames = context.Games.ToObservableCollection();
-                AllGameData = context.GameDatas.ToObservableCollection();
+                // update local representation of characters and players
+                AllPlayers = context.Players.ToObservableCollection();
+                AllCharacters = context.Characters.ToObservableCollection();
+                AllGames.Add(game);
+                foreach (var gameGameData in game.GameDatas)
+                {
+                    AllGameData.Add(gameGameData);
+                }
             }
+        }
+
+        public static Game CreateNewGame()
+        {
+            Game game;
+            using (var context = new FourSoulsStatsContext())
+            {
+                game = context.Games.Create();
+                game.GameId = AllGames.Max(p => p.GameId) + 1;
+
+                for (int i = 0; i < 4; i++)
+                {
+                    GameData data = context.GameDatas.Create();
+                    data.Game = game;
+                    game.GameDatas.Add(data);
+                }
+            }
+
+            return game;
         }
     }
 }
