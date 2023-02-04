@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Maui.Markup;
-using FourSoulsCore;
 using CommunityToolkit.Maui;
 
 namespace FourSoulsStatGUI
@@ -19,11 +18,6 @@ namespace FourSoulsStatGUI
                 fonts.AddFont("fa_solid.ttf", "FontAwesome");
             });
             return builder.Build();
-        }
-
-        private static async void LoadData()
-        {
-            await Task.Run(FourSoulsGlobalData.LoadAllData);
         }
     }
 }

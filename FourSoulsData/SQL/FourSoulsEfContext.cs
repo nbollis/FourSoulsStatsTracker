@@ -9,7 +9,9 @@ namespace FourSoulsData
 {
     public class FourSoulsEfContext : DbContext
     {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public FourSoulsEfContext(string connectionString)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             Database.SetInitializer<EFSampleContext>(new DropCreateDatabaseAlways<EFSampleContext>());
             this.Database.Connection.ConnectionString = connectionString;

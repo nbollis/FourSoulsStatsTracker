@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -20,29 +22,13 @@ namespace FourSoulsData
 
         public static void AddPlayer(string name)
         {
-            Player player = new() { PlayerName = name };
+            Player player = new Player()
+            {
+                PlayerName = name,
+                PlayerId = SqlConnection.EfContext.Players.Max(p => p.PlayerId) + 1,
+            };
             SqlConnection.EfContext.Players.Add(player);
             SqlConnection.EfContext.SaveChanges();
-        }
-
-        public static List<Player> GetPlayers()
-        {
-            return (from p in SqlConnection.EfContext.Players select p).ToList();
-        }
-
-        public static List<Character> GetCharacters()
-        {
-            return (from c in SqlConnection.EfContext.Characters select c).ToList();
-        }
-
-        public static List<Game> GetGames()
-        {
-            return (from g in SqlConnection.EfContext.Games select g).ToList();
-        }
-
-        public static List<GameData> GetGameData()
-        {
-            return (from d in SqlConnection.EfContext.GameData select d).ToList();
         }
 
         public static void AddFirst12Games()
@@ -314,5 +300,9 @@ namespace FourSoulsData
                 AddGame(game.Key, game.Value);
             }
         }
+
+        
     }
+
+    
 }
