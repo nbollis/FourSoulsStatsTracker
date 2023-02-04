@@ -25,11 +25,10 @@ namespace FourSoulsStatGUI
             }
         }
 
-
-        public static ObservableCollection<Player> AllPlayers { get; } 
-        public static ObservableCollection<Game> AllGames { get; }
-        public static ObservableCollection<Character> AllCharacters { get; } 
-        public static ObservableCollection<GameData> AllGameData { get; }
+        public static ObservableCollection<Player> AllPlayers { get; private set; } 
+        public static ObservableCollection<Game> AllGames { get; private set; }
+        public static ObservableCollection<Character> AllCharacters { get;  } 
+        public static ObservableCollection<GameData> AllGameData { get; private set; }
 
         public static ObservableCollection<string> AllPlayerNames =>
             AllPlayers.Select(p => p.PlayerName).ToObservableCollection();
@@ -39,7 +38,36 @@ namespace FourSoulsStatGUI
 
 
 
-        public static void AddPlayer(string name) => DataBaseMethods.AddPlayer(name);
-        public static void AddGame(Game game) => DataBaseMethods.AddGame(game);
+        public static void AddPlayer(string name)
+        {
+            using (var context = new FourSoulsStatsContext())
+            {
+                // save player
+                var player = new Player
+                {
+                    PlayerName = name,
+                };
+                context.Players.Add(player);
+                context.SaveChanges();
+
+                // update local
+                AllPlayers = context.Players.ToObservableCollection();
+            }
+        } 
+
+        public static void AddGame(Game game)
+        {
+            using (var context = new FourSoulsStatsContext())
+            {
+                // save game
+                game.NumberOfPlayers = game.GameDatas.Count;
+                context.Games.Add(game);
+                context.SaveChanges();
+
+                // update local objects
+                AllGames = context.Games.ToObservableCollection();
+                AllGameData = context.GameDatas.ToObservableCollection();
+            }
+        }
     }
 }

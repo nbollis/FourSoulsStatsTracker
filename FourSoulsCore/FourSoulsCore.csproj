@@ -60,7 +60,6 @@
     <Compile Include="Player.cs" />
     <Compile Include="sysdiagram.cs" />
     <Compile Include="Ugh\CharacterName.cs" />
-    <Compile Include="Ugh\DataBaseMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

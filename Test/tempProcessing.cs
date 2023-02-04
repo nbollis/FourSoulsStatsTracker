@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using FourSoulsCore;
 using NUnit.Framework;
-using CharacterName = FourSoulsCore.CharacterName;
 
 namespace Test
 {
@@ -34,8 +33,275 @@ namespace Test
         [Test]
         public static void AddFirst12Games()
         {
-           
-            DataBaseMethods.AddFirst12Games();
+            List<Game> games = new List<Game>()
+            {
+                new Game(),
+                new Game(),
+                new Game(),
+                new Game(),
+                new Game(),
+                new Game(),
+                new Game(),
+                new Game(),
+                new Game(),
+                new Game(),
+                new Game(),
+                new Game(),
+            };
+
+            List<GameData> gameData = new List<GameData>()
+            {
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.TheKeeper,
+                    GameId = 1,
+                    PlayerId = 1,
+                    Souls = 4,
+                    Win = 1
+                },
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Judas,
+                    GameId = 1,
+                    PlayerId = 2,
+                    Souls = 1,
+                    Win = 0
+                },
+
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Lilith,
+                    GameId = 2,
+                    PlayerId = 1,
+                    Souls = 4,
+                    Win = 1
+                },
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.DarkJudas,
+                    GameId = 2,
+                    PlayerId = 2,
+                    Souls = 3,
+                    Win = 0
+                },
+
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.BlueBaby,
+                    GameId = 3,
+                    PlayerId = 1,
+                    Souls = 3,
+                    Win = 0
+                },
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.DarkJudas,
+                    GameId = 3,
+                    PlayerId = 2,
+                    Souls = 4,
+                    Win = 1
+                },
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.TheKeeper,
+                    GameId = 3,
+                    PlayerId = 3,
+                    Souls = 1,
+                    Win = 0
+                },
+
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Samson,
+                    GameId = 4,
+                    PlayerId = 1,
+                    Souls = 4,
+                    Win = 1
+                },
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Lazarus,
+                    GameId = 4,
+                    PlayerId = 2,
+                    Souls = 0,
+                    Win = 0
+                },
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Eden,
+                    GameId = 4,
+                    PlayerId = 3,
+                    Souls = 1,
+                    Win = 0
+                },
+
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Lazarus,
+                    GameId = 5,
+                    PlayerId = 1,
+                    Souls = 1,
+                    Win = 0
+                },
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Eve,
+                    GameId = 5,
+                    PlayerId = 3,
+                    Souls = 4,
+                    Win = 1
+                },
+
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Eve,
+                    GameId = 6,
+                    PlayerId = 1,
+                    Souls = 4,
+                    Win = 1
+                },
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.TheKeeper,
+                    GameId = 6,
+                    PlayerId = 3,
+                    Souls = 3,
+                    Win = 0
+                },
+
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Judas,
+                    GameId = 7,
+                    PlayerId = 2,
+                    Souls = 2,
+                    Win = 0
+                },
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Eden,
+                    GameId = 7,
+                    PlayerId = 3,
+                    Souls = 4,
+                    Win = 1
+                },
+
+
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Azazel,
+                    GameId = 8,
+                    PlayerId = 2,
+                    Souls = 2,
+                    Win = 0
+                },
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Eden,
+                    GameId = 8,
+                    PlayerId = 3,
+                    Souls = 4,
+                    Win = 1
+                },
+
+
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Judas,
+                    GameId = 9,
+                    PlayerId = 2,
+                    Souls = 4,
+                    Win = 1
+                },
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.TheForgotten,
+                    GameId = 9,
+                    PlayerId = 3,
+                    Souls = 1,
+                    Win = 0
+                },
+
+
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Lazarus,
+                    GameId = 10,
+                    PlayerId = 2,
+                    Souls = 3,
+                    Win = 0
+                },
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Eve,
+                    GameId = 10,
+                    PlayerId = 3,
+                    Souls = 4,
+                    Win = 1
+                },
+
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Lazarus,
+                    GameId = 11,
+                    PlayerId = 1,
+                    Souls = 2,
+                    Win = 0
+                },
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Maggy,
+                    GameId = 11,
+                    PlayerId = 2,
+                    Souls = 3,
+                    Win = 0
+                },
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.TheKeeper,
+                    GameId = 11,
+                    PlayerId = 3,
+                    Souls = 4,
+                    Win = 1
+                },
+
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Lazarus,
+                    GameId = 12,
+                    PlayerId = 1,
+                    Souls = 4,
+                    Win = 1
+                },
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.Azazel,
+                    GameId = 12,
+                    PlayerId = 2,
+                    Souls = 2,
+                    Win = 0
+                },
+                new GameData()
+                {
+                    CharacterId = (int)CharacterName.TheKeeper,
+                    GameId = 12,
+                    PlayerId = 3,
+                    Souls = 1,
+                    Win = 0
+                },
+
+            };
+
+            using (var context = new FourSoulsStatsContext())
+            {
+                foreach (var game in games)
+                {
+                    game.GameDatas = gameData.Where(m => m.GameId == games.IndexOf(game) + 1).ToList();
+
+                }
+                context.Games.AddRange(games);
+                context.SaveChanges();
+            }
         }
 
         [Test]
