@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Maui.Core.Extensions;
-using FourSoulsCore;
+using FourSoulsDataConnection;
 
 namespace FourSoulsStatGUI
 {

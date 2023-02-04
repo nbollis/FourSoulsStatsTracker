@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Input;
 using System.Xml.Serialization;
-using FourSoulsCore;
+using FourSoulsDataConnection;
 using Task = System.Threading.Tasks.Task;
 using Timer = System.Timers.Timer;
 

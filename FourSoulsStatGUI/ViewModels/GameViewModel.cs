@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using CommunityToolkit.Maui.Core.Extensions;
-using FourSoulsCore;
+using FourSoulsDataConnection;
 
 namespace FourSoulsStatGUI
 {

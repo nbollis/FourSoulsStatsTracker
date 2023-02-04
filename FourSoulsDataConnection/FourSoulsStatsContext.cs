@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 
-namespace FourSoulsCore
+namespace FourSoulsDataConnection
 {
     public partial class FourSoulsStatsContext : DbContext
     {

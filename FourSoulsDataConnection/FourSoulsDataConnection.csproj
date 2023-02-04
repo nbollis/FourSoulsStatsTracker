@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{523561CC-4D1C-4A5D-889B-74BC1965C70D}</ProjectGuid>
+    <ProjectGuid>{D388A19E-EF97-444C-A30C-14D10515B06C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FourSoulsCore</RootNamespace>
-    <AssemblyName>FourSoulsCore</AssemblyName>
+    <RootNamespace>FourSoulsDataConnection</RootNamespace>
+    <AssemblyName>FourSoulsDataConnection</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -54,20 +54,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Character.cs" />
+    <Compile Include="CharacterName.cs" />
     <Compile Include="FourSoulsStatsContext.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameData.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="sysdiagram.cs" />
-    <Compile Include="Ugh\CharacterName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sysdiagram.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
