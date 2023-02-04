@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 
-namespace FourSoulsCore
+namespace FourSoulsDataConnection
 {
     public partial class FourSoulsStatsContext : DbContext
     {
         public FourSoulsStatsContext()
-            : base("data source=NICS-DESKTOP;initial catalog=FourSoulsStats;persist security info=True;user id=admin;password=admin;MultipleActiveResultSets=True;App=EntityFramework")
+            : base("FourSoulsStatsContext")
         {
         }
 

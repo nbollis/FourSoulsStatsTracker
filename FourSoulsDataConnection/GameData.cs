@@ -1,4 +1,4 @@
-namespace FourSoulsCore
+namespace FourSoulsDataConnection
 {
     using System;
     using System.Collections.Generic;
@@ -54,7 +54,7 @@ namespace FourSoulsCore
         public virtual Player Player
         {
             get => _player;
-            set 
+            set
             {
                 _player = value;
                 PlayerId = _player.PlayerId;

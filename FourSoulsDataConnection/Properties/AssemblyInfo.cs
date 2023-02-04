@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FourSoulsCore")]
+[assembly: AssemblyTitle("FourSoulsDataConnection")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FourSoulsCore")]
+[assembly: AssemblyProduct("FourSoulsDataConnection")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("523561cc-4d1c-4a5d-889b-74bc1965c70d")]
+[assembly: Guid("d388a19e-ef97-444c-a30c-14d10515b06c")]
 
 // Version information for an assembly consists of the following four values:
 //

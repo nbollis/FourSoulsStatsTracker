@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FourSoulsCore\FourSoulsCore.csproj" />
+    <ProjectReference Include="..\FourSoulsDataConnection\FourSoulsDataConnection.csproj" />
   </ItemGroup>
 
   <ItemGroup>

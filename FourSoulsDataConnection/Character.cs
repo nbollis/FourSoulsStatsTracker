@@ -1,4 +1,4 @@
-namespace FourSoulsCore
+namespace FourSoulsDataConnection
 {
     using System;
     using System.Collections.Generic;
@@ -6,19 +6,19 @@ namespace FourSoulsCore
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Player
+    public partial class Character
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Player()
+        public Character()
         {
             GameDatas = new HashSet<GameData>();
         }
 
-        public int PlayerId { get; set; }
+        public int CharacterId { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string PlayerName { get; set; }
+        public string CharacterName { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public int? Wins { get; set; }
@@ -40,7 +40,7 @@ namespace FourSoulsCore
 
         public override string ToString()
         {
-            return PlayerName;
+            return CharacterName;
         }
     }
 }

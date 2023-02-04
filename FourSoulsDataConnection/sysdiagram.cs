@@ -1,4 +1,4 @@
-namespace FourSoulsCore
+namespace FourSoulsDataConnection
 {
     using System;
     using System.Collections.Generic;
