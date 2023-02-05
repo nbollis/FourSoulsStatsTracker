@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using static FourSoulsGUI.DI;
 
 namespace FourSoulsGUI
 {
@@ -138,6 +139,8 @@ namespace FourSoulsGUI
                 OnPropertyChanged(nameof(Icon)); }
         }
 
+        public ApplicationViewModel ApplicationViewModel { get; set; }
+    
 
         #endregion
 
@@ -177,6 +180,7 @@ namespace FourSoulsGUI
             mWindow = window;
             string filepath = Path.Join(ApplicationPath, @"Resources\Images\Icon.png");
             icon = new BitmapImage(new Uri(filepath));
+            ApplicationViewModel = ViewModelApplication;
 
             // Listen out for the window resizing to let whoever is attached to know to adjust
             mWindow.StateChanged += (sender, e) =>

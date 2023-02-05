@@ -13,6 +13,8 @@
         Height="450"
         Width="800">
 
+
+
     <Window.Resources>
         <Style TargetType="{x:Type local:MainWindow}">
             <Setter Property="Template">
@@ -88,7 +90,7 @@
                                         <!-- Title -->
                                         <Viewbox Grid.Column="0" Grid.ColumnSpan="3" Margin="5">
                                             <StackPanel>
-                                                <TextBlock FontFamily="{StaticResource FourSouls}" FontSize="{StaticResource FontSizeLarge}" Margin="0,0,0,-5">
+                                                <TextBlock FontFamily="{StaticResource FourSouls}" FontSize="{StaticResource FontSizeRegular}" Margin="0,0,0,-5">
                                                 <Run Text="Four Souls" Foreground="{StaticResource OrangeBrush}" />
                                                 </TextBlock>
                                             </StackPanel>
@@ -126,7 +128,8 @@
         />
     </WindowChrome.WindowChrome>
 
-    <Grid>
-
+    <Grid >
+        <local:ApplicationView DataContext="{Binding ApplicationViewModel}" x:Name="applicationView"
+                               d:DataContext="{x:Static local:ApplicationModel.Instance}"></local:ApplicationView>
     </Grid>
 </Window>

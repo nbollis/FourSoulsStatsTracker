@@ -16,15 +16,14 @@ using System.Windows.Shapes;
 namespace FourSoulsGUI
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for EnterGamePage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class EnterGamePage : BasePage
     {
-        public ApplicationViewModel ApplicationViewModel => new ApplicationViewModel();
-        public MainWindow()
+        public EnterGamePage(EnterGamePageViewModel viewModel)
         {
             InitializeComponent();
-            this.DataContext = new WindowViewModel(this);
+            DataContext = viewModel;
         }
     }
 }

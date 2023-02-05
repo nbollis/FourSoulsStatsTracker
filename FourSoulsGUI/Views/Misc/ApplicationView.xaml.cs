@@ -16,15 +16,13 @@ using System.Windows.Shapes;
 namespace FourSoulsGUI
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ApplicationView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ApplicationView : UserControl
     {
-        public ApplicationViewModel ApplicationViewModel => new ApplicationViewModel();
-        public MainWindow()
+        public ApplicationView()
         {
             InitializeComponent();
-            this.DataContext = new WindowViewModel(this);
         }
     }
 }

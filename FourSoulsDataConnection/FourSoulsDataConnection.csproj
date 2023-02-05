@@ -55,6 +55,8 @@
   <ItemGroup>
     <Compile Include="Character.cs" />
     <Compile Include="CharacterName.cs" />
+    <Compile Include="ClassExtensions.cs" />
+    <Compile Include="FourSoulsGlobalData.cs" />
     <Compile Include="FourSoulsStatsContext.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameData.cs" />

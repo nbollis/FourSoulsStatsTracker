@@ -5,6 +5,7 @@
 
     <!-- Fonts -->
     <FontFamily x:Key="FourSouls">pack://application:,,,Resources/Fonts/IsaacGame.ttf</FontFamily>
+    <FontFamily x:Key="Upheav">pack://application:,,,Resources/Fonts/upheavtt.ttf</FontFamily>
 
     <!-- Font Sizes -->
     <system:Double x:Key="FontSizeSmaller">10</system:Double>
