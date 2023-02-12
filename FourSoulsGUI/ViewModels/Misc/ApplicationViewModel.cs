@@ -78,10 +78,27 @@ namespace FourSoulsGUI
         /// </summary>
         /// <param name="page">The page to go to</param>
         /// <param name="viewModel">The view model, if any, to set explicitly to the new page</param>
-        public void GoToPage(ApplicationPage page, BaseViewModel viewModel = null)
+        public void GoToPage(ApplicationPage page, BaseViewModel? viewModel = null)
         {
             // Set the view model
-            CurrentPageViewModel = viewModel;
+            if (viewModel == null)
+                switch (page)
+                {
+                    case ApplicationPage.EnterGamePage:
+                        CurrentPageViewModel = EnterGamePageViewModel;
+                        break;
+                    case ApplicationPage.CharacterPage:
+                        CurrentPageViewModel = CharacterPageViewModel;
+                        break;
+                    case ApplicationPage.PlayerPage:
+                        CurrentPageViewModel = PlayerPageViewModel;
+                        break;
+                    case ApplicationPage.EditGamesPage:
+                        CurrentPageViewModel = EditGamePageViewModel;
+                        break;
+                }
+            else
+                CurrentPageViewModel = viewModel;
 
             // See if page has changed
             var different = CurrentPage != page;

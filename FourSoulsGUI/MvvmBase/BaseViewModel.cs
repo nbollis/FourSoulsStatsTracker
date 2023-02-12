@@ -150,11 +150,11 @@ namespace FourSoulsGUI
     //}
 
 
-    #region Private Members
+    #region Private Fields
 
     #endregion
 
-    #region Public Properties
+    #region Public Fields
 
     #endregion
 
@@ -166,7 +166,7 @@ namespace FourSoulsGUI
 
     #endregion
 
-    #region Private Helpers
+    #region Command Methods
 
     #endregion
 

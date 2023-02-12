@@ -1,12 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:FourSoulsGUI">
 
     <Color x:Key="Orange">#ffa800</Color>
     <SolidColorBrush x:Key="OrangeBrush" Color="{StaticResource Orange}" />
 
+    <!-- Use for main background -->
     <Color x:Key="BackgroundLight">#efefef</Color>
     <SolidColorBrush x:Key="BackgroundLightBrush" Color="{StaticResource BackgroundLight}" />
 
+    <!-- use for list or accent background -->
     <Color x:Key="BackgroundVeryLight">#fafafa</Color>
     <SolidColorBrush x:Key="BackgroundVeryLightBrush" Color="{StaticResource BackgroundVeryLight}" />
 
@@ -22,5 +25,9 @@
     <Color x:Key="ForegroundDark">#bdbdbd</Color>
     <SolidColorBrush x:Key="ForegroundDarkBrush" Color="{StaticResource ForegroundDark}" />
 
+    <!-- progress bar colors -->
+    <SolidColorBrush x:Key="ProgressBar.Progress" Color="#FF06B025"/>
+    <SolidColorBrush x:Key="ProgressBar.Background" Color="IndianRed"/>
+    <SolidColorBrush x:Key="ProgressBar.Border" Color="{StaticResource ForegroundMain}"/>
 
 </ResourceDictionary>

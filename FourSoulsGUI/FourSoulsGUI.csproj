@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Fonts\fa_solid.ttf" />
     <None Remove="Resources\Fonts\IsaacGame.ttf" />
     <None Remove="Resources\Fonts\upheavtt.ttf" />
   </ItemGroup>
@@ -31,6 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Fonts\fa_solid.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Fonts\IsaacGame.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

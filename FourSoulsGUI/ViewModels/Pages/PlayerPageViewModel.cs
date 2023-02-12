@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using FourSoulsDataConnection;
 
 namespace FourSoulsGUI
@@ -13,6 +14,8 @@ namespace FourSoulsGUI
         #region Private Members
 
         private ObservableCollection<Player> allPlayers;
+        private Player selectedPlayer;
+        private PlayerStatsDisplayViewModel playerStatsDisplayViewModel;
 
         #endregion
 
@@ -28,9 +31,27 @@ namespace FourSoulsGUI
             }
         }
 
+        public Player SelectedPlayer
+        {
+            get => selectedPlayer;
+            set
+            {
+                selectedPlayer = value;
+                PlayerStatsDisplayViewModel = new PlayerStatsDisplayViewModel(SelectedPlayer);
+                OnPropertyChanged(nameof(SelectedPlayer));
+            }
+        }
+
+        public PlayerStatsDisplayViewModel PlayerStatsDisplayViewModel
+        {
+            get => playerStatsDisplayViewModel;
+            set => SetProperty(ref playerStatsDisplayViewModel, value);
+        }
+
         #endregion
 
         #region Commands
+        
 
         #endregion
 
@@ -39,11 +60,13 @@ namespace FourSoulsGUI
         public PlayerPageViewModel()
         {
             AllPlayers = FourSoulsGlobalData.AllPlayers;
+            
         }
 
         #endregion
 
-        #region Private Helpers
+        #region Command Methods
+
 
         #endregion
     }

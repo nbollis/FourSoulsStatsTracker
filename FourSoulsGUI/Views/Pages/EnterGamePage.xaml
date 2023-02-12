@@ -6,9 +6,139 @@
       xmlns:local="clr-namespace:FourSoulsGUI"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      x:Name="Page">
+      x:Name="Page"
+      d:DataContext="{x:Static local:EnterGamePageModel.Instance}">
 
-    <Grid Background="Bisque">
-        
+    
+
+    <Grid Background="{StaticResource BackgroundLightBrush}">
+        <Grid.RowDefinitions>
+            <!-- Top Labels -->
+            <RowDefinition Height="Auto" />
+            <!-- Main Content -->
+            <RowDefinition Height="*" />
+            <!-- Timer Controls -->
+            <RowDefinition Height="Auto" />
+            <!-- Buttons -->
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+
+        <!-- Top Labels -->
+        <Label Grid.Row="0" Grid.Column="0" Content="Player" FontFamily="{StaticResource Upheav}"
+               HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Label Grid.Row="0" Grid.Column="1" Content="Character" FontFamily="{StaticResource Upheav}"
+               HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Label Grid.Row="0" Grid.Column="2" Content="Souls" FontFamily="{StaticResource Upheav}"
+               HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+        <!-- Player Character Soul Data -->
+        <ItemsControl Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" ItemsSource="{Binding GameViewModel.GameData}"
+                  HorizontalContentAlignment="Stretch" >
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <UserControl>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Player -->
+                            <ComboBox Grid.Column="0" HorizontalAlignment="Center" SelectedItem="{Binding Player}" Width="100" Height="20"
+                                      ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=Grid, AncestorLevel=2}, Path=DataContext.Players}">
+                            </ComboBox>
+
+                            <!-- Character -->
+                            <ComboBox SelectedItem="{Binding Character}" Grid.Column="1"
+                                      HorizontalAlignment="Center" Width="100" Height="20"
+                                      ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=Grid, AncestorLevel=2}, Path=DataContext.Characters}">
+                            </ComboBox>
+
+                            <!-- Souls -->
+                            <StackPanel Orientation="Vertical" Grid.Column="2">
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <RadioButton Content="0" GroupName="{Binding DataHash}" Margin ="10, 5"
+                                                 IsChecked="{Binding Souls, 
+                                                Converter={local:RadioButtonToSoulsConverter}, ConverterParameter=0, Mode=TwoWay}">
+                                    </RadioButton>
+                                    <RadioButton Content="1" GroupName="{Binding DataHash}" Margin ="10, 5"
+                                                 IsChecked="{Binding Souls, 
+                                                Converter={local:RadioButtonToSoulsConverter}, ConverterParameter=1}">
+                                    </RadioButton>
+                                    <RadioButton Content="2" GroupName="{Binding DataHash}" Margin ="10, 5"
+                                                 IsChecked="{Binding Souls, 
+                                                Converter={local:RadioButtonToSoulsConverter}, ConverterParameter=2}">
+                                    </RadioButton>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <RadioButton Content="3" GroupName="{Binding DataHash}" Margin ="10, 5"
+                                                 IsChecked="{Binding Souls, 
+                                                Converter={local:RadioButtonToSoulsConverter}, ConverterParameter=3}">
+                                    </RadioButton>
+                                    <RadioButton Content="4" GroupName="{Binding DataHash}" Margin ="10, 5"
+                                                 IsChecked="{Binding Souls, 
+                                                Converter={local:RadioButtonToSoulsConverter}, ConverterParameter=4}">
+                                    </RadioButton>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </UserControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!-- Timer Buttons -->
+        <Grid Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+
+            <!-- Timer and Related Buttons -->
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Width="50"
+                        Content="{x:Static local:IconFont.Play}"
+                        FontFamily="FontAwesome"
+                        Command="{Binding StartGameTimerCommand}" />
+
+                <Label Grid.Column="1"
+                       Content="{Binding Source={RelativeSource AncestorType
+                        ={x:Type local:EnterGamePageViewModel}}, Path=ElapsedTime}"
+                       FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                </Label>
+
+                <Button Grid.Column="2" Width="50"
+                        Content="{x:Static local:IconFont.Pause}"
+                        FontFamily="FontAwesome"
+                        Command="{Binding PauseGameTimerCommand}" />
+            </Grid>
+
+        </Grid>
+
+            <!-- Buttons -->
+        <Button Grid.Row="3" Grid.Column="0" Content="Add Player" x:Name="AddPlayer"
+                Command="{Binding AddPlayerCommand}" />
+        <Button Grid.Row="3" Grid.Column="1" Content="Save Game" x:Name="SaveGame"
+                Command="{Binding SaveGameCommand}" />
+        <Button Grid.Row="3" Grid.Column="2" Content="Reset Game"
+                Command="{Binding ResetGameCommand}" />
     </Grid>
 </local:BasePage>

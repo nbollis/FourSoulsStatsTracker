@@ -32,12 +32,12 @@ namespace FourSoulsGUI
             // Log it
             Logger.LogDebugSource("Application starting...");
 
-            // Setup the application view model based on if we are logged in
-            ViewModelApplication.GoToPage(ApplicationPage.EnterGamePage);
+     
 
             // Show the main window
             Current.MainWindow = new MainWindow();
             Current.MainWindow.Show();
+            ViewModelApplication.GoToPage(ApplicationPage.EnterGamePage);
         }
 
         /// <summary>

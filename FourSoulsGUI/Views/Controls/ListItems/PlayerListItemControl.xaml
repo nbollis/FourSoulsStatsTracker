@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="FourSoulsGUI.PlayerListItemControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:local="clr-namespace:FourSoulsGUI"
+             d:DataContext="{x:Static local:PlayerModel.Instance}"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="240">
+    <Grid Background="{StaticResource BackgroundVeryLightBrush}">
+
+        <Grid.ColumnDefinitions>
+            <!-- bitmoji -->
+            <ColumnDefinition Width="40" />
+            <!-- main content -->
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Players Name -->
+        <Label Grid.Row="0" Grid.Column="1" Content="{Binding PlayerName}" 
+               HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+               FontFamily="{StaticResource FourSouls}"/>
+
+        <!-- Winrate Progressbar -->
+        <Grid Grid.Row="1" Grid.Column="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="{Binding Wins}"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+            <ProgressBar  Grid.Column="1" IsIndeterminate="False"
+                          Style="{StaticResource WholeProgressBarStyle}"
+                          Maximum="{Binding GamesPlayed}" >
+                <ProgressBar.Resources>
+                    <local:ProgressbarTipToArchConverter x:Key="converter" />
+                </ProgressBar.Resources>
+                <ProgressBar.Value>
+                    <MultiBinding Converter="{StaticResource converter}" >
+                        <Binding Path="Wins" />
+                        <Binding Path="GamesPlayed" />
+                    </MultiBinding>
+                </ProgressBar.Value>
+            </ProgressBar>
+
+            <TextBlock Grid.Column="2" Text="{Binding GamesPlayed}"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+        </Grid>
+        
+        
+       
+
+        
+
+
+    </Grid>
+</UserControl>

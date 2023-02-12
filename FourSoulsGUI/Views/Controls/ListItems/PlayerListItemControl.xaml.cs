@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -17,14 +16,13 @@ using System.Windows.Shapes;
 namespace FourSoulsGUI
 {
     /// <summary>
-    /// Interaction logic for EnterGamePage.xaml
+    /// Interaction logic for PlayerListItemControl.xaml
     /// </summary>
-    public partial class EnterGamePage : BasePage
+    public partial class PlayerListItemControl : UserControl
     {
-        public EnterGamePage(EnterGamePageViewModel viewModel)
+        public PlayerListItemControl()
         {
             InitializeComponent();
-            DataContext = viewModel;
         }
     }
 }
