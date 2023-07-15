@@ -293,7 +293,7 @@ namespace Test
 
             };
 
-            using (var context = new FourSoulsStatsContext())
+            using (var context = new FourSoulsDbContext())
             {
                 foreach (var game in games)
                 {

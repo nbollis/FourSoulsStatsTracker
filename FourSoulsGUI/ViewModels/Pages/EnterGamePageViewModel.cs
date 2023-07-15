@@ -32,9 +32,9 @@ namespace FourSoulsGUI
 
         #region Public Properties
 
-        public ObservableCollection<Character> Characters => FourSoulsGlobalData.AllCharacters;
+        public ObservableCollection<Character> Characters => DataBaseOperations.AllCharacters;
 
-        public ObservableCollection<Player> Players => FourSoulsGlobalData.AllPlayers;
+        public ObservableCollection<Player> Players => DataBaseOperations.AllPlayers;
 
         public GameViewModel GameViewModel
         {
@@ -139,11 +139,11 @@ namespace FourSoulsGUI
                 var sb = new StringBuilder();
                 if (playerName == "")
                     MessageBox.Show("Player Name Cannot Be Empty", "Player Name Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                else if (playerName != null && FourSoulsGlobalData.AllPlayerNames.Contains(playerName))
+                else if (playerName != null && DataBaseOperations.AllPlayerNames.Contains(playerName))
                     MessageBox.Show("Player with name already exists", "Player Name Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 else
                 {
-                    FourSoulsGlobalData.AddPlayer(playerName);
+                    DataBaseOperations.AddPlayer(playerName);
                     OnPropertyChanged(nameof(Players));
                     ResetGame();
                 }
@@ -220,7 +220,7 @@ namespace FourSoulsGUI
                 GameViewModel.GameTime = null;
             else
                 GameViewModel.GameTime = TimeSpan.Parse(ElapsedTime);
-            FourSoulsGlobalData.AddGame(GameViewModel.Game);
+            DataBaseOperations.AddGame(GameViewModel.Game);
             ResetGame();
         }
 

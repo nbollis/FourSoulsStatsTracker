@@ -52,7 +52,7 @@ public partial class EnterGamePage : ContentPage
         string playerName = ((PopupViewModel)addPlayerPopup.BindingContext).InputText;
         if (playerName == "")
             popupVM.Messages.Add("Cannot Add Empty Name");
-        if (playerName != null && FourSoulsGlobalData.AllPlayerNames.Contains(playerName))
+        if (playerName != null && DataBaseOperations.AllPlayerNames.Contains(playerName))
             popupVM.Messages.Add("Player with name already exists");
         if (popupVM.Messages.Any())
         {
@@ -61,7 +61,7 @@ public partial class EnterGamePage : ContentPage
         }
         else
         {
-            FourSoulsGlobalData.AddPlayer(playerName);
+            DataBaseOperations.AddPlayer(playerName);
             vm.UpdatePlayerNames();
         }
     }

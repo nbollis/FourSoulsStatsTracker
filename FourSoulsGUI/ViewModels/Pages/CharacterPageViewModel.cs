@@ -38,7 +38,7 @@ namespace FourSoulsGUI
 
         public CharacterPageViewModel()
         {
-            AllCharacters = FourSoulsGlobalData.AllCharacters;
+            AllCharacters = DataBaseOperations.AllCharacters;
         }
 
         #endregion

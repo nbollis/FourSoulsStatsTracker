@@ -60,7 +60,7 @@ namespace FourSoulsGUI
 
         public PlayerPageViewModel()
         {
-            AllPlayers = FourSoulsGlobalData.AllPlayers;
+            AllPlayers = DataBaseOperations.AllPlayers;
             
         }
 

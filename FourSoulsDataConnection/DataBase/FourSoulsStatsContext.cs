@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace FourSoulsDataConnection
 {
-    public partial class FourSoulsStatsContext : DbContext
+    public partial class FourSoulsDbContext : DbContext
     {
-        public FourSoulsStatsContext()
+        public FourSoulsDbContext()
             : base("data source=NICS-DESKTOP;initial catalog=FourSoulsStats;persist security info=True;user id=admin;password=admin;MultipleActiveResultSets=True;App=EntityFramework")
         {
         }

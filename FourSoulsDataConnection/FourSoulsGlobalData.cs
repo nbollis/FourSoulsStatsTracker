@@ -10,12 +10,12 @@ using FourSoulsDataConnection;
 
 namespace FourSoulsDataConnection
 {
-    public static class FourSoulsGlobalData
+    public static class DataBaseOperations
     {
-        static FourSoulsGlobalData()
+        static DataBaseOperations()
         {
 
-            using (var context = new FourSoulsStatsContext())
+            using (var context = new FourSoulsDbContext())
             {
                 AllGames = context.Games.ToObservableCollection();
                 AllGameData = context.GameDatas.ToObservableCollection();
@@ -39,7 +39,7 @@ namespace FourSoulsDataConnection
 
         public static void AddPlayer(string name)
         {
-            using (var context = new FourSoulsStatsContext())
+            using (var context = new FourSoulsDbContext())
             {
                 // save player
                 var player = new Player
@@ -56,7 +56,7 @@ namespace FourSoulsDataConnection
 
         public static void AddGame(Game game)
         {
-            using (var context = new FourSoulsStatsContext())
+            using (var context = new FourSoulsDbContext())
             {
                 // save game
                 game.NumberOfPlayers = game.GameDatas.Count;
@@ -77,7 +77,7 @@ namespace FourSoulsDataConnection
         public static Game CreateNewGame()
         {
             Game game;
-            using (var context = new FourSoulsStatsContext())
+            using (var context = new FourSoulsDbContext())
             {
                 game = context.Games.Create();
                 game.GameId = AllGames.Max(p => p.GameId) + 1;

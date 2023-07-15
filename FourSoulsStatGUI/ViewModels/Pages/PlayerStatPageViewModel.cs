@@ -38,7 +38,7 @@ namespace FourSoulsStatGUI
 
         public PlayerStatPageViewModel()
         {
-            AllPlayers = FourSoulsGlobalData.AllPlayers;
+            AllPlayers = DataBaseOperations.AllPlayers;
         }
 
         #endregion

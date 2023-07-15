@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FourSoulsDataConnection.DataBase;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
@@ -33,7 +34,14 @@ namespace FourSoulsGUI
             return true;
         }
 
+        protected FourSoulsData FourSoulsData;
+
         #endregion
+
+        public BaseViewModel()
+        {
+            FourSoulsData = new FourSoulsData();
+        }
 
         /// <summary>
         /// The event that is fired when any child property changes its value
@@ -139,35 +147,4 @@ namespace FourSoulsGUI
 
         #endregion
     }
-
-    //public static class BaseViewModelExtensions
-    //{
-    //    public static void OnPropertyChanged(this BaseViewModel vm, string propertyName)
-    //    {
-    //        vm.OnPropertyChanged(propertyName);
-    //    }
-
-    //}
-
-
-    #region Private Fields
-
-    #endregion
-
-    #region Public Fields
-
-    #endregion
-
-    #region Commands
-
-    #endregion
-
-    #region Constructor
-
-    #endregion
-
-    #region Command Methods
-
-    #endregion
-
 }

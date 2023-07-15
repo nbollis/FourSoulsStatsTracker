@@ -30,9 +30,9 @@ namespace FourSoulsStatGUI
 
         #region Public Properties
 
-        public ObservableCollection<Character> Characters => FourSoulsGlobalData.AllCharacters;
+        public ObservableCollection<Character> Characters => DataBaseOperations.AllCharacters;
 
-        public ObservableCollection<Player> Players => FourSoulsGlobalData.AllPlayers;
+        public ObservableCollection<Player> Players => DataBaseOperations.AllPlayers;
 
         public GameViewModel GameViewModel
         {
@@ -130,7 +130,7 @@ namespace FourSoulsStatGUI
                 GameViewModel.GameTime = null;
             else
                 GameViewModel.GameTime = TimeSpan.Parse(ElapsedTime);
-            FourSoulsGlobalData.AddGame(GameViewModel.Game);
+            DataBaseOperations.AddGame(GameViewModel.Game);
             ResetGame();
         }
 
