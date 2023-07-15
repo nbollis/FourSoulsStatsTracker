@@ -17,9 +17,9 @@ namespace Test.Graphing
         public static void Test1()
         {
 
-            var players = DataBaseOperations.AllPlayers.Select(p => p as ICharPlayer).ToList();
-            var games = DataBaseOperations.AllGames.ToList();
-            var graph = new WinRateHeatMap(players, ref games);
+            //var players = DataBaseOperations.AllPlayers.Select(p => p as ICharPlayer).ToList();
+            //var games = DataBaseOperations.AllGames.ToList();
+            //var graph = new WinRateHeatMap(players, ref games);
             
 
 

@@ -152,7 +152,7 @@ namespace FourSoulsGUI
                 var sb = new StringBuilder();
                 if (playerName == "")
                     MessageBox.Show("Player Name Cannot Be Empty", "Player Name Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                else if (playerName != null && DataBaseOperations.AllPlayerNames.Contains(playerName))
+                else if (playerName != null && Players.Select(p => p.Name).Contains(playerName))
                     MessageBox.Show("Player with name already exists", "Player Name Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 else
                 {
@@ -234,7 +234,7 @@ namespace FourSoulsGUI
                 GameViewModel.GameTime = null;
             else
                 GameViewModel.GameTime = TimeSpan.Parse(ElapsedTime);
-            DataBaseOperations.AddGame(GameViewModel.Game);
+            DataBaseOperations.AddGame(FourSoulsData, GameViewModel.Game);
             ResetGame();
         }
 

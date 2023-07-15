@@ -13,31 +13,6 @@ namespace FourSoulsDataConnection
 {
     public static class DataBaseOperations
     {
-        static DataBaseOperations()
-        {
-
-            using (var context = new FourSoulsDbContext())
-            {
-                AllGames = context.Games.ToObservableCollection();
-                AllGameData = context.GameDatas.ToObservableCollection();
-                AllPlayers = context.Players.OrderByDescending(p => p.GamesPlayed).ToObservableCollection();
-                AllCharacters = context.Characters.OrderByDescending(p => p.GamesPlayed).ToObservableCollection();
-            }
-        }
-
-        public static ObservableCollection<Player> AllPlayers { get; private set; } 
-        public static ObservableCollection<Game> AllGames { get; private set; }
-        public static ObservableCollection<Character> AllCharacters { get; private set; } 
-        public static ObservableCollection<GameData> AllGameData { get; private set; }
-
-        public static ObservableCollection<string> AllPlayerNames =>
-            AllPlayers.Select(p => p.Name).ToObservableCollection();
-
-        public static ObservableCollection<string> AllCharacterNames =>
-            AllCharacters.Select(p => p.Name).ToObservableCollection();
-
-
-
         public static void AddPlayer(FourSoulsData data, string name)
         {
             using (var context = new FourSoulsDbContext())
@@ -52,11 +27,10 @@ namespace FourSoulsDataConnection
 
                 // update local
                 data.AllPlayers.Value.Add(player);
-                AllPlayers = context.Players.ToObservableCollection();
             }
         } 
 
-        public static void AddGame(Game game)
+        public static void AddGame(FourSoulsData data, Game game)
         {
             using (var context = new FourSoulsDbContext())
             {
@@ -66,29 +40,23 @@ namespace FourSoulsDataConnection
                 context.SaveChanges();
 
                 // update local representation of characters and players
-                AllPlayers = context.Players.ToObservableCollection();
-                AllCharacters = context.Characters.ToObservableCollection();
-                AllGames.Add(game);
-                foreach (var gameGameData in game.GameDatas)
-                {
-                    AllGameData.Add(gameGameData);
-                }
+                data = new FourSoulsDataDirectClient(true).Data;
             }
         }
 
-        public static Game CreateNewGame()
+        public static Game CreateNewGame(FourSoulsData data)
         {
             Game game;
             using (var context = new FourSoulsDbContext())
             {
                 game = context.Games.Create();
-                game.GameId = AllGames.Max(p => p.GameId) + 1;
+                game.GameId = data.AllGames.Value.Max(p => p.GameId) + 1;
 
                 for (int i = 0; i < 4; i++)
                 {
-                    GameData data = context.GameDatas.Create();
-                    data.Game = game;
-                    game.GameDatas.Add(data);
+                    GameData gameData = context.GameDatas.Create();
+                    gameData.Game = game;
+                    game.GameDatas.Add(gameData);
                 }
             }
 

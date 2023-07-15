@@ -65,7 +65,7 @@ namespace FourSoulsGUI
 
         public GameViewModel()
         {
-            game = DataBaseOperations.CreateNewGame();
+            game = DataBaseOperations.CreateNewGame(FourSoulsData);
             OnPropertyChanged(nameof(GameData));
         }
 

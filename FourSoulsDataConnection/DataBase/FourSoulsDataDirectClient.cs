@@ -15,16 +15,16 @@ namespace FourSoulsDataConnection.DataBase
         {
             _dbAccess = new FourSoulsDbAccess();
             if (getAllData)
-                Data = GetMetaDrawData();
+                Data = GetFourSoulsData();
         }
 
         public FourSoulsData Data
         {
-            get => _data = GetMetaDrawData();
+            get => _data = GetFourSoulsData();
             set => _data = value;
         }
 
-        private FourSoulsData GetMetaDrawData()
+        private FourSoulsData GetFourSoulsData()
         {
             try
             {
