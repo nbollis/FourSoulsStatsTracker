@@ -2,7 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FourSoulsStatGUI.Pages.PlayersPage"
-             Title="PlayersPage">
+             xmlns:local="clr-namespace:FourSoulsStatGUI"
+             Title="Players">
+    <ContentPage.BindingContext>
+        <local:PlayerStatPageViewModel />
+    </ContentPage.BindingContext>
+
     <VerticalStackLayout Background="Red">
         <Label 
             Text="Welcome to .NET MAUI!"

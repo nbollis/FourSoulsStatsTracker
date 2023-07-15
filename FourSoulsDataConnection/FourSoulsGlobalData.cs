@@ -6,10 +6,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CommunityToolkit.Maui.Core.Extensions;
 using FourSoulsDataConnection;
 
-namespace FourSoulsStatGUI
+namespace FourSoulsDataConnection
 {
     public static class FourSoulsGlobalData
     {
@@ -18,10 +17,10 @@ namespace FourSoulsStatGUI
 
             using (var context = new FourSoulsStatsContext())
             {
-                AllPlayers = context.Players.ToObservableCollection();
                 AllGames = context.Games.ToObservableCollection();
-                AllCharacters = context.Characters.ToObservableCollection();
                 AllGameData = context.GameDatas.ToObservableCollection();
+                AllPlayers = context.Players.OrderByDescending(p => p.GamesPlayed).ToObservableCollection();
+                AllCharacters = context.Characters.OrderByDescending(p => p.GamesPlayed).ToObservableCollection();
             }
         }
 
@@ -31,10 +30,10 @@ namespace FourSoulsStatGUI
         public static ObservableCollection<GameData> AllGameData { get; private set; }
 
         public static ObservableCollection<string> AllPlayerNames =>
-            AllPlayers.Select(p => p.PlayerName).ToObservableCollection();
+            AllPlayers.Select(p => p.Name).ToObservableCollection();
 
         public static ObservableCollection<string> AllCharacterNames =>
-            AllCharacters.Select(p => p.CharacterName).ToObservableCollection();
+            AllCharacters.Select(p => p.Name).ToObservableCollection();
 
 
 
@@ -45,7 +44,7 @@ namespace FourSoulsStatGUI
                 // save player
                 var player = new Player
                 {
-                    PlayerName = name,
+                    Name = name,
                 };
                 context.Players.Add(player);
                 context.SaveChanges();
@@ -93,5 +92,7 @@ namespace FourSoulsStatGUI
 
             return game;
         }
+
+
     }
 }

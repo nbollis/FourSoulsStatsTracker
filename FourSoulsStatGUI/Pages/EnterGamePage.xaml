@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FourSoulsStatGUI.Pages.EnterGamePage"
              xmlns:local="clr-namespace:FourSoulsStatGUI"
-             Title="">
+             Title="Enter Game">
     <ContentPage.BindingContext>
         <local:EnterGamePageViewModel />
     </ContentPage.BindingContext>
