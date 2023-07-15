@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FourSoulsDataConnection;
+using FourSoulsDataConnection.DataBase;
 
 namespace FourSoulsDataConnection
 {
@@ -37,7 +38,7 @@ namespace FourSoulsDataConnection
 
 
 
-        public static void AddPlayer(string name)
+        public static void AddPlayer(FourSoulsData data, string name)
         {
             using (var context = new FourSoulsDbContext())
             {
@@ -50,6 +51,7 @@ namespace FourSoulsDataConnection
                 context.SaveChanges();
 
                 // update local
+                data.AllPlayers.Value.Add(player);
                 AllPlayers = context.Players.ToObservableCollection();
             }
         } 

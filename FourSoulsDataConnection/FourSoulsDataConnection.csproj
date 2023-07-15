@@ -73,7 +73,7 @@
     <Compile Include="Models\Character.cs" />
     <Compile Include="CharacterName.cs" />
     <Compile Include="ClassExtensions.cs" />
-    <Compile Include="FourSoulsGlobalData.cs" />
+    <Compile Include="DataBaseOperations.cs" />
     <Compile Include="DataBase\FourSoulsStatsContext.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameData.cs" />

@@ -35,11 +35,16 @@ namespace FourSoulsGUI
             return true;
         }
 
-        protected FourSoulsData FourSoulsData;
-        protected IUnityContainer container;
+        protected static FourSoulsData FourSoulsData;
+        protected static IUnityContainer container;
         #endregion
 
         public BaseViewModel()
+        {
+          
+        }
+
+        static BaseViewModel()
         {
             container = new UnityContainer();
             ContainerBootStrapper.RegisterTypes(container);
