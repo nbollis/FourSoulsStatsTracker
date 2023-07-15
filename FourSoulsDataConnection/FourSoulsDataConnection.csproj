@@ -69,6 +69,7 @@
     <Compile Include="DataBase\FourSoulsDataDirectClient.cs" />
     <Compile Include="DataBase\FourSoulsDbAccess.cs" />
     <Compile Include="DataBase\IFourSoulsData.cs" />
+    <Compile Include="DataOperations.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="CharacterName.cs" />
     <Compile Include="ClassExtensions.cs" />

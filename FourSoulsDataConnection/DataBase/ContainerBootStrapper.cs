@@ -10,11 +10,11 @@ using Unity.Lifetime;
 
 namespace FourSoulsDataConnection.DataBase
 {
-    class ContainerBootStrapper
+    public class ContainerBootStrapper
     {
         public static void RegisterTypes(IUnityContainer container)
         {
-            container.RegisterType<IFourSoulsData, FourSoulsDataDirectClient>("MockedData",
+            container.RegisterType<IFourSoulsData, FourSoulsDataDirectClient>("FourSoulsData",
                                             new TransientLifetimeManager(),
                                             new InjectionConstructor(false));
 

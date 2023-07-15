@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Unity;
 
 namespace FourSoulsGUI
 {
@@ -35,12 +36,14 @@ namespace FourSoulsGUI
         }
 
         protected FourSoulsData FourSoulsData;
-
+        protected IUnityContainer container;
         #endregion
 
         public BaseViewModel()
         {
-            FourSoulsData = new FourSoulsData();
+            container = new UnityContainer();
+            ContainerBootStrapper.RegisterTypes(container);
+            FourSoulsData = container.Resolve<IFourSoulsData>("FourSoulsData").Data;
         }
 
         /// <summary>

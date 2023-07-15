@@ -60,8 +60,7 @@ namespace FourSoulsGUI
 
         public PlayerPageViewModel()
         {
-            AllPlayers = DataBaseOperations.AllPlayers;
-            
+            AllPlayers = FourSoulsData.AllPlayers.Value.ToObservableCollection();
         }
 
         #endregion
