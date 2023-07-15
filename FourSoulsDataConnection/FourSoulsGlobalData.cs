@@ -17,10 +17,10 @@ namespace FourSoulsDataConnection
 
             using (var context = new FourSoulsStatsContext())
             {
-                AllPlayers = context.Players.ToObservableCollection();
                 AllGames = context.Games.ToObservableCollection();
-                AllCharacters = context.Characters.ToObservableCollection();
                 AllGameData = context.GameDatas.ToObservableCollection();
+                AllPlayers = context.Players.OrderByDescending(p => p.GamesPlayed).ToObservableCollection();
+                AllCharacters = context.Characters.OrderByDescending(p => p.GamesPlayed).ToObservableCollection();
             }
         }
 
@@ -30,10 +30,10 @@ namespace FourSoulsDataConnection
         public static ObservableCollection<GameData> AllGameData { get; private set; }
 
         public static ObservableCollection<string> AllPlayerNames =>
-            AllPlayers.Select(p => p.PlayerName).ToObservableCollection();
+            AllPlayers.Select(p => p.Name).ToObservableCollection();
 
         public static ObservableCollection<string> AllCharacterNames =>
-            AllCharacters.Select(p => p.CharacterName).ToObservableCollection();
+            AllCharacters.Select(p => p.Name).ToObservableCollection();
 
 
 
@@ -44,7 +44,7 @@ namespace FourSoulsDataConnection
                 // save player
                 var player = new Player
                 {
-                    PlayerName = name,
+                    Name = name,
                 };
                 context.Players.Add(player);
                 context.SaveChanges();
@@ -92,5 +92,7 @@ namespace FourSoulsDataConnection
 
             return game;
         }
+
+
     }
 }

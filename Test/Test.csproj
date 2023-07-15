@@ -17,20 +17,21 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FourSoulsDataConnection\FourSoulsDataConnection.csproj" />
+    <ProjectReference Include="..\FourSoulsGraphing\Graphing.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="DataHandling\Data\AllCharacters.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="DataHandling\Data\AllGames.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="DataHandling\Data\AllPlayerNames.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="DataHandling\Data\AllPlayers.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

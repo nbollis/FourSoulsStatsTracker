@@ -23,7 +23,7 @@
         </Grid.RowDefinitions>
 
         <!-- Players Name -->
-        <Label Grid.Row="0" Grid.Column="1" Content="{Binding PlayerName}" 
+        <Label Grid.Row="0" Grid.Column="1" Content="{Binding Name}" 
                HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
                FontFamily="{StaticResource FourSouls}"/>
 

@@ -21,7 +21,7 @@ namespace FourSoulsDataConnection
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Character>()
-                .Property(e => e.CharacterName)
+                .Property(e => e.Name)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Character>()
@@ -35,7 +35,7 @@ namespace FourSoulsDataConnection
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Player>()
-                .Property(e => e.PlayerName)
+                .Property(e => e.Name)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Player>()

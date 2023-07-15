@@ -53,14 +53,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Character.cs" />
+    <Compile Include="Base\GameFilter.cs" />
+    <Compile Include="Base\ICharPlayer.cs" />
+    <Compile Include="Models\Character.cs" />
     <Compile Include="CharacterName.cs" />
     <Compile Include="ClassExtensions.cs" />
     <Compile Include="FourSoulsGlobalData.cs" />
     <Compile Include="FourSoulsStatsContext.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="GameData.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\GameData.cs" />
+    <Compile Include="Models\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sysdiagram.cs" />
   </ItemGroup>
@@ -68,6 +70,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

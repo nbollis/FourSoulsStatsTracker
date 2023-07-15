@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FourSoulsDataConnection;
+using ScottPlot;
 
 namespace FourSoulsGUI
 {
@@ -23,6 +24,8 @@ namespace FourSoulsGUI
             set => SetProperty(ref player, value);
         }
 
+        public Plot PlayersPieChart { get; set; }
+
         #endregion
 
         #region Commands
@@ -40,6 +43,15 @@ namespace FourSoulsGUI
 
         #region Command Methods
 
+
+
         #endregion
+
+     
+
+        private void CreateCharts()
+        {
+            var plot = new ScottPlot.Plot();
+        }
     }
 }

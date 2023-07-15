@@ -13,8 +13,8 @@ namespace FourSoulsGUI
 
         public PlayerModel() : base()
         {
-            PlayerId = 1;
-            PlayerName = "Nic";
+            Id = 1;
+            Name = "Nic";
             Wins = 8;
             GamesPlayed = 16;
             WinRate = 0.5;

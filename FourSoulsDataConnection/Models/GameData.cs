@@ -37,7 +37,7 @@ namespace FourSoulsDataConnection
             set
             {
                 _character = value;
-                CharacterId = _character?.CharacterId ?? 0;
+                CharacterId = _character?.Id ?? 0;
             }
         }
 
@@ -59,7 +59,7 @@ namespace FourSoulsDataConnection
             set
             {
                 _player = value;
-                PlayerId = _player?.PlayerId ?? 0;
+                PlayerId = _player?.Id ?? 0;
             }
         }
 
@@ -90,7 +90,7 @@ namespace FourSoulsDataConnection
 
         public override string ToString()
         {
-            return $"{Player?.PlayerName ?? ""} : {Character?.CharacterName ?? ""} : {Souls}";
+            return $"{Player?.Name ?? ""} : {Character?.Name ?? ""} : {Souls}";
         }
     }
 }

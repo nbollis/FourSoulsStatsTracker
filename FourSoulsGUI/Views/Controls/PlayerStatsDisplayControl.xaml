@@ -8,6 +8,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            <TextBlock Text="{Binding Path=Player.PlayerName}"></TextBlock>
+            <TextBlock Text="{Binding Path=Player.Name}"></TextBlock>
     </Grid>
 </UserControl>

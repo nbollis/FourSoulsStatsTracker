@@ -6,7 +6,7 @@ namespace FourSoulsDataConnection
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Character
+    public partial class Character : ICharPlayer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Character()
@@ -14,11 +14,13 @@ namespace FourSoulsDataConnection
             GameDatas = new HashSet<GameData>();
         }
 
-        public int CharacterId { get; set; }
+        [Column("CharacterId")]
+        public int Id { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string CharacterName { get; set; }
+        [Column("CharacterName")]
+        public string Name { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public int? Wins { get; set; }
@@ -38,9 +40,21 @@ namespace FourSoulsDataConnection
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GameData> GameDatas { get; set; }
 
+        [NotMapped]
+        public string IconPath;
+
         public override string ToString()
         {
-            return CharacterName;
+            return Name;
+        }
+        public bool Equals(ICharPlayer other)
+        {
+            if (ReferenceEquals(this, other))
+                return true;
+            if (ReferenceEquals(other, null))
+                return false;
+            else
+                return (Id == other.Id && Name == other.Name);
         }
     }
 }
