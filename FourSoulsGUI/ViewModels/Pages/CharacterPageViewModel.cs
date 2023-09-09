@@ -38,8 +38,10 @@ namespace FourSoulsGUI
 
         public CharacterPageViewModel()
         {
-            AllCharacters = FourSoulsData.AllCharacters.Value;
+            AllCharacters = FourSoulsData.AllCharacters.Value.OrderByDescending(p => p.GamesPlayed ??= 0).ToList();
         }
+        
+    
 
         #endregion
 

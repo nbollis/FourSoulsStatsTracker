@@ -60,7 +60,7 @@ namespace FourSoulsGUI
 
         public PlayerPageViewModel()
         {
-            AllPlayers = FourSoulsData.AllPlayers.Value;
+            AllPlayers = FourSoulsData.AllPlayers.Value.OrderByDescending(p => p.GamesPlayed ??= 0).ToList();
         }
 
         #endregion

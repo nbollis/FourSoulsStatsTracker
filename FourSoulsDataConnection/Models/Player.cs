@@ -44,7 +44,7 @@ namespace FourSoulsDataConnection
 
         public override string ToString()
         {
-            return Name;
+            return $"{Id}:{Name}";
         }
 
 

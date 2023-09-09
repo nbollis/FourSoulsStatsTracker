@@ -90,7 +90,7 @@ namespace FourSoulsDataConnection
 
         public override string ToString()
         {
-            return $"{Player?.Name ?? ""} : {Character?.Name ?? ""} : {Souls}";
+            return $"{Player?.Name ?? PlayerId.ToString()} : {Character?.Name ?? CharacterId.ToString()} : {Souls}";
         }
     }
 }

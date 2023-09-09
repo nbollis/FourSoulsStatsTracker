@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace FourSoulsDataConnection
 {
     using System;
@@ -25,5 +27,9 @@ namespace FourSoulsDataConnection
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GameData> GameDatas { get; set; }
+
+        [NotMapped] public int WinningPlayer => GameDatas.First(p => p.Win == 1).PlayerId;
+
+        [NotMapped] public int WinningCharacter => GameDatas.First(p => p.Win == 1).CharacterId;
     }
 }
