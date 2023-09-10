@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using Unity;
+﻿using Unity;
 using Unity.Injection;
 using Unity.Lifetime;
 
@@ -16,7 +10,7 @@ namespace FourSoulsDataConnection.DataBase
         {
             container.RegisterType<IFourSoulsData, FourSoulsDataDirectClient>("FourSoulsData",
                 new TransientLifetimeManager(), new InjectionConstructor(false));
-            
+
             container.RegisterType<IFourSoulsData, MockedFourSoulsDataClient>("MockedData",
                 new TransientLifetimeManager(), new InjectionConstructor(10));
         }

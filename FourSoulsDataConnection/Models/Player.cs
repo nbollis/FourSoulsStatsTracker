@@ -1,11 +1,8 @@
 namespace FourSoulsDataConnection
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-    using System.Linq;
 
     public partial class Player : ICharPlayer
     {
@@ -63,7 +60,7 @@ namespace FourSoulsDataConnection
                 return true;
             if (ReferenceEquals(other, null))
                 return false;
-            else 
+            else
                 return (Id == other.Id && Name == other.Name);
         }
 

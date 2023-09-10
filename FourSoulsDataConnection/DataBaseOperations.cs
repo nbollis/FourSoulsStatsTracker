@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data.Entity.Infrastructure;
-using System.Data.SqlClient;
+﻿using FourSoulsDataConnection.DataBase;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FourSoulsDataConnection;
-using FourSoulsDataConnection.DataBase;
 
 namespace FourSoulsDataConnection
 {
@@ -28,7 +20,7 @@ namespace FourSoulsDataConnection
                 // update local
                 data.AllPlayers.Value.Add(player);
             }
-        } 
+        }
 
         public static void AddGame(FourSoulsData data, Game game)
         {

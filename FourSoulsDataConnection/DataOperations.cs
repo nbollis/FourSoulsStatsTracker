@@ -1,14 +1,7 @@
 ﻿using FourSoulsDataConnection.DataBase;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data.Entity.Core.Objects;
-using System.Deployment.Internal;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FourSoulsDataConnection
 {
@@ -23,7 +16,7 @@ namespace FourSoulsDataConnection
         /// <returns></returns>
         public static Dictionary<int, double> GetWinRateByPlayer(FourSoulsData data, Player player, GameFilter filter = null)
         {
-            Dictionary<int, (int win, int loss)> temp = data.AllPlayers.Value.ToDictionary(p => p.Id, p => (0,0));
+            Dictionary<int, (int win, int loss)> temp = data.AllPlayers.Value.ToDictionary(p => p.Id, p => (0, 0));
             // all games played by player of interest
             foreach (var game in GetGamesByPlayer(data, player, filter))
             {
@@ -50,7 +43,7 @@ namespace FourSoulsDataConnection
             return result;
         }
 
-        
+
 
         /// <summary>
         /// Gets all games a specific player has been a part of
@@ -82,5 +75,5 @@ namespace FourSoulsDataConnection
         }
     }
 
-    
+
 }
