@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Test.DataHandling
 {
     [TestFixture]
-    public class TestMockData : DataTesting
+    public class TestMockData : DataTestingBase
     {
 
         [Test]

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FourSoulsDataConnection.DataBase
 {
@@ -57,20 +58,23 @@ namespace FourSoulsDataConnection.DataBase
 
         public static List<Game> GetGames(int size)
         {
+            var gameData = GetGameData(size)
+                .GroupBy(p => p.GameId)
+                .ToDictionary(p => p.Key, p => p.ToList());
             var games = new List<Game>()
             {
-                new Game() { GameId = 1, NumberOfPlayers = 2,},
-                new Game() { GameId = 2, NumberOfPlayers = 2,},
-                new Game() { GameId = 3, NumberOfPlayers = 3,},
-                new Game() { GameId = 4, NumberOfPlayers = 3,},
-                new Game() { GameId = 5, NumberOfPlayers = 2,},
-                new Game() { GameId = 6, NumberOfPlayers = 2,},
-                new Game() { GameId = 7, NumberOfPlayers = 2,},
-                new Game() { GameId = 8, NumberOfPlayers = 2,},
-                new Game() { GameId = 9, NumberOfPlayers = 2,},
-                new Game() { GameId = 10, NumberOfPlayers = 2,},
-                new Game() { GameId = 11, NumberOfPlayers = 3,},
-                new Game() { GameId = 12, NumberOfPlayers = 3,},
+                new Game() { GameId = 1, NumberOfPlayers = 2, GameDatas = gameData[1]},
+                new Game() { GameId = 2, NumberOfPlayers = 2, GameDatas = gameData[2]},
+                new Game() { GameId = 3, NumberOfPlayers = 3, GameDatas = gameData[3]},
+                new Game() { GameId = 4, NumberOfPlayers = 3, GameDatas = gameData[4]},
+                new Game() { GameId = 5, NumberOfPlayers = 2, GameDatas = gameData[5]},
+                new Game() { GameId = 6, NumberOfPlayers = 2, GameDatas = gameData[6]},
+                new Game() { GameId = 7, NumberOfPlayers = 2, GameDatas = gameData[7]},
+                new Game() { GameId = 8, NumberOfPlayers = 2, GameDatas = gameData[8]},
+                new Game() { GameId = 9, NumberOfPlayers = 2, GameDatas = gameData[9]},
+                new Game() { GameId = 10, NumberOfPlayers = 2, GameDatas = gameData[10]},
+                new Game() { GameId = 11, NumberOfPlayers = 3, GameDatas = gameData[11]},
+                new Game() { GameId = 12, NumberOfPlayers = 3, GameDatas = gameData[12]},
             };
             return games;
         }

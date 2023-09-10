@@ -43,7 +43,7 @@ namespace FourSoulsDataConnection
 
         public override string ToString()
         {
-            return Name;
+            return $"{Id}:{Name}";
         }
         public bool Equals(ICharPlayer other)
         {

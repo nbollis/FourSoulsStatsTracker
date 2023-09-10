@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace Test.DataHandling
 {
     [TestFixture]
-    public class TestDataOperations : DataTesting
+    public class TestDataOperations : DataTestingBase
     {
         
         // TODO: Test Data Operations

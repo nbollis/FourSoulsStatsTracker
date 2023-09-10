@@ -3,9 +3,9 @@ using Unity;
 
 namespace Test.DataHandling;
 
-public class DataTesting
+public class DataTestingBase
 {
-    static DataTesting()
+    static DataTestingBase()
     {
         var container = new UnityContainer();
         ContainerBootStrapper.RegisterTypes(container);
