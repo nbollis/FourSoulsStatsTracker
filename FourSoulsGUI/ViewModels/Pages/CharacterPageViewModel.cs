@@ -12,13 +12,13 @@ namespace FourSoulsGUI
     {
         #region Private Members
 
-        private ObservableCollection<Character> allCharacters;
+        private List<Character> allCharacters;
 
         #endregion
 
         #region Public Properties
 
-        public ObservableCollection<Character> AllCharacters
+        public List<Character> AllCharacters
         {
             get => allCharacters;
             set
@@ -38,8 +38,10 @@ namespace FourSoulsGUI
 
         public CharacterPageViewModel()
         {
-            AllCharacters = FourSoulsGlobalData.AllCharacters;
+            AllCharacters = FourSoulsData.AllCharacters.Value.OrderByDescending(p => p.GamesPlayed ??= 0).ToList();
         }
+        
+    
 
         #endregion
 

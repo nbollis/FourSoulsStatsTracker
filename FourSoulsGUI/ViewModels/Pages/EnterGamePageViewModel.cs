@@ -32,9 +32,19 @@ namespace FourSoulsGUI
 
         #region Public Properties
 
-        public ObservableCollection<Character> Characters => FourSoulsGlobalData.AllCharacters;
+        private ObservableCollection<Character> _characters = new ObservableCollection<Character>();
+        public ObservableCollection<Character> Characters
+        {
+            get => _characters;
+            set{ _characters = value; OnPropertyChanged(nameof(Characters)); }
+        }
 
-        public ObservableCollection<Player> Players => FourSoulsGlobalData.AllPlayers;
+        private ObservableCollection<Player> _players = new ObservableCollection<Player>();
+        public ObservableCollection<Player> Players
+        {
+            get => _players;
+            set { _players = value; OnPropertyChanged(nameof(Players)); }
+        }
 
         public GameViewModel GameViewModel
         {
@@ -69,6 +79,9 @@ namespace FourSoulsGUI
             gameTimer = new Timer();
             gameTimer.Interval = 1000; //milliseconds
             GameViewModel = new();
+
+            Players = FourSoulsData.AllPlayers.Value.ToObservableCollection();
+            Characters = FourSoulsData.AllCharacters.Value.ToObservableCollection();
 
             gameTimer.Elapsed += (s,e) => UpdateText();
             AddPlayerCommand = new RelayCommand(AddPlayer);
@@ -133,20 +146,21 @@ namespace FourSoulsGUI
         private void AddPlayer()
         {
             var playerNameDialog = new TextResponseDialogWindow();
-            if (playerNameDialog.ShowDialog() == true)
+            if (playerNameDialog.ShowDialog() ?? false)
             {
                 string playerName = playerNameDialog.ResponseText;
                 var sb = new StringBuilder();
                 if (playerName == "")
                     MessageBox.Show("Player Name Cannot Be Empty", "Player Name Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                else if (playerName != null && FourSoulsGlobalData.AllPlayerNames.Contains(playerName))
+                else if (playerName != null && Players.Select(p => p.Name).Contains(playerName))
                     MessageBox.Show("Player with name already exists", "Player Name Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 else
                 {
-                    FourSoulsGlobalData.AddPlayer(playerName);
+                    DataBaseOperations.AddPlayer(FourSoulsData, playerName);
                     OnPropertyChanged(nameof(Players));
                     ResetGame();
                 }
+                Players = FourSoulsData.AllPlayers.Value.ToObservableCollection();
             }
         }
 
@@ -220,7 +234,7 @@ namespace FourSoulsGUI
                 GameViewModel.GameTime = null;
             else
                 GameViewModel.GameTime = TimeSpan.Parse(ElapsedTime);
-            FourSoulsGlobalData.AddGame(GameViewModel.Game);
+            DataBaseOperations.AddGame(FourSoulsData, GameViewModel.Game);
             ResetGame();
         }
 

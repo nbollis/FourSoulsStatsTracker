@@ -14,7 +14,7 @@ namespace FourSoulsGUI
     {
         #region Private Members
 
-        private ObservableCollection<Player> allPlayers;
+        private List<Player> allPlayers;
         private Player selectedPlayer;
         private PlayerStatsDisplayViewModel playerStatsDisplayViewModel;
 
@@ -22,7 +22,7 @@ namespace FourSoulsGUI
 
         #region Public Properties
 
-        public ObservableCollection<Player> AllPlayers
+        public List<Player> AllPlayers
         {
             get => allPlayers;
             set
@@ -60,8 +60,7 @@ namespace FourSoulsGUI
 
         public PlayerPageViewModel()
         {
-            AllPlayers = FourSoulsGlobalData.AllPlayers;
-            
+            AllPlayers = FourSoulsData.AllPlayers.Value.OrderByDescending(p => p.GamesPlayed ??= 0).ToList();
         }
 
         #endregion

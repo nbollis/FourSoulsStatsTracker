@@ -1,10 +1,8 @@
 namespace FourSoulsDataConnection
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     public partial class Character : ICharPlayer
     {
@@ -45,7 +43,7 @@ namespace FourSoulsDataConnection
 
         public override string ToString()
         {
-            return Name;
+            return $"{Id}:{Name}";
         }
         public bool Equals(ICharPlayer other)
         {

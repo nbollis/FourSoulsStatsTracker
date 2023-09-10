@@ -1,9 +1,11 @@
-﻿using System;
+﻿using FourSoulsDataConnection.DataBase;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Unity;
 
 namespace FourSoulsGUI
 {
@@ -33,7 +35,21 @@ namespace FourSoulsGUI
             return true;
         }
 
+        protected static FourSoulsData FourSoulsData;
+        protected static IUnityContainer container;
         #endregion
+
+        public BaseViewModel()
+        {
+          
+        }
+
+        static BaseViewModel()
+        {
+            container = new UnityContainer();
+            ContainerBootStrapper.RegisterTypes(container);
+            FourSoulsData = container.Resolve<IFourSoulsData>("MockedData").Data;
+        }
 
         /// <summary>
         /// The event that is fired when any child property changes its value
@@ -139,35 +155,4 @@ namespace FourSoulsGUI
 
         #endregion
     }
-
-    //public static class BaseViewModelExtensions
-    //{
-    //    public static void OnPropertyChanged(this BaseViewModel vm, string propertyName)
-    //    {
-    //        vm.OnPropertyChanged(propertyName);
-    //    }
-
-    //}
-
-
-    #region Private Fields
-
-    #endregion
-
-    #region Public Fields
-
-    #endregion
-
-    #region Commands
-
-    #endregion
-
-    #region Constructor
-
-    #endregion
-
-    #region Command Methods
-
-    #endregion
-
 }

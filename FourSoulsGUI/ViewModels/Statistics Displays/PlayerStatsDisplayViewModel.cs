@@ -24,6 +24,17 @@ namespace FourSoulsGUI
             set => SetProperty(ref player, value);
         }
 
+        #region Stats
+
+        public Character MostPlayedCharacter { get; set; }
+        public Character BestCharacter { get; set; }
+        public Character WorstCharacter { get; set; }
+        public Player BestPlayerAgainst { get; set; }
+        public Player WorstPlayerAgainst { get; set; }
+
+
+        #endregion
+
         public Plot PlayersPieChart { get; set; }
 
         #endregion
@@ -37,6 +48,7 @@ namespace FourSoulsGUI
         public PlayerStatsDisplayViewModel(Player player)
         {
             Player = player;
+            DataOperations.GetWinRateByPlayer(FourSoulsData, Player);;
         }
 
         #endregion
@@ -47,6 +59,7 @@ namespace FourSoulsGUI
 
         #endregion
 
+        
      
 
         private void CreateCharts()

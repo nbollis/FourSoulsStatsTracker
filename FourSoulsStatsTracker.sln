@@ -5,13 +5,11 @@ VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{C45B1CAB-60E4-4130-AE28-517BD5C2497C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FourSoulsStatGUI", "FourSoulsStatGUI\FourSoulsStatGUI.csproj", "{0753D280-07BB-49B7-BAA6-099B8621791E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourSoulsDataConnection", "FourSoulsDataConnection\FourSoulsDataConnection.csproj", "{D388A19E-EF97-444C-A30C-14D10515B06C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FourSoulsGUI", "FourSoulsGUI\FourSoulsGUI.csproj", "{095AE9AD-C7ED-4CAA-9555-DA3E0352C787}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graphing", "FourSoulsGraphing\Graphing.csproj", "{F1CF79B0-23DB-4624-846E-4C20D09CD842}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Graphing", "FourSoulsGraphing\Graphing.csproj", "{F1CF79B0-23DB-4624-846E-4C20D09CD842}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +21,6 @@ Global
 		{C45B1CAB-60E4-4130-AE28-517BD5C2497C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C45B1CAB-60E4-4130-AE28-517BD5C2497C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C45B1CAB-60E4-4130-AE28-517BD5C2497C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0753D280-07BB-49B7-BAA6-099B8621791E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0753D280-07BB-49B7-BAA6-099B8621791E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0753D280-07BB-49B7-BAA6-099B8621791E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{0753D280-07BB-49B7-BAA6-099B8621791E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0753D280-07BB-49B7-BAA6-099B8621791E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0753D280-07BB-49B7-BAA6-099B8621791E}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{D388A19E-EF97-444C-A30C-14D10515B06C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D388A19E-EF97-444C-A30C-14D10515B06C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D388A19E-EF97-444C-A30C-14D10515B06C}.Release|Any CPU.ActiveCfg = Release|Any CPU

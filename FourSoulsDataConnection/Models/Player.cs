@@ -1,11 +1,8 @@
 namespace FourSoulsDataConnection
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-    using System.Linq;
 
     public partial class Player : ICharPlayer
     {
@@ -44,17 +41,17 @@ namespace FourSoulsDataConnection
 
         public override string ToString()
         {
-            return Name;
+            return $"{Id}:{Name}";
         }
 
 
         private void GenerateNotMappedData()
         {
-            AllGamesPlayed = FourSoulsGlobalData.AllGames.Where(p => p.GameDatas.Any(m => m.PlayerId == Id)).ToList();
-            GamesByPlayerCount = AllGamesPlayed.GroupBy(p => p.NumberOfPlayers)
-                .ToDictionary(p => p.Key, p => p.ToList());
-            GamesByCharacter = AllGamesPlayed.GroupBy(p => p.GameDatas.First(m => m.PlayerId == Id).CharacterId)
-                .ToDictionary(p => p.Key, p => p.ToList());
+            //AllGamesPlayed = FourSoulsGlobalData.AllGames.Where(p => p.GameDatas.Any(m => m.PlayerId == Id)).ToList();
+            //GamesByPlayerCount = AllGamesPlayed.GroupBy(p => p.NumberOfPlayers)
+            //    .ToDictionary(p => p.Key, p => p.ToList());
+            //GamesByCharacter = AllGamesPlayed.GroupBy(p => p.GameDatas.First(m => m.PlayerId == Id).CharacterId)
+            //    .ToDictionary(p => p.Key, p => p.ToList());
         }
 
         public bool Equals(ICharPlayer other)
@@ -63,7 +60,7 @@ namespace FourSoulsDataConnection
                 return true;
             if (ReferenceEquals(other, null))
                 return false;
-            else 
+            else
                 return (Id == other.Id && Name == other.Name);
         }
 
