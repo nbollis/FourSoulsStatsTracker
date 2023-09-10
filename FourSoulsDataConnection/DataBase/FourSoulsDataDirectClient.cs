@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FourSoulsDataConnection.DataBase
 {
+    /// <summary>
+    /// Data client to provide data from the database
+    /// </summary>
     public class FourSoulsDataDirectClient : IFourSoulsData
     {
         private FourSoulsDbAccess _dbAccess;

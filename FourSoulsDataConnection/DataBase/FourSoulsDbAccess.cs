@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace FourSoulsDataConnection.DataBase
 {
+    /// <summary>
+    /// Calls the data from the database
+    /// </summary>
     public class FourSoulsDbAccess
     {
         private FourSoulsDbContext context;

@@ -42,6 +42,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FizzWare.NBuilder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5651b03e12e42c12, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBuilder.6.1.0\lib\net40\FizzWare.NBuilder.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -70,6 +73,7 @@
     <Compile Include="DataBase\FourSoulsData.cs" />
     <Compile Include="DataBase\FourSoulsDataDirectClient.cs" />
     <Compile Include="DataBase\FourSoulsDbAccess.cs" />
+    <Compile Include="DataBase\MockedFourSoulsDataClient.cs" />
     <Compile Include="DataBase\IFourSoulsData.cs" />
     <Compile Include="DataOperations.cs" />
     <Compile Include="Models\Character.cs" />
