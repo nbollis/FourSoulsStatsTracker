@@ -25,7 +25,7 @@
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="Ninject" Version="3.3.6" />
     <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
-    <PackageReference Include="ScottPlot" Version="4.1.60" />
+    <PackageReference Include="ScottPlot" Version="4.1.65" />
     <PackageReference Include="ScottPlot.WPF" Version="4.1.60" />
     <PackageReference Include="Unity" Version="5.11.10" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.4" />
@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FourSoulsDataConnection\FourSoulsDataConnection.csproj" />
+    <ProjectReference Include="..\FourSoulsGraphing\Graphing.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -13,5 +13,6 @@ namespace FourSoulsDataConnection
         int? CumulativeSouls { get; set; }
         double? AverageSouls { get; set; }
         ICollection<GameData> GameDatas { get; set; }
+        string ColorCode { get; set; }
     }
 }

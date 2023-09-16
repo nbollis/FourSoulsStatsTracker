@@ -48,7 +48,7 @@ namespace FourSoulsGUI
         public PlayerStatsDisplayViewModel(Player player)
         {
             Player = player;
-            DataOperations.GetWinRateByPlayer(FourSoulsData, Player);;
+            FourSoulsDataConnection.DataOperations.GetWinRateByPlayer(FourSoulsData, Player);
         }
 
         #endregion

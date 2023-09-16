@@ -1,5 +1,6 @@
 ﻿using FourSoulsDataConnection.DataBase;
 using System.Linq;
+using FourSoulsDataConnection.Util;
 
 namespace FourSoulsDataConnection
 {
@@ -14,6 +15,9 @@ namespace FourSoulsDataConnection
                 {
                     Name = name,
                 };
+                var color = ColorQueue.GetNextColor(data, player);
+                player.ColorCode = color;
+
                 context.Players.Add(player);
                 context.SaveChanges();
 
@@ -32,7 +36,8 @@ namespace FourSoulsDataConnection
                 context.SaveChanges();
 
                 // update local representation of characters and players
-                data = new FourSoulsDataDirectClient(true).Data;
+                data.AllGames.Value.Add(game);
+                data.AllGameData.Value.AddRange(game.GameDatas);
             }
         }
 
@@ -55,6 +60,25 @@ namespace FourSoulsDataConnection
             return game;
         }
 
+        public static void ChangeColor(FourSoulsData data, ICharPlayer charPlayer, string newColor)
+        {
+            using (var context = new FourSoulsDbContext())
+            {
+                bool isPlayer = charPlayer is Player;
 
+                // update db and local
+                if (isPlayer)
+                {
+                    context.Players.First(p => p.Id == charPlayer.Id).ColorCode = newColor;
+                    data.AllPlayers.Value.First(p => p.Id == charPlayer.Id).ColorCode = newColor;
+                }
+                else
+                {
+                    context.Characters.First(p => p.Id == charPlayer.Id).ColorCode = newColor;
+                    data.AllCharacters.Value.First(p => p.Id == charPlayer.Id).ColorCode = newColor;
+                }
+                context.SaveChanges();
+            }
+        }
     }
 }

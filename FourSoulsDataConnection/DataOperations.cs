@@ -61,10 +61,16 @@ namespace FourSoulsDataConnection
             return filter.Filter(result);
         }
 
-        public static IEnumerable<string> GetAllPlayerNames(FourSoulsData data, GameFilter filter = null)
+        public static IEnumerable<string> GetAllPlayerNames(FourSoulsData data)
         {
             return data.AllPlayers.Value.Select(player => player.Name);
         }
+
+        public static IEnumerable<string> GetAllCharacterNames(FourSoulsData data)
+        {
+            return data.AllCharacters.Value.Select(character => character.Name);
+        }
+
 
 
 
