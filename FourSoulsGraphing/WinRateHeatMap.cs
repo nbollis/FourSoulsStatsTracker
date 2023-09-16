@@ -1,9 +1,6 @@
 ﻿using FourSoulsDataConnection;
-using Plotly.NET.CSharp;
-using System.Collections.Generic;
-using System.Reflection;
 
-namespace FourSoulsGraphing
+namespace Graphing
 {
     public class WinRateHeatMap
     {

@@ -12,17 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Graphing.Data;
 
 namespace FourSoulsGUI
 {
     /// <summary>
-    /// Interaction logic for GraphControl.xaml
+    /// Interaction logic for ScottPlotControl.xaml
     /// </summary>
-    public partial class GraphControl : UserControl
+    public partial class ScottPlotControl : UserControl
     {
-        public GraphControl()
+        public ScottPlotControl()
         {
             InitializeComponent();
+
+
         }
     }
 }
