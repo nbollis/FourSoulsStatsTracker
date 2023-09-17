@@ -51,6 +51,18 @@ namespace FourSoulsGUI
             }
         }
 
+        private GraphViewModel charactersPieChart;
+
+        public GraphViewModel CharactersPieChart
+        {
+            get => charactersPieChart;
+            set
+            {
+                charactersPieChart = value;
+                OnPropertyChanged(nameof(CharactersPieChart));
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -63,6 +75,10 @@ namespace FourSoulsGUI
         {
             Player = player;
             PlayersPieChart = new GraphViewModel()
+            {
+                Plot = new PieChart()
+            };
+            CharactersPieChart = new GraphViewModel()
             {
                 Plot = new PieChart()
             };
@@ -91,10 +107,24 @@ namespace FourSoulsGUI
                 seriesValues.Add(result.Count);
                 seriesColors.Add(result.HexCode);
             }
-            PieChartGraphData data = new PieChartGraphData("Player Play Frequency", null, seriesValues.ToArray(),
+            PieChartGraphData playerData = new PieChartGraphData("Player Play Frequency", null, seriesValues.ToArray(),
                                seriesColors.ToArray(), seriesNames.ToArray());
 
-            PlayersPieChart.GraphData = data;
+            PlayersPieChart.GraphData = playerData;
+
+            seriesNames.Clear();
+            seriesValues.Clear();
+            seriesColors.Clear();
+            foreach (var result in DataOperations.GetPlayFrequencyForCharacterByPlayer(FourSoulsData, Player))
+            {
+                seriesNames.Add(result.Name);
+                seriesValues.Add(result.Count);
+                seriesColors.Add(result.HexCode);
+            }
+            PieChartGraphData characterData = new PieChartGraphData("Character Play Frequency", null, seriesValues.ToArray(),
+                seriesColors.ToArray(), seriesNames.ToArray());
+            CharactersPieChart.GraphData = characterData;
+
         }
     }
 }

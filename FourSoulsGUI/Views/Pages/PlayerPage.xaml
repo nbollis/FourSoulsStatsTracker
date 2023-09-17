@@ -46,10 +46,17 @@
                 </local:ScottPlotGraphControl.RenderGraphData>
             </local:ScottPlotGraphControl>
 
+            <local:ScottPlotGraphControl Grid.Column="1" Grid.Row="1" Background="Transparent"
+                                         DataContext="{Binding CharactersPieChart}">
+                <local:ScottPlotGraphControl.RenderGraphData>
+                    <Binding Path="GraphData" />
+                </local:ScottPlotGraphControl.RenderGraphData>
+            </local:ScottPlotGraphControl>
+
         </Grid>
 
 
-        <!--<local:PlayerStatsDisplayControl Grid.Column="1" DataContext="{Binding PlayerStatsDisplayViewModel}" />-->
+        
 
     </Grid>
 

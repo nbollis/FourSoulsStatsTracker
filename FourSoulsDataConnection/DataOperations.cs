@@ -133,6 +133,30 @@ namespace FourSoulsDataConnection
             return result;
         }
 
+        public static IEnumerable<(string Name, int Id, int Count, string HexCode)> GetPlayFrequencyForCharacter(
+            FourSoulsData data,
+            Character character)
+        {
+            var games = GetGamesByCharacter(data, character);
+            var result = games.SelectMany(p => p.GameDatas)
+                .GroupBy(p => p.CharacterId)
+                .Where(p => p.Key != character.Id)
+                .Select(p => (p.First().Character.Name, p.Key, p.Count(), p.First().Character.ColorCode))
+                .OrderByDescending(p => p.Item3);
+            return result;
+        }
+
+        public static IEnumerable<(string Name, int Id, int Count, string HexCode)>
+            GetPlayFrequencyForCharacterByPlayer(FourSoulsData data, Player player)
+        {
+            var games = GetGamesByPlayer(data, player);
+            var result = games.SelectMany(p => p.GameDatas)
+                .GroupBy(p => p.CharacterId)
+                .Select(p => (p.First().Character.Name, p.Key, p.Count(), p.First().Character.ColorCode))
+                .OrderByDescending(p => p.Item3);
+            return result;
+        }
+
 
 
 
