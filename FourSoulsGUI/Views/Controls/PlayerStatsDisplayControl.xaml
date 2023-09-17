@@ -22,9 +22,12 @@
 
         <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=Player.Name}"></TextBlock>
 
-        <local:ScottPlotControl Grid.Column="1" Grid.Row="1" DataContext="{Binding PlayersPieChart}">
+        <local:ScottPlotControl x:Name="ScottPlot" Grid.Column="1" Grid.Row="1"
+                               DataContext="{Binding PlayersPieChart}">
 
         </local:ScottPlotControl>
+
+        <WpfPlot Grid.Column="0" Grid.Row="0" x:Name="TopLeft" ></WpfPlot>
 
     
             

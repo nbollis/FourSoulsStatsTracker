@@ -9,9 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Controls\PlayerStatsDisplayControl.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\Fonts\fa_solid.ttf" />
     <None Remove="Resources\Fonts\IsaacGame.ttf" />
     <None Remove="Resources\Fonts\upheavtt.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Views\Controls\PlayerStatsDisplayControl.xaml" />
   </ItemGroup>
 
   <ItemGroup>

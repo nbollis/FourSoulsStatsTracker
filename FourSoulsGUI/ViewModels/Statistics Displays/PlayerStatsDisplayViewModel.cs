@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Accessibility;
 using FourSoulsDataConnection;
+using FourSoulsGUI.Graphing;
 using Graphing.Data;
-using Graphing.Graphs;
+using Graphing;
 using ScottPlot;
 using DataOperations = FourSoulsDataConnection.DataOperations;
 
@@ -30,16 +31,25 @@ namespace FourSoulsGUI
 
         #region Stats
 
-        public Character MostPlayedCharacter { get; set; }
-        public Character BestCharacter { get; set; }
-        public Character WorstCharacter { get; set; }
-        public Player BestPlayerAgainst { get; set; }
-        public Player WorstPlayerAgainst { get; set; }
+        //public Character MostPlayedCharacter { get; set; }
+        //public Character BestCharacter { get; set; }
+        //public Character WorstCharacter { get; set; }
+        //public Player BestPlayerAgainst { get; set; }
+        //public Player WorstPlayerAgainst { get; set; }
 
 
         #endregion
 
-        public GraphViewModel PlayersPieChart { get; set; }
+        private GraphViewModel playersPieChart;
+        public GraphViewModel PlayersPieChart
+        {
+            get => playersPieChart;
+            set
+            {
+                playersPieChart = value;
+                OnPropertyChanged(nameof(PlayersPieChart));
+            }
+        }
 
         #endregion
 
@@ -52,21 +62,25 @@ namespace FourSoulsGUI
         public PlayerStatsDisplayViewModel(Player player)
         {
             Player = player;
-            CreateCharts();
+            PlayersPieChart = new GraphViewModel()
+            {
+                Plot = new PieChart()
+            };
         }
 
         #endregion
 
-        #region Command Methods
 
 
-
-        #endregion
-
+        public void ChangePlayer(Player player)
+        {
+            Player = player; 
+            CreatePieChart();
+        }
         
      
 
-        private void CreateCharts()
+        private void CreatePieChart()
         {
             List<string> seriesNames = new List<string>();
             List<double> seriesValues = new List<double>();
@@ -77,10 +91,10 @@ namespace FourSoulsGUI
                 seriesValues.Add(result.Count);
                 seriesColors.Add(result.HexCode);
             }
-            PieChartGraphData data = new PieChartGraphData("Player Play Frequency", new Plot(), seriesValues.ToArray(),
+            PieChartGraphData data = new PieChartGraphData("Player Play Frequency", null, seriesValues.ToArray(),
                                seriesColors.ToArray(), seriesNames.ToArray());
-            
-            PlayersPieChart = new GraphViewModel(new PieChart(), data);
+
+            PlayersPieChart.GraphData = data;
         }
     }
 }

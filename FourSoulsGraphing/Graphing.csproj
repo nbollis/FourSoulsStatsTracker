@@ -16,4 +16,8 @@
     <ProjectReference Include="..\FourSoulsDataConnection\FourSoulsDataConnection.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Graphs\" />
+  </ItemGroup>
+
 </Project>

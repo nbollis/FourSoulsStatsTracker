@@ -5,8 +5,7 @@ namespace Graphing.Interfaces
 {
     public interface IGraph
     {
-
         public void Initialize();
-        public void RenderGraph(GraphData graphData);
+        public void RenderGraph(GraphData graphData, object plot);
     }
 }

@@ -128,7 +128,8 @@ namespace FourSoulsDataConnection
             var result = games.SelectMany(p => p.GameDatas)
                 .GroupBy(p => p.PlayerId)
                 .Where(p => p.Key != player.Id)
-                .Select(p => (p.First().Player.Name, p.Key, p.Count(), p.First().Player.ColorCode));
+                .Select(p => (p.First().Player.Name, p.Key, p.Count(), p.First().Player.ColorCode))
+                .OrderByDescending(p => p.Item3);
             return result;
         }
 

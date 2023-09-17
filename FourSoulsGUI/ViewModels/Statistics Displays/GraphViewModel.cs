@@ -29,15 +29,8 @@ namespace FourSoulsGUI
                 if (graphData != value)
                 {
                     SetProperty(ref graphData, value);
-                    Plot.RenderGraph(graphData);
                 }
             }
-        }
-
-        public GraphViewModel(IGraph plot, GraphData data)
-        {
-            Plot = plot;
-            GraphData = data;
         }
 
         public GraphViewModel()
