@@ -38,7 +38,7 @@ namespace FourSoulsGUI
             set
             {
                 selectedPlayer = value;
-                PlayerStatsDisplayViewModel.ChangePlayer(value);
+                PlayerStatsDisplayViewModel.Player = value;
                 OnPropertyChanged(nameof(SelectedPlayer));
             }
         }

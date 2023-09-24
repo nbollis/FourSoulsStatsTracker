@@ -25,5 +25,12 @@ namespace FourSoulsGUI
             InitializeComponent();
             DataContext = viewModel;
         }
+
+      
+
+        private void ColorPicker_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+       
+        }
     }
 }

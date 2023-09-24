@@ -10,6 +10,7 @@ using Graphing.Util;
 using Plotly.NET;
 using ScottPlot;
 using Color = Plotly.NET.Color;
+using ColorConverter = System.Windows.Media.ColorConverter;
 using HorizontalAlignment = System.Windows.HorizontalAlignment;
 
 namespace FourSoulsGUI.Graphing
@@ -26,13 +27,14 @@ namespace FourSoulsGUI.Graphing
             PieChartGraphData pieChartGraphData = graphData as PieChartGraphData ??
                                                    throw new GraphingException("Graph data must be of type PieChartGraphData");
             WpfPlot wpfPlot = plot as WpfPlot ?? throw new GraphingException("Plot must be of type WpfPlot");
+            var colorConverter = new System.Drawing.ColorConverter();
 
             wpfPlot.Plot.Clear();
 
-            wpfPlot.Plot.SetAxisLimitsX(-75, 100);
+            wpfPlot.Plot.SetAxisLimitsX(-80, 100);
 
             var pie = wpfPlot.Plot.AddPie(pieChartGraphData.Values);
-            pie.SliceFillColors = pieChartGraphData.SeriesColors.Select(p => p.HexToColor()).ToArray();
+            pie.SliceFillColors = pieChartGraphData.SeriesColors.Select(p => (System.Drawing.Color)(colorConverter.ConvertFromString(p) ?? throw new InvalidOperationException())).ToArray();
             pie.DonutSize = 0.5;
 
             if (graphData.SeriesNames.Length <= 10)

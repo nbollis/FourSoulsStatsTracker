@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media;
 using Accessibility;
 using FourSoulsDataConnection;
@@ -29,24 +30,31 @@ namespace FourSoulsGUI
             get => player;
             set
             {
+               
+                // TODO: Think of a better way to update databse only when the final color is selected, instread of whenerver it is changed
+                // current idea is to do it when player is changed, but this is not ideal. Especially in the case of when the program is closed 
+                CheckForColorChangeAndUpdateDatabase();
+
                 SetProperty(ref player, value);
-                PlayerColorBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(player.ColorCode));
+                PlayerColor = ((Color)ColorConverter.ConvertFromString(player.ColorCode));
+                CreatePieChart();
             }
         }
 
         #region Player Info
 
-        private SolidColorBrush playerColorBrush;
-
-        public SolidColorBrush PlayerColorBrush
+        private Color playerColor;
+        public Color PlayerColor
         {
-            get => playerColorBrush;
+            get => playerColor;
             set
             {
-                playerColorBrush = value;
-                OnPropertyChanged(nameof(PlayerColorBrush));
+                SetProperty(ref playerColor, value);
+
             }
         }
+
+       
 
         #endregion
 
@@ -90,13 +98,26 @@ namespace FourSoulsGUI
 
         #region Commands
 
+        private void CheckForColorChangeAndUpdateDatabase() 
+        {
+            // the first time the player is set, it will be null, so we can just return
+            if (player == null) return;
+
+
+            string hexcode = $"#{PlayerColor.A:X2}{PlayerColor.R:X2}{PlayerColor.G:X2}{PlayerColor.B:X2}";
+            if (hexcode != Player.ColorCode)
+            {
+               DataBaseOperations.UpdatePlayerColor(FourSoulsData, Player, hexcode);
+            }
+        }
+
         #endregion
 
         #region Constructor
 
         public PlayerStatsDisplayViewModel(Player player)
         {
-            Player = player;
+            // initialize charts
             PlayersPieChart = new GraphViewModel()
             {
                 Plot = new PieChart()
@@ -105,17 +126,20 @@ namespace FourSoulsGUI
             {
                 Plot = new PieChart()
             };
+
+            // initialize commands
+
+            // do this last so all other things are initilized when player set occurs
+            Player = player;
+
+
         }
 
         #endregion
 
 
 
-        public void ChangePlayer(Player player)
-        {
-            Player = player; 
-            CreatePieChart();
-        }
+   
         
      
 

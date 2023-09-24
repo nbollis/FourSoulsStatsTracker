@@ -60,7 +60,7 @@ namespace FourSoulsDataConnection
             return game;
         }
 
-        public static void ChangeColor(FourSoulsData data, ICharPlayer charPlayer, string newColor)
+        public static void UpdatePlayerColor(FourSoulsData data, ICharPlayer charPlayer, string newColor)
         {
             using (var context = new FourSoulsDbContext())
             {

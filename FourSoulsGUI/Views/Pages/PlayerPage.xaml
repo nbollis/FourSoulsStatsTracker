@@ -4,6 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FourSoulsGUI" 
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       d:DataContext="{d:DesignInstance Type=local:PlayerPageViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -29,7 +31,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <!-- Window Content -->
+        <!-- Selected Player Content -->
         <Grid Grid.Column="2" DataContext="{Binding PlayerStatsDisplayViewModel}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -44,17 +46,32 @@
             </Grid.RowDefinitions>
 
             <!-- Upper Region -->
-            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Row="0" Grid.Column="0" BorderBrush="{Binding }">
+                <Border Grid.Row="0" Grid.Column="0" BorderBrush="{Binding PlayerColor, Converter={local:ColorToSolidColorBrushConverter}}" BorderThickness="5">
                     <!--<Image Source="{Binding PlayerImage}" Stretch="Uniform" />-->
                   
                 </Border>
+
+                <Grid Grid.Row="0" Grid.Column="1" Margin="3">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Player.Name}" />
+                        <xctk:ColorPicker Width="40" DisplayColorAndName="False" TabIndex="2"
+                            SelectedColor="{Binding PlayerColor}">
+
+                        </xctk:ColorPicker>
+                    </StackPanel>
+                </Grid>
+
+
+               
+             
 
             </Grid>
 
