@@ -89,4 +89,8 @@
     </Page>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controls\Legend\" />
+  </ItemGroup>
+
 </Project>

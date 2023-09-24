@@ -11,6 +11,8 @@
         <local:GraphViewModel x:Key="ViewModelGraph" />
     </UserControl.Resources>
     <Grid Background="Transparent">
-            <WpfPlot x:Name="WpfPlot" Background="Transparent"></WpfPlot>
+            <WpfPlot x:Name="WpfPlot" Background="Transparent"  HorizontalAlignment="Center" >
+
+            </WpfPlot>
     </Grid>
 </UserControl>

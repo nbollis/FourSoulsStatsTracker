@@ -8,6 +8,9 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       x:Name="Page">
+    <local:BasePage.Resources>
+        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </local:BasePage.Resources>
 
     <Grid Background="{StaticResource BackgroundLightBrush}" >
         <Grid.ColumnDefinitions>
@@ -26,7 +29,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <!-- Stats -->
+        <!-- Window Content -->
         <Grid Grid.Column="2" DataContext="{Binding PlayerStatsDisplayViewModel}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -37,21 +40,34 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <local:ScottPlotGraphControl x:Name="ScottPlot" Grid.Column="0" Grid.Row="1" Background="Transparent"
-                                         DataContext="{Binding PlayersPieChart}">
-                <local:ScottPlotGraphControl.RenderGraphData>
-                    <Binding Path="GraphData" />
-                </local:ScottPlotGraphControl.RenderGraphData>
-            </local:ScottPlotGraphControl>
+            <!-- Upper Region -->
+            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <local:ScottPlotGraphControl Grid.Column="1" Grid.Row="1" Background="Transparent"
-                                         DataContext="{Binding CharactersPieChart}">
-                <local:ScottPlotGraphControl.RenderGraphData>
-                    <Binding Path="GraphData" />
-                </local:ScottPlotGraphControl.RenderGraphData>
-            </local:ScottPlotGraphControl>
+                <Border Grid.Row="0" Grid.Column="0" BorderBrush="{Binding }">
+                    <!--<Image Source="{Binding PlayerImage}" Stretch="Uniform" />-->
+                  
+                </Border>
+
+            </Grid>
+
+            <!-- Players Pie Chart -->
+            <local:PieChartControl x:Name="ScottPlot" Grid.Column="0" Grid.Row="1" Background="Transparent"
+                                   DataContext="{Binding PlayersPieChart}">
+            </local:PieChartControl>
+
+            <!-- Characters Pie Chart -->
+            <local:PieChartControl Grid.Column="1" Grid.Row="1" Background="Transparent"
+                                   DataContext="{Binding CharactersPieChart}">
+            </local:PieChartControl>
+
 
         </Grid>
 

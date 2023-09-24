@@ -29,17 +29,18 @@ namespace FourSoulsGUI.Graphing
 
             wpfPlot.Plot.Clear();
 
-            wpfPlot.Plot.SetAxisLimitsX(-50, 150);
+            wpfPlot.Plot.SetAxisLimitsX(-75, 100);
 
             var pie = wpfPlot.Plot.AddPie(pieChartGraphData.Values);
-            pie.SliceLabels = pieChartGraphData.SeriesNames;
             pie.SliceFillColors = pieChartGraphData.SeriesColors.Select(p => p.HexToColor()).ToArray();
             pie.DonutSize = 0.5;
-            pie.ShowValues = true;
 
-            var legend = wpfPlot.Plot.Legend();
-            legend.Location = Alignment.MiddleRight;
-            legend.FixedLineWidth = false;
+            if (graphData.SeriesNames.Length <= 10)
+                pie.ShowValues = true;
+
+            //var legend = wpfPlot.Plot.Legend();
+            //legend.Location = Alignment.MiddleRight;
+            //legend.FixedLineWidth = false;
             
             wpfPlot.Plot.Style(dataBackground: System.Drawing.Color.Transparent, figureBackground: System.Drawing.Color.Transparent);
 

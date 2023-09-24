@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="FourSoulsGUI.LegendControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:FourSoulsGUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance Type=local:GraphViewModel}">
+    <UserControl.Resources>
+        <local:ColorToSolidColorBrushConverter x:Key="ColorToSolidColorBrushConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <ItemsControl x:Name="LegendItemsControl" ItemsSource="{Binding LegendItems}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="{Binding LegendRows}" IsItemsHost="True"  VerticalAlignment="Center" HorizontalAlignment="Left" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Width="10" Height="10" Margin="1" Fill="{Binding SeriesColor, Converter={StaticResource ColorToSolidColorBrushConverter}}"/>
+                        <TextBlock Text="{Binding SeriesName}" VerticalAlignment="Center" Margin="5,0" />
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using Accessibility;
 using FourSoulsDataConnection;
 using FourSoulsGUI.Graphing;
@@ -22,14 +23,34 @@ namespace FourSoulsGUI
         #endregion
 
         #region Public Fields
-
+          
         public Player Player
         {
             get => player;
-            set => SetProperty(ref player, value);
+            set
+            {
+                SetProperty(ref player, value);
+                PlayerColorBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(player.ColorCode));
+            }
         }
 
-        #region Stats
+        #region Player Info
+
+        private SolidColorBrush playerColorBrush;
+
+        public SolidColorBrush PlayerColorBrush
+        {
+            get => playerColorBrush;
+            set
+            {
+                playerColorBrush = value;
+                OnPropertyChanged(nameof(PlayerColorBrush));
+            }
+        }
+
+        #endregion
+
+        #region Graphs
 
         //public Character MostPlayedCharacter { get; set; }
         //public Character BestCharacter { get; set; }
@@ -38,7 +59,6 @@ namespace FourSoulsGUI
         //public Player WorstPlayerAgainst { get; set; }
 
 
-        #endregion
 
         private GraphViewModel playersPieChart;
         public GraphViewModel PlayersPieChart
@@ -62,6 +82,9 @@ namespace FourSoulsGUI
                 OnPropertyChanged(nameof(CharactersPieChart));
             }
         }
+
+        #endregion
+
 
         #endregion
 

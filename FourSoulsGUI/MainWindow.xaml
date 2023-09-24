@@ -10,7 +10,7 @@
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" 
         Icon="{Binding Icon}"
-        Height="450"
+        Height="800"
         Width="800">
 
 

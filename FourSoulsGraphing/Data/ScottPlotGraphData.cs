@@ -8,7 +8,7 @@ namespace Graphing.Data
     public abstract class ScottPlotGraphData : GraphData
     {
         public Plot Plot { get; set; }
-        protected ScottPlotGraphData(string title, Plot plot) : base(title)
+        protected ScottPlotGraphData(string title, Plot plot, string[] seriesNames, string[] seriesColors) : base(title, seriesNames, seriesColors)
         {
             Plot = plot;
         }
