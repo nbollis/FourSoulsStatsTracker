@@ -59,5 +59,15 @@ namespace Graphing
 
             return new PieChartGraphData("Characters Played Frequency", null, values, colors, names);
         }
+
+        public static StackedBarGraphData GetPlayerStackedBarGraphData(this FourSoulsData data, Player player)
+        {
+
+
+
+
+
+            return null;
+        }
     }
 }

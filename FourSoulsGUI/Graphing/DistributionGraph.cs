@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using FourSoulsDataConnection;
 using Graphing;
 using Graphing.Data;
@@ -10,6 +11,7 @@ using Graphing.Interfaces;
 using Graphing.Util;
 using MathNet.Numerics.Distributions;
 using MathNet.Numerics;
+using ScottPlot;
 
 
 namespace FourSoulsGUI.Graphing
@@ -26,7 +28,11 @@ namespace FourSoulsGUI.Graphing
             PropertyStatistics statsData = (graphData as PropertyStatisticsGraphData ??
                                             throw new GraphingException(
                                                 "Graph data must be of type PropertyStatistics")).PropertyStatistics;
+            WpfPlot wpfPlot = plot as WpfPlot ?? throw new GraphingException("Plot must be of type WpfPlot");
 
+            wpfPlot.Plot.Clear();
+         
+            
             var normalDistribution = new Normal(statsData.Mean, statsData.StandardDeviation);
             int numPoints = 100;
             double[] xValues = new double[numPoints];
@@ -42,18 +48,9 @@ namespace FourSoulsGUI.Graphing
                 yValues[i] = normalDistribution.Density(xValues[i]);
             }
 
-            var chart = Plotly.NET.Line.init();
+            var plt = wpfPlot.Plot.AddScatter(xValues, yValues, null, 3, 0, MarkerShape.none, LineStyle.DashDotDot);
 
-
-            
-            Line<double, double, string>(xValues, yValues)
-                .WithTitle($"Winrate {statsData.Value.Round(2)}%");
-
-
-            chart.
-            GenericChartExtensions.Show(chart);
-
-
+            wpfPlot.Render();
 
         }
     }

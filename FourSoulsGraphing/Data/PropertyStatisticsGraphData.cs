@@ -10,12 +10,12 @@ using ScottPlot;
 
 namespace Graphing
 {
-    public class PropertyStatisticsGraphData : ScottPlotGraphData
+    public class PropertyStatisticsGraphData : GraphData
     {
         public PropertyStatistics PropertyStatistics { get; set; }
 
-        public PropertyStatisticsGraphData(PropertyStatistics propertyStatistics, Plot plot)
-            : base(propertyStatistics.PropertyName, plot, new string[] { }, new string[] { })
+        public PropertyStatisticsGraphData(PropertyStatistics propertyStatistics)
+            : base(propertyStatistics.PropertyName, new string[] { }, new string[]{})
         {
             PropertyStatistics = propertyStatistics;
         }

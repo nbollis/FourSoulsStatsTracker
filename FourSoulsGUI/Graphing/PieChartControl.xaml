@@ -22,8 +22,8 @@
         </Grid.RowDefinitions>
 
         <!-- Pie Chart -->
-        <local:ScottPlotGraphControl Grid.Row="0" Grid.Column="0" Background="Transparent"
-                                     DataContext="{Binding }">
+        <local:ScottPlotGraphControl Grid.Row="0" Grid.Column="0" Background="Transparent" IsHitTestVisible="False"
+                                     DataContext="{Binding }" >
             <local:ScottPlotGraphControl.RenderGraphData>
                 <Binding Path="GraphData" />
             </local:ScottPlotGraphControl.RenderGraphData>

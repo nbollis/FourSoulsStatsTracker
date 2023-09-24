@@ -41,8 +41,9 @@ namespace FourSoulsGUI
                 CharactersPlayedWithPieChart.GraphData = FourSoulsData.GetCharactersPlayedPieChartGraphData(value);
                 WinRateDistributionGraph.GraphData = FourSoulsData.GetWinRateStatisticsGraphData(value);
                 AverageSoulDistributionGraph.GraphData = FourSoulsData.GetAverageSoulStatisticsGraphData(value);
-
-                WinRateDistributionGraph.Plot.RenderGraph(WinRateDistributionGraph.GraphData, new object());
+                WinLossStackedBarsGraph.GraphData = FourSoulsData.GetPlayerStackedBarGraphData(value);
+                OnPropertyChanged(nameof(WinRateStatistics));
+                OnPropertyChanged(nameof(AverageSoulStatistics));
 
             }
         }
@@ -56,7 +57,7 @@ namespace FourSoulsGUI
             set => SetProperty(ref playerColor, value);
         }
 
-        private PropertyStatistics winRateStatistics;
+       
 
         public PropertyStatistics WinRateStatistics =>
             (WinRateDistributionGraph.GraphData as PropertyStatisticsGraphData)!.PropertyStatistics;
@@ -80,6 +81,8 @@ namespace FourSoulsGUI
         public GraphViewModel CharactersPlayedWithPieChart { get; }
         public GraphViewModel WinRateDistributionGraph { get; } 
         public GraphViewModel AverageSoulDistributionGraph { get; }
+        public GraphViewModel WinLossStackedBarsGraph { get; }
+
 
         #endregion
 
@@ -112,6 +115,7 @@ namespace FourSoulsGUI
             CharactersPlayedWithPieChart = new GraphViewModel() { Plot = new PieChart() };
             WinRateDistributionGraph = new GraphViewModel() { Plot = new DistributionGraph() };
             AverageSoulDistributionGraph = new GraphViewModel() { Plot = new DistributionGraph() };
+            WinLossStackedBarsGraph = new GraphViewModel() { Plot = new StackedBarGraph() };
 
             // initialize commands
 

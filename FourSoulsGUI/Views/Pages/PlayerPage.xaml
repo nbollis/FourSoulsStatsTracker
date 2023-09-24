@@ -8,7 +8,7 @@
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       d:DataContext="{d:DesignInstance Type=local:PlayerPageViewModel}"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="800" d:DesignWidth="800"
       x:Name="Page">
     <local:BasePage.Resources>
         <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -67,24 +67,43 @@
                             SelectedColor="{Binding PlayerColor}">
 
                         </xctk:ColorPicker>
-                        
                     </StackPanel>
                 </Grid>
 
 
+                <Grid Grid.Row="0" Grid.Column="2">
+                  
+                 
+
+                </Grid>
+
                 <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
-                            Orientation="Horizontal"
-                            VerticalAlignment="Bottom"
-                            DataContext="{Binding WinRateStatistics}">
-                    <TextBlock>
-                        <Run Text="{Binding Value, Converter={local:DoubleToPercentStringConverter}}" />
-                        <Run Text="{Binding PropertyName}"/>
-                        <Run Text="x̄: " />
-                        <Run Text="{Binding Mean, Converter={local:DoubleToPercentStringConverter}}"/>
-                        <Run Text="σ: " />
-                        <Run Text="{Binding StandardDeviation, Converter={local:DoubleToTwoDigitConverter}}"/>
-                    </TextBlock>
+                            Orientation="Vertical"
+                            VerticalAlignment="Bottom">
+                    <StackPanel Orientation="Horizontal"
+                        DataContext="{Binding WinRateStatistics}">
+                        <TextBlock>
+                            <Run Text="{Binding Value, Converter={local:DoubleToPercentStringConverter}}" />
+                            <Run Text="{Binding PropertyName}"/>
+                            <Run Text="x̄: " />
+                            <Run Text="{Binding Mean, Converter={local:DoubleToPercentStringConverter}}"/>
+                            <Run Text="σ: " />
+                            <Run Text="{Binding StandardDeviation, Converter={local:DoubleToTwoDigitConverter}}"/>
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                DataContext="{Binding AverageSoulStatistics}">
+                        <TextBlock>
+                            <Run Text="{Binding Value, Converter={local:DoubleToTwoDigitConverter}}" />
+                            <Run Text="{Binding PropertyName}"/>
+                            <Run Text="x̄: " />
+                            <Run Text="{Binding Mean, Converter={local:DoubleToTwoDigitConverter}}"/>
+                            <Run Text="σ: " />
+                            <Run Text="{Binding StandardDeviation, Converter={local:DoubleToTwoDigitConverter}}"/>
+                        </TextBlock>
+                    </StackPanel>
                 </StackPanel>
+             
 
 
             </Grid>
