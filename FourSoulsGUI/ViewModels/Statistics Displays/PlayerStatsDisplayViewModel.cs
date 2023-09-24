@@ -37,7 +37,13 @@ namespace FourSoulsGUI
 
                 SetProperty(ref player, value);
                 PlayerColor = ((Color)ColorConverter.ConvertFromString(player.ColorCode));
-                CreatePieChart();
+                PlayedAgainstPieChart.GraphData = FourSoulsData.GetPlayedAgainstPieChartGraphData(value);
+                CharactersPlayedWithPieChart.GraphData = FourSoulsData.GetCharactersPlayedPieChartGraphData(value);
+                WinRateDistributionGraph.GraphData = FourSoulsData.GetWinRateStatisticsGraphData(value);
+                AverageSoulDistributionGraph.GraphData = FourSoulsData.GetAverageSoulStatisticsGraphData(value);
+
+                WinRateDistributionGraph.Plot.RenderGraph(WinRateDistributionGraph.GraphData, new object());
+
             }
         }
 
@@ -47,12 +53,16 @@ namespace FourSoulsGUI
         public Color PlayerColor
         {
             get => playerColor;
-            set
-            {
-                SetProperty(ref playerColor, value);
-
-            }
+            set => SetProperty(ref playerColor, value);
         }
+
+        private PropertyStatistics winRateStatistics;
+
+        public PropertyStatistics WinRateStatistics =>
+            (WinRateDistributionGraph.GraphData as PropertyStatisticsGraphData)!.PropertyStatistics;
+
+        public PropertyStatistics AverageSoulStatistics =>
+            (AverageSoulDistributionGraph.GraphData as PropertyStatisticsGraphData)!.PropertyStatistics;
 
        
 
@@ -66,30 +76,10 @@ namespace FourSoulsGUI
         //public Player BestPlayerAgainst { get; set; }
         //public Player WorstPlayerAgainst { get; set; }
 
-
-
-        private GraphViewModel playersPieChart;
-        public GraphViewModel PlayersPieChart
-        {
-            get => playersPieChart;
-            set
-            {
-                playersPieChart = value;
-                OnPropertyChanged(nameof(PlayersPieChart));
-            }
-        }
-
-        private GraphViewModel charactersPieChart;
-
-        public GraphViewModel CharactersPieChart
-        {
-            get => charactersPieChart;
-            set
-            {
-                charactersPieChart = value;
-                OnPropertyChanged(nameof(CharactersPieChart));
-            }
-        }
+        public GraphViewModel PlayedAgainstPieChart { get; }
+        public GraphViewModel CharactersPlayedWithPieChart { get; }
+        public GraphViewModel WinRateDistributionGraph { get; } 
+        public GraphViewModel AverageSoulDistributionGraph { get; }
 
         #endregion
 
@@ -118,14 +108,10 @@ namespace FourSoulsGUI
         public PlayerStatsDisplayViewModel(Player player)
         {
             // initialize charts
-            PlayersPieChart = new GraphViewModel()
-            {
-                Plot = new PieChart()
-            };
-            CharactersPieChart = new GraphViewModel()
-            {
-                Plot = new PieChart()
-            };
+            PlayedAgainstPieChart = new GraphViewModel() { Plot = new PieChart() };
+            CharactersPlayedWithPieChart = new GraphViewModel() { Plot = new PieChart() };
+            WinRateDistributionGraph = new GraphViewModel() { Plot = new DistributionGraph() };
+            AverageSoulDistributionGraph = new GraphViewModel() { Plot = new DistributionGraph() };
 
             // initialize commands
 
@@ -137,41 +123,5 @@ namespace FourSoulsGUI
 
         #endregion
 
-
-
-   
-        
-     
-
-        private void CreatePieChart()
-        {
-            List<string> seriesNames = new List<string>();
-            List<double> seriesValues = new List<double>();
-            List<string> seriesColors = new List<string>();
-            foreach (var result in DataOperations.GetPlayFrequencyForPlayer(FourSoulsData, Player))
-            {
-                seriesNames.Add(result.Name);
-                seriesValues.Add(result.Count);
-                seriesColors.Add(result.HexCode);
-            }
-            PieChartGraphData playerData = new PieChartGraphData("Player Play Frequency", null, seriesValues.ToArray(),
-                               seriesColors.ToArray(), seriesNames.ToArray());
-
-            PlayersPieChart.GraphData = playerData;
-
-            seriesNames.Clear();
-            seriesValues.Clear();
-            seriesColors.Clear();
-            foreach (var result in DataOperations.GetPlayFrequencyForCharacterByPlayer(FourSoulsData, Player))
-            {
-                seriesNames.Add(result.Name);
-                seriesValues.Add(result.Count);
-                seriesColors.Add(result.HexCode);
-            }
-            PieChartGraphData characterData = new PieChartGraphData("Character Play Frequency", null, seriesValues.ToArray(),
-                seriesColors.ToArray(), seriesNames.ToArray());
-            CharactersPieChart.GraphData = characterData;
-
-        }
     }
 }

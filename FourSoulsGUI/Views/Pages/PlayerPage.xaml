@@ -12,6 +12,7 @@
       x:Name="Page">
     <local:BasePage.Resources>
         <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <local:DoubleToPercentStringConverter x:Key="DoubleToPercentStringConverter" />
     </local:BasePage.Resources>
 
     <Grid Background="{StaticResource BackgroundLightBrush}" >
@@ -66,23 +67,36 @@
                             SelectedColor="{Binding PlayerColor}">
 
                         </xctk:ColorPicker>
+                        
                     </StackPanel>
                 </Grid>
 
 
-               
-             
+                <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Bottom"
+                            DataContext="{Binding WinRateStatistics}">
+                    <TextBlock>
+                        <Run Text="{Binding Value, Converter={local:DoubleToPercentStringConverter}}" />
+                        <Run Text="{Binding PropertyName}"/>
+                        <Run Text="x̄: " />
+                        <Run Text="{Binding Mean, Converter={local:DoubleToPercentStringConverter}}"/>
+                        <Run Text="σ: " />
+                        <Run Text="{Binding StandardDeviation, Converter={local:DoubleToTwoDigitConverter}}"/>
+                    </TextBlock>
+                </StackPanel>
+
 
             </Grid>
 
             <!-- Players Pie Chart -->
             <local:PieChartControl x:Name="ScottPlot" Grid.Column="0" Grid.Row="1" Background="Transparent"
-                                   DataContext="{Binding PlayersPieChart}">
+                                   DataContext="{Binding PlayedAgainstPieChart}">
             </local:PieChartControl>
 
             <!-- Characters Pie Chart -->
             <local:PieChartControl Grid.Column="1" Grid.Row="1" Background="Transparent"
-                                   DataContext="{Binding CharactersPieChart}">
+                                   DataContext="{Binding CharactersPlayedWithPieChart}">
             </local:PieChartControl>
 
 

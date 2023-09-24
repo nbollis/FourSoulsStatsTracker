@@ -1,7 +1,9 @@
 ﻿using FourSoulsDataConnection.DataBase;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using MathNet.Numerics.Statistics;
 
 namespace FourSoulsDataConnection
 {
@@ -121,49 +123,73 @@ namespace FourSoulsDataConnection
             return data.AllCharacters.Value.Select(character => character.Name);
         }
 
-        public static IEnumerable<(string Name, int Id, int Count, string HexCode)> GetPlayFrequencyForPlayer(FourSoulsData data,
-            Player player)
-        {
-            var games = GetGamesByPlayer(data, player);
-            var result = games.SelectMany(p => p.GameDatas)
-                .GroupBy(p => p.PlayerId)
-                .Where(p => p.Key != player.Id)
-                .Select(p => (p.First().Player.Name, p.Key, p.Count(), p.First().Player.ColorCode))
-                .OrderByDescending(p => p.Item3);
-            return result;
-        }
-
-        public static IEnumerable<(string Name, int Id, int Count, string HexCode)> GetPlayFrequencyForCharacter(
-            FourSoulsData data,
-            Character character)
-        {
-            var games = GetGamesByCharacter(data, character);
-            var result = games.SelectMany(p => p.GameDatas)
-                .GroupBy(p => p.CharacterId)
-                .Where(p => p.Key != character.Id)
-                .Select(p => (p.First().Character.Name, p.Key, p.Count(), p.First().Character.ColorCode))
-                .OrderByDescending(p => p.Item3);
-            return result;
-        }
-
-        public static IEnumerable<(string Name, int Id, int Count, string HexCode)>
-            GetPlayFrequencyForCharacterByPlayer(FourSoulsData data, Player player)
-        {
-            var games = GetGamesByPlayer(data, player);
-            var result = games.SelectMany(p => p.GameDatas)
-                .GroupBy(p => p.CharacterId)
-                .Select(p => (p.First().Character.Name, p.Key, p.Count(), p.First().Character.ColorCode))
-                .OrderByDescending(p => p.Item3);
-            return result;
-        }
-
-
-
-
 
         private static IEnumerable<Game> GetGamesByPlayer(IEnumerable<Game> games, Player player)
         {
             return games.Where(p => p.GameDatas.Any(m => m.PlayerId == player.Id));
+        }
+
+        #region Statistic Methods
+
+        public static IEnumerable<PropertyStatistics> GetStatistics(FourSoulsData data, ICharPlayer charPlayer)
+        {
+            yield return GetWinRateStatistics(data, charPlayer);
+            yield return GetAverageSoulsStatistics(data, charPlayer);
+        }
+
+        public static PropertyStatistics GetWinRateStatistics(FourSoulsData data, ICharPlayer charPlayer)
+        {
+            double[] winRates = charPlayer switch
+            {
+                Player player => data.AllPlayers.Value.Select(p => p.WinRate ?? 0.0).ToArray(),
+                Character character => data.AllCharacters.Value.Select(p => p.WinRate ?? 0.0).ToArray(),
+                _ => throw new ArgumentException("charPlayer must be either a Player or a Character")
+            };
+
+            var value = charPlayer.WinRate ?? 0.0;
+            var mean = winRates.Average();
+            var median = winRates.Median();
+            var stdDev = winRates.StandardDeviation();
+            return new PropertyStatistics("Win Rate", value, mean, median, stdDev);
+        }
+
+        public static PropertyStatistics GetAverageSoulsStatistics(FourSoulsData data, ICharPlayer charPlayer)
+        {
+            double[] averageSouls = charPlayer switch
+            {
+                Player player => data.AllPlayers.Value.Select(p => p.AverageSouls ?? 0.0).ToArray(),
+                Character character => data.AllCharacters.Value.Select(p => p.AverageSouls ?? 0.0).ToArray(),
+                _ => throw new ArgumentException("charPlayer must be either a Player or a Character")
+            };
+
+            var value = charPlayer.AverageSouls ?? 0.0;
+            var mean = averageSouls.Average();
+            var median = averageSouls.Median();
+            var stdDev = averageSouls.StandardDeviation();
+            return new PropertyStatistics("Average Souls", value, mean, median, stdDev);
+        }
+
+        
+
+
+        #endregion
+    }
+
+    public class PropertyStatistics
+    {
+        public string PropertyName { get; set; }
+        public double Value { get; set; }
+        public double Mean { get; set; }
+        public double Median { get; set; }
+        public double StandardDeviation { get; set; }
+
+        public PropertyStatistics(string propertyName, double value, double mean, double median, double stdDev)
+        {
+            PropertyName = propertyName;
+            Value = value;
+            Mean = mean;
+            Median = median;
+            StandardDeviation = stdDev;
         }
     }
 
