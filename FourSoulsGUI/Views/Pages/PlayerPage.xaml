@@ -8,7 +8,7 @@
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       d:DataContext="{d:DesignInstance Type=local:PlayerPageViewModel}"
       mc:Ignorable="d" 
-      d:DesignHeight="800" d:DesignWidth="800"
+      d:DesignHeight="800" d:DesignWidth="1200"
       x:Name="Page">
     <local:BasePage.Resources>
         <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -118,6 +118,10 @@
                                    DataContext="{Binding CharactersPlayedWithPieChart}">
             </local:PieChartControl>
 
+            <local:ScottPlotGraphControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2"  DataContext="{Binding WinLossStackedBarsGraph}" 
+                                             RenderGraphData="{Binding GraphData}" >
+
+            </local:ScottPlotGraphControl>
 
         </Grid>
 

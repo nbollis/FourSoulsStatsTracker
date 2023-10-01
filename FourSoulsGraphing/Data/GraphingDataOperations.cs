@@ -63,11 +63,34 @@ namespace Graphing
         public static StackedBarGraphData GetPlayerStackedBarGraphData(this FourSoulsData data, Player player)
         {
 
+            var games = DataOperations.GetGamesByPlayer(data, player);
+            (string Name, int Wins, int TheirWins, int Games)[] results = games.SelectMany(p => p.GameDatas)
+                .GroupBy(p => p.PlayerId)
+                .Where(p => p.Key != player.Id)
+                .Select(p => (
+                    p.First().Player.Name,
+                    p.Count(gameData => player.GameDatas.First(playersData => playersData.GameId == gameData.GameId).Win == 1), 
+                    p.Count(gameData => gameData.Win == 1),
+                    p.Count(gameData => gameData.PlayerId == p.Key)))
+                .OrderByDescending(p => p.Item3)
+                .ToArray();
 
 
 
 
-            return null;
+
+
+            //(string, int, int) averagePlayer = ("Average", (int)data.AllPlayers.Value.Average(p => p.Wins)!,
+            //    (int)data.AllPlayers.Value.Average(p => p.GamesPlayed)!);
+            //results = results.Prepend(averagePlayer).ToArray();
+            var seriesNames = results.Select(x => x.Name).ToArray();
+            var wins = results.Select(x => (double)x.Wins).ToArray(); 
+            var theirWIns = results.Select(x => (double)x.TheirWins + (double)x.Wins).ToArray();
+            var gamesArr = results.Select(x => (double)x.Games).ToArray();
+
+            return new StackedBarGraphData(player.Name, gamesArr, wins, theirWIns, seriesNames,
+                new string[] { "#f93500",  "#00f91e", "#1300f9" });
+
         }
     }
 }

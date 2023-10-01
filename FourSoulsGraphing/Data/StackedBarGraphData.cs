@@ -8,24 +8,23 @@ using Graphing.Util;
 
 namespace Graphing.Data
 {
-    public class StackedBarGraphData : GraphData, ITwoDimensionalGraphData<double>
+    public class StackedBarGraphData : GraphData, IThreeDimensionalGraphData<double>
     {
-        public StackedBarGraphData(string title, double[] upperSeries, double[]lowerSeries, string[] seriesNames, string[] seriesColors)
+        public StackedBarGraphData(string title, double[] xValues, double[] yValues, double[]zValues, string[] seriesNames, string[] seriesColors)
             : base(title, seriesNames, seriesColors)
         {
-            if (upperSeries.Length != lowerSeries.Length)
-                throw new GraphingException("Upper and lower series must be the same length");
-
-            XValues = upperSeries;
-            YValues = lowerSeries;
+            XValues = xValues;
+            YValues = yValues;
+            ZValues = zValues;
         }
 
         public override IEnumerable<LegendItem> GetLegendItems()
         {
-            throw new NotImplementedException();
+            return Enumerable.Empty<LegendItem>();
         }
 
         public double[] XValues { get; }
         public double[] YValues { get; }
+        public double[] ZValues { get; }
     }
 }

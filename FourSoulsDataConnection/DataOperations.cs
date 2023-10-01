@@ -131,12 +131,6 @@ namespace FourSoulsDataConnection
 
         #region Statistic Methods
 
-        public static IEnumerable<PropertyStatistics> GetStatistics(FourSoulsData data, ICharPlayer charPlayer)
-        {
-            yield return GetWinRateStatistics(data, charPlayer);
-            yield return GetAverageSoulsStatistics(data, charPlayer);
-        }
-
         public static PropertyStatistics GetWinRateStatistics(FourSoulsData data, ICharPlayer charPlayer)
         {
             double[] winRates = charPlayer switch
