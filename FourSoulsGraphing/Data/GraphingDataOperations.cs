@@ -15,7 +15,7 @@ namespace Graphing
             ICharPlayer charPlayer)
         {
             PropertyStatistics stats = DataOperations.GetWinRateStatistics(data, charPlayer);
-            return new PropertyStatisticsGraphData(stats);
+            return new PropertyStatisticsGraphData(stats, charPlayer.Name, charPlayer.ColorCode);
            
         }
 
@@ -23,7 +23,7 @@ namespace Graphing
             ICharPlayer charPlayer)
         {
             PropertyStatistics stats = DataOperations.GetAverageSoulsStatistics(data, charPlayer);
-            return new PropertyStatisticsGraphData(stats);
+            return new PropertyStatisticsGraphData(stats, charPlayer.Name, charPlayer.ColorCode);
         }
 
         public static PieChartGraphData GetPlayedAgainstPieChartGraphData(this FourSoulsData data, Player player)

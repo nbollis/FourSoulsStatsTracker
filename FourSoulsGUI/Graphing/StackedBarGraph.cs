@@ -27,11 +27,11 @@ namespace FourSoulsGUI
             wpfPlot.Plot.Clear();
             wpfPlot.Plot.Width = 400;
             wpfPlot.Plot.Height = 300;
-            var totalBar = wpfPlot.Plot.AddBar(stackedBarGraphData.XValues, stackedBarGraphData.SeriesColors[0].HexToColor());
+            var totalBar = wpfPlot.Plot.AddBar(stackedBarGraphData.XValues, GraphData.GetColorFromString(stackedBarGraphData.SeriesColors[0]));
             totalBar.Label = "Somebody Else Won";
-            var theirWinBar = wpfPlot.Plot.AddBar(stackedBarGraphData.ZValues, stackedBarGraphData.SeriesColors[2].HexToColor());
+            var theirWinBar = wpfPlot.Plot.AddBar(stackedBarGraphData.ZValues, GraphData.GetColorFromString(stackedBarGraphData.SeriesColors[2]));
             theirWinBar.Label = "They Won";
-            var winBar = wpfPlot.Plot.AddBar(stackedBarGraphData.YValues, stackedBarGraphData.SeriesColors[1].HexToColor());
+            var winBar = wpfPlot.Plot.AddBar(stackedBarGraphData.YValues, GraphData.GetColorFromString(stackedBarGraphData.SeriesColors[1]));
             winBar.Label = $"{graphData.Title} Won";
             wpfPlot.Plot.XTicks(stackedBarGraphData.SeriesNames);
             wpfPlot.Plot.XAxis.TickLabelStyle(rotation: 45);

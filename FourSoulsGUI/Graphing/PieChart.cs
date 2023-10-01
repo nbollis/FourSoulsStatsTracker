@@ -34,7 +34,7 @@ namespace FourSoulsGUI.Graphing
             wpfPlot.Plot.SetAxisLimitsX(-80, 100);
 
             var pie = wpfPlot.Plot.AddPie(pieChartGraphData.Values);
-            pie.SliceFillColors = pieChartGraphData.SeriesColors.Select(p => (System.Drawing.Color)(colorConverter.ConvertFromString(p) ?? throw new InvalidOperationException())).ToArray();
+            pie.SliceFillColors = pieChartGraphData.SeriesColors.Select(GraphData.GetColorFromString).ToArray();
             pie.DonutSize = 0.5;
 
             if (graphData.SeriesNames.Length <= 10)

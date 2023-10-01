@@ -79,9 +79,11 @@ namespace FourSoulsGUI
 
         public GraphViewModel PlayedAgainstPieChart { get; }
         public GraphViewModel CharactersPlayedWithPieChart { get; }
+        public GraphViewModel WinLossStackedBarsGraph { get; }
+
+
         public GraphViewModel WinRateDistributionGraph { get; } 
         public GraphViewModel AverageSoulDistributionGraph { get; }
-        public GraphViewModel WinLossStackedBarsGraph { get; }
 
 
         #endregion

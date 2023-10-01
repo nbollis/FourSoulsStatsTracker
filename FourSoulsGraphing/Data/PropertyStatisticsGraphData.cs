@@ -14,8 +14,8 @@ namespace Graphing
     {
         public PropertyStatistics PropertyStatistics { get; set; }
 
-        public PropertyStatisticsGraphData(PropertyStatistics propertyStatistics)
-            : base(propertyStatistics.PropertyName, new string[] { }, new string[]{})
+        public PropertyStatisticsGraphData(PropertyStatistics propertyStatistics, string name, string colorHexCode)
+            : base(propertyStatistics.PropertyName, new[] { name }, new[] { colorHexCode })
         {
             PropertyStatistics = propertyStatistics;
         }
@@ -25,4 +25,6 @@ namespace Graphing
             return Enumerable.Empty<LegendItem>();
         }
     }
+
+   
 }

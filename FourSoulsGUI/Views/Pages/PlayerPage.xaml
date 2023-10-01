@@ -53,6 +53,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <Border Grid.Row="0" Grid.Column="0" BorderBrush="{Binding PlayerColor, Converter={local:ColorToSolidColorBrushConverter}}" BorderThickness="5">
@@ -70,13 +71,7 @@
                     </StackPanel>
                 </Grid>
 
-
-                <Grid Grid.Row="0" Grid.Column="2">
-                  
-                 
-
-                </Grid>
-
+                <!-- Written Stats Data --> 
                 <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
                             Orientation="Vertical"
                             VerticalAlignment="Bottom">
@@ -103,8 +98,14 @@
                         </TextBlock>
                     </StackPanel>
                 </StackPanel>
-             
 
+                <local:ScottPlotGraphControl Grid.Row="0" Grid.Column="3" 
+                                             DataContext="{Binding WinRateDistributionGraph}"
+                                             RenderGraphData="{Binding GraphData}"/>
+                
+                <local:ScottPlotGraphControl Grid.Row="0" Grid.Column="4" 
+                                             DataContext="{Binding AverageSoulDistributionGraph}"
+                                             RenderGraphData="{Binding GraphData}"/>
 
             </Grid>
 
@@ -115,13 +116,13 @@
 
             <!-- Characters Pie Chart -->
             <local:PieChartControl Grid.Column="1" Grid.Row="1" Background="Transparent"
-                                   DataContext="{Binding CharactersPlayedWithPieChart}">
-            </local:PieChartControl>
+                                   DataContext="{Binding CharactersPlayedWithPieChart}"/>
 
-            <local:ScottPlotGraphControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2"  DataContext="{Binding WinLossStackedBarsGraph}" 
-                                             RenderGraphData="{Binding GraphData}" >
+            <local:ScottPlotGraphControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" Grid.RowSpan="1" 
+                                         DataContext="{Binding WinLossStackedBarsGraph}" 
+                                         RenderGraphData="{Binding GraphData}" />
 
-            </local:ScottPlotGraphControl>
+           
 
         </Grid>
 
