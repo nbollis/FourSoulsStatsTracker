@@ -28,7 +28,7 @@ namespace FourSoulsDataConnection
 
         #region Not Mapped
 
-        [NotMapped]
+  
         public virtual Character Character
         {
             get => _character;
@@ -39,7 +39,7 @@ namespace FourSoulsDataConnection
             }
         }
 
-        [NotMapped]
+      
         public virtual Game Game
         {
             get => _game;
@@ -50,7 +50,7 @@ namespace FourSoulsDataConnection
             }
         }
 
-        [NotMapped]
+    
         public virtual Player Player
         {
             get => _player;

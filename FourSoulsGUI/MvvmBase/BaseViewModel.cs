@@ -48,7 +48,7 @@ namespace FourSoulsGUI
         {
             container = new UnityContainer();
             ContainerBootStrapper.RegisterTypes(container);
-            FourSoulsData = container.Resolve<IFourSoulsData>("MockedData").Data;
+            FourSoulsData = container.Resolve<IFourSoulsData>("FourSoulsData").Data;
         }
 
         /// <summary>

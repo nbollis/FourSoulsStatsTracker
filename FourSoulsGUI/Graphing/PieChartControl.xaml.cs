@@ -16,21 +16,13 @@ using System.Windows.Shapes;
 namespace FourSoulsGUI
 {
     /// <summary>
-    /// Interaction logic for EnterGamePage.xaml
+    /// Interaction logic for PieChartControl.xaml
     /// </summary>
-    public partial class PlayerPage : BasePage
+    public partial class PieChartControl : UserControl
     {
-        public PlayerPage(PlayerPageViewModel viewModel)
+        public PieChartControl()
         {
             InitializeComponent();
-            DataContext = viewModel;
-        }
-
-      
-
-        private void ColorPicker_OnLostFocus(object sender, RoutedEventArgs e)
-        {
-       
         }
     }
 }

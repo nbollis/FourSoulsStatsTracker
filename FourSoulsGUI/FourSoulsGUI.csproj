@@ -9,23 +9,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Controls\PlayerStatsDisplayControl.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\Fonts\fa_solid.ttf" />
     <None Remove="Resources\Fonts\IsaacGame.ttf" />
     <None Remove="Resources\Fonts\upheavtt.ttf" />
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="Views\Controls\PlayerStatsDisplayControl.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dna.Framework" Version="1.0.7.19" />
     <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.1" />
     <PackageReference Include="Fody" Version="6.6.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />
+    <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="Ninject" Version="3.3.6" />
     <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
-    <PackageReference Include="ScottPlot" Version="4.1.60" />
+    <PackageReference Include="ScottPlot" Version="4.1.65" />
     <PackageReference Include="ScottPlot.WPF" Version="4.1.60" />
     <PackageReference Include="Unity" Version="5.11.10" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.4" />
@@ -33,6 +43,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FourSoulsDataConnection\FourSoulsDataConnection.csproj" />
+    <ProjectReference Include="..\FourSoulsGraphing\Graphing.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -78,6 +89,10 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controls\Legend\" />
   </ItemGroup>
 
 </Project>

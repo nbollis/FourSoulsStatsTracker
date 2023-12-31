@@ -8,6 +8,28 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            <TextBlock Text="{Binding Path=Player.Name}"></TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Path=Player.Name}"></TextBlock>
+
+        <local:ScottPlotControl x:Name="ScottPlot" Grid.Column="1" Grid.Row="1"
+                               DataContext="{Binding PlayersPieChart}">
+
+        </local:ScottPlotControl>
+
+        <WpfPlot Grid.Column="0" Grid.Row="0" x:Name="TopLeft" ></WpfPlot>
+
+    
+            
     </Grid>
 </UserControl>

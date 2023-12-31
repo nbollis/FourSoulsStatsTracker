@@ -37,13 +37,17 @@ namespace FourSoulsDataConnection
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GameData> GameDatas { get; set; }
+        
+        [StringLength(50)]
+        [Column("ColorCode")]
+        public string ColorCode { get; set; }
 
         [NotMapped]
         public string IconPath;
 
         public override string ToString()
         {
-            return $"{Id}:{Name}";
+            return $"{Name}";
         }
         public bool Equals(ICharPlayer other)
         {

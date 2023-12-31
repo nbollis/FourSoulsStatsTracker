@@ -38,7 +38,7 @@ namespace FourSoulsGUI
             set
             {
                 selectedPlayer = value;
-                PlayerStatsDisplayViewModel = new PlayerStatsDisplayViewModel(SelectedPlayer);
+                PlayerStatsDisplayViewModel.Player = value;
                 OnPropertyChanged(nameof(SelectedPlayer));
             }
         }
@@ -61,6 +61,8 @@ namespace FourSoulsGUI
         public PlayerPageViewModel()
         {
             AllPlayers = FourSoulsData.AllPlayers.Value.OrderByDescending(p => p.GamesPlayed ??= 0).ToList();
+            PlayerStatsDisplayViewModel = new PlayerStatsDisplayViewModel(AllPlayers[0]);
+            SelectedPlayer = AllPlayers[0];
         }
 
         #endregion
